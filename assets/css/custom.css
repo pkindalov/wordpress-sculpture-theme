@@ -1,0 +1,230 @@
+/**
+ * Sculpture Theme - Custom Styles
+ * 
+ * @package Sculpture_Theme
+ * @since   1.0.0
+ */
+
+/* =========================================
+   SCULPTURE SINGLE PAGE
+   ========================================= */
+
+.sculpture-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 20px;
+}
+
+.sculpture-title {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: #1a1a1a;
+    line-height: 1.2;
+}
+
+/* Short description as subtitle */
+.sculpture-subtitle h2 {
+    font-size: 1.5rem;
+    font-weight: 400;
+    color: #666;
+    font-style: italic;
+    margin-bottom: 30px;
+    line-height: 1.4;
+}
+
+/* Featured image */
+.sculpture-featured-image {
+    margin: 30px 0;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.sculpture-featured-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* =========================================
+   SCULPTURE INFO SECTION
+   ========================================= */
+
+.sculpture-info {
+    background: #f8f9fa;
+    padding: 30px;
+    border-radius: 8px;
+    margin: 30px 0;
+    border-left: 4px solid #333;
+}
+
+.sculpture-info-item {
+    display: flex;
+    margin-bottom: 15px;
+    font-size: 1.1rem;
+}
+
+.sculpture-info-item:last-child {
+    margin-bottom: 0;
+}
+
+.info-label {
+    font-weight: 600;
+    margin-right: 10px;
+    min-width: 120px;
+    color: #333;
+}
+
+.info-value {
+    color: #555;
+}
+
+/* =========================================
+   SCULPTURE DESCRIPTION
+   ========================================= */
+
+.sculpture-description {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    margin: 30px 0;
+    color: #333;
+}
+
+.sculpture-description p {
+    margin-bottom: 1.5em;
+}
+
+/* =========================================
+   SCULPTURE GALLERY
+   ========================================= */
+
+.sculpture-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    margin: 40px 0;
+}
+
+.gallery-item {
+    position: relative;
+    overflow: hidden;
+    border-radius: 8px;
+    background: #f0f0f0;
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.3s ease;
+}
+
+.gallery-item:hover img {
+    transform: scale(1.05);
+}
+
+/* =========================================
+   RESPONSIVE DESIGN
+   ========================================= */
+
+@media (max-width: 768px) {
+    .sculpture-title {
+        font-size: 2rem;
+    }
+    
+    .sculpture-subtitle h2 {
+        font-size: 1.2rem;
+    }
+    
+    .sculpture-info-item {
+        flex-direction: column;
+    }
+    
+    .info-label {
+        margin-bottom: 5px;
+    }
+    
+    .sculpture-gallery {
+        grid-template-columns: 1fr;
+    }
+    
+    .gallery-item img {
+        height: 250px;
+    }
+}
+
+/* =========================================
+   ARCHIVE / LIST VIEW
+   ========================================= */
+
+.sculpture-archive-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 30px;
+    margin: 40px 0;
+}
+
+.sculpture-card {
+    background: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.sculpture-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+}
+
+.sculpture-card-image {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+}
+
+.sculpture-card-content {
+    padding: 20px;
+}
+
+.sculpture-card-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.sculpture-card-title a {
+    color: #333;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.sculpture-card-title a:hover {
+    color: #0066cc;
+}
+
+.sculpture-card-meta {
+    font-size: 0.9rem;
+    color: #666;
+}
+
+/* =========================================
+   UTILITY CLASSES
+   ========================================= */
+
+.text-center {
+    text-align: center;
+}
+
+.mb-0 {
+    margin-bottom: 0 !important;
+}
+
+.mt-40 {
+    margin-top: 40px;
+}
+
+.mb-40 {
+    margin-bottom: 40px;
+}

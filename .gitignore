@@ -1,0 +1,23 @@
+# OS Files
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Editor directories
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Node modules (ако използваш npm в бъдеще)
+node_modules/
+
+# Temp files
+*.log
+*.tmp
+*~
+
+# WordPress specific
+*.sql
+.htaccess
+wp-config.php
