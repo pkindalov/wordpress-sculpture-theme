@@ -1,212 +1,560 @@
 /**
  * Sculpture Theme - Custom Styles
+ * Modern Gallery Design with Earth Tones
  * 
  * @package Sculpture_Theme
  * @since   1.0.0
  */
 
 /* =========================================
-   SCULPTURE SINGLE PAGE
+   CSS VARIABLES - COLOR PALETTE
    ========================================= */
 
-.sculpture-container {
-    max-width: 1200px;
+:root {
+    /* Brand Colors */
+    --color-dark-forest: #1F3A2A;
+    --color-gold: #E7C871;
+    --color-forest: #40543D;
+    --color-sage: #6A8B58;
+    --color-mist: #DDE7D1;
+    --color-cream: #FFFCE6;
+    
+    /* Functional Colors */
+    --color-text-primary: #1F3A2A;
+    --color-text-secondary: #40543D;
+    --color-text-light: #6A8B58;
+    --color-background: #FFFCE6;
+    --color-background-alt: #DDE7D1;
+    --color-accent: #E7C871;
+    
+    /* Typography */
+    --font-heading: 'Cormorant Garamond', 'Georgia', serif;
+    --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    
+    /* Spacing */
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 1rem;
+    --spacing-md: 2rem;
+    --spacing-lg: 4rem;
+    --spacing-xl: 6rem;
+    
+    /* Shadows */
+    --shadow-sm: 0 2px 8px rgba(31, 58, 42, 0.08);
+    --shadow-md: 0 4px 20px rgba(31, 58, 42, 0.12);
+    --shadow-lg: 0 8px 40px rgba(31, 58, 42, 0.16);
+    
+    /* Transitions */
+    --transition-fast: 0.2s ease;
+    --transition-base: 0.3s ease;
+    --transition-slow: 0.5s ease;
+}
+
+/* =========================================
+   GLOBAL STYLES
+   ========================================= */
+
+body {
+    background-color: var(--color-background);
+    color: var(--color-text-primary);
+    font-family: var(--font-body);
+    font-size: 18px;
+    line-height: 1.7;
+}
+
+/* Import elegant serif font for headings */
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
+
+/* =========================================
+   SINGLE SCULPTURE PAGE - DESKTOP FIRST
+   ========================================= */
+
+.sculpture-single-container {
+    max-width: 1400px;
     margin: 0 auto;
-    padding: 40px 20px;
+    padding: var(--spacing-xl) var(--spacing-md);
+    background: var(--color-background);
+}
+
+/* =========================================
+   HEADER SECTION - HERO STYLE
+   ========================================= */
+
+.sculpture-header {
+    text-align: center;
+    margin-bottom: var(--spacing-xl);
+    padding: var(--spacing-lg) 0;
+    position: relative;
 }
 
 .sculpture-title {
-    font-size: 3rem;
-    font-weight: 700;
-    margin-bottom: 10px;
-    color: #1a1a1a;
-    line-height: 1.2;
+    font-family: var(--font-heading);
+    font-size: 5rem;
+    font-weight: 300;
+    letter-spacing: -0.02em;
+    margin-bottom: var(--spacing-md);
+    color: var(--color-dark-forest);
+    line-height: 1.1;
+    animation: fadeInUp 0.8s ease;
 }
 
-/* Short description as subtitle */
-.sculpture-subtitle h2 {
-    font-size: 1.5rem;
-    font-weight: 400;
-    color: #666;
+/* Featured Badge - Elegant & Subtle */
+.sculpture-badge {
+    display: inline-block;
+    padding: 0.75rem 2rem;
+    border-radius: 50px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: var(--spacing-md);
+    animation: fadeIn 1s ease 0.3s both;
+}
+
+.featured-badge {
+    background: var(--color-gold);
+    color: var(--color-dark-forest);
+    box-shadow: 0 4px 20px rgba(231, 200, 113, 0.3);
+}
+
+/* Subtitle - Elegant Typography */
+.sculpture-subtitle {
+    max-width: 900px;
+    margin: 0 auto var(--spacing-lg);
+    animation: fadeInUp 0.8s ease 0.2s both;
+}
+
+.sculpture-subtitle p {
+    font-family: var(--font-heading);
+    font-size: 1.75rem;
+    font-weight: 300;
+    color: var(--color-text-secondary);
     font-style: italic;
-    margin-bottom: 30px;
-    line-height: 1.4;
+    line-height: 1.6;
+    margin: 0;
 }
 
-/* Featured image */
+/* =========================================
+   FEATURED IMAGE - GALLERY STYLE
+   ========================================= */
+
 .sculpture-featured-image {
-    margin: 30px 0;
-    border-radius: 8px;
+    margin: var(--spacing-xl) auto;
+    max-width: 1100px;
+    border-radius: 2px;
     overflow: hidden;
+    box-shadow: var(--shadow-lg);
+    animation: fadeInScale 1s ease 0.4s both;
+    position: relative;
+}
+
+.sculpture-featured-image::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        180deg,
+        rgba(31, 58, 42, 0) 0%,
+        rgba(31, 58, 42, 0.05) 100%
+    );
+    pointer-events: none;
 }
 
 .sculpture-featured-image img {
     width: 100%;
     height: auto;
     display: block;
+    transition: transform var(--transition-slow);
+}
+
+.sculpture-featured-image:hover img {
+    transform: scale(1.02);
 }
 
 /* =========================================
-   SCULPTURE INFO SECTION
+   INFO BOX - MODERN CARD DESIGN
    ========================================= */
 
-.sculpture-info {
-    background: #f8f9fa;
-    padding: 30px;
+.sculpture-info-box {
+    background: linear-gradient(
+        135deg,
+        var(--color-mist) 0%,
+        rgba(221, 231, 209, 0.5) 100%
+    );
+    padding: var(--spacing-lg);
     border-radius: 8px;
-    margin: 30px 0;
-    border-left: 4px solid #333;
+    margin: var(--spacing-xl) auto;
+    max-width: 1200px;
+    box-shadow: var(--shadow-md);
+    border: 1px solid rgba(106, 139, 88, 0.2);
+    position: relative;
+    overflow: hidden;
 }
 
-.sculpture-info-item {
-    display: flex;
-    margin-bottom: 15px;
-    font-size: 1.1rem;
+.sculpture-info-box::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(
+        90deg,
+        var(--color-sage) 0%,
+        var(--color-gold) 50%,
+        var(--color-sage) 100%
+    );
 }
 
-.sculpture-info-item:last-child {
-    margin-bottom: 0;
+.info-box-title {
+    font-family: var(--font-heading);
+    font-size: 2.5rem;
+    font-weight: 400;
+    margin-bottom: var(--spacing-lg);
+    color: var(--color-dark-forest);
+    text-align: center;
+    letter-spacing: -0.01em;
+}
+
+.sculpture-info-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--spacing-md);
+}
+
+.info-item {
+    background: rgba(255, 252, 230, 0.8);
+    padding: var(--spacing-md);
+    border-radius: 4px;
+    border-left: 3px solid var(--color-sage);
+    transition: all var(--transition-base);
+    backdrop-filter: blur(10px);
+}
+
+.info-item:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-sm);
+    border-left-color: var(--color-gold);
 }
 
 .info-label {
+    display: block;
+    font-family: var(--font-body);
     font-weight: 600;
-    margin-right: 10px;
-    min-width: 120px;
-    color: #333;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--color-text-light);
+    margin-bottom: 0.5rem;
 }
 
 .info-value {
-    color: #555;
+    display: block;
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    color: var(--color-dark-forest);
+    font-weight: 400;
+}
+
+/* Availability Status - Color Coded */
+.availability-available {
+    color: var(--color-sage);
+    font-weight: 600;
+}
+
+.availability-sold {
+    color: #8B4545;
+    font-weight: 600;
+}
+
+.availability-exhibition {
+    color: var(--color-gold);
+    font-weight: 600;
+}
+
+.availability-reserved {
+    color: var(--color-forest);
+    font-weight: 600;
 }
 
 /* =========================================
-   SCULPTURE DESCRIPTION
+   DESCRIPTION SECTION - EDITORIAL STYLE
    ========================================= */
 
 .sculpture-description {
-    font-size: 1.1rem;
-    line-height: 1.8;
-    margin: 30px 0;
-    color: #333;
+    margin: var(--spacing-xl) auto;
+    max-width: 850px;
+    padding: 0 var(--spacing-md);
+}
+
+.sculpture-description h2 {
+    font-family: var(--font-heading);
+    font-size: 3rem;
+    font-weight: 400;
+    margin-bottom: var(--spacing-lg);
+    color: var(--color-dark-forest);
+    letter-spacing: -0.01em;
+    position: relative;
+    padding-bottom: var(--spacing-md);
+}
+
+.sculpture-description h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 80px;
+    height: 2px;
+    background: var(--color-gold);
 }
 
 .sculpture-description p {
-    margin-bottom: 1.5em;
+    font-size: 1.125rem;
+    line-height: 1.8;
+    color: var(--color-text-secondary);
+    margin-bottom: 1.75em;
+    font-weight: 400;
+}
+
+.sculpture-description p:first-of-type {
+    font-size: 1.25rem;
+    color: var(--color-text-primary);
+}
+
+/* Gutenberg blocks styling */
+.sculpture-description .wp-block-image {
+    margin: var(--spacing-lg) 0;
+}
+
+.sculpture-description blockquote {
+    border-left: 4px solid var(--color-gold);
+    padding-left: var(--spacing-md);
+    margin: var(--spacing-lg) 0;
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    font-style: italic;
+    color: var(--color-text-secondary);
 }
 
 /* =========================================
-   SCULPTURE GALLERY
+   NAVIGATION - MINIMAL & ELEGANT
    ========================================= */
 
-.sculpture-gallery {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 20px;
-    margin: 40px 0;
+.sculpture-navigation {
+    text-align: center;
+    margin-top: var(--spacing-xl);
+    padding-top: var(--spacing-lg);
+    border-top: 1px solid rgba(106, 139, 88, 0.2);
 }
 
-.gallery-item {
-    position: relative;
-    overflow: hidden;
-    border-radius: 8px;
-    background: #f0f0f0;
+.btn-back-to-gallery {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem 2.5rem;
+    background: var(--color-dark-forest);
+    color: var(--color-cream);
+    text-decoration: none;
+    border-radius: 2px;
+    font-weight: 500;
+    font-size: 0.95rem;
+    letter-spacing: 0.5px;
+    transition: all var(--transition-base);
+    box-shadow: var(--shadow-sm);
+    text-transform: uppercase;
 }
 
-.gallery-item img {
-    width: 100%;
-    height: 300px;
-    object-fit: cover;
-    display: block;
-    transition: transform 0.3s ease;
-}
-
-.gallery-item:hover img {
-    transform: scale(1.05);
+.btn-back-to-gallery:hover {
+    background: var(--color-forest);
+    transform: translateX(-4px);
+    box-shadow: var(--shadow-md);
+    color: var(--color-cream);
 }
 
 /* =========================================
-   RESPONSIVE DESIGN
+   ANIMATIONS
    ========================================= */
 
-@media (max-width: 768px) {
-    .sculpture-title {
-        font-size: 2rem;
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
     }
-    
-    .sculpture-subtitle h2 {
-        font-size: 1.2rem;
+    to {
+        opacity: 1;
+        transform: translateY(0);
     }
-    
-    .sculpture-info-item {
-        flex-direction: column;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
     }
-    
-    .info-label {
-        margin-bottom: 5px;
+    to {
+        opacity: 1;
     }
-    
-    .sculpture-gallery {
-        grid-template-columns: 1fr;
+}
+
+@keyframes fadeInScale {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
     }
-    
-    .gallery-item img {
-        height: 250px;
+    to {
+        opacity: 1;
+        transform: scale(1);
     }
 }
 
 /* =========================================
-   ARCHIVE / LIST VIEW
+   ARCHIVE / GALLERY VIEW
    ========================================= */
 
 .sculpture-archive-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 30px;
-    margin: 40px 0;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--spacing-lg);
+    margin: var(--spacing-xl) auto;
+    max-width: 1400px;
+    padding: 0 var(--spacing-md);
 }
 
 .sculpture-card {
-    background: #fff;
-    border-radius: 8px;
+    background: var(--color-cream);
+    border-radius: 4px;
     overflow: hidden;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: var(--shadow-sm);
+    transition: all var(--transition-base);
+    border: 1px solid rgba(106, 139, 88, 0.1);
 }
 
 .sculpture-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-lg);
 }
 
 .sculpture-card-image {
     width: 100%;
-    height: 250px;
+    height: 400px;
     object-fit: cover;
+    transition: transform var(--transition-slow);
+}
+
+.sculpture-card:hover .sculpture-card-image {
+    transform: scale(1.05);
 }
 
 .sculpture-card-content {
-    padding: 20px;
+    padding: var(--spacing-md);
 }
 
 .sculpture-card-title {
-    font-size: 1.5rem;
-    font-weight: 600;
-    margin-bottom: 10px;
+    font-family: var(--font-heading);
+    font-size: 1.75rem;
+    font-weight: 400;
+    margin-bottom: var(--spacing-sm);
+    line-height: 1.3;
 }
 
 .sculpture-card-title a {
-    color: #333;
+    color: var(--color-dark-forest);
     text-decoration: none;
-    transition: color 0.3s ease;
+    transition: color var(--transition-fast);
 }
 
 .sculpture-card-title a:hover {
-    color: #0066cc;
+    color: var(--color-gold);
 }
 
 .sculpture-card-meta {
     font-size: 0.9rem;
-    color: #666;
+    color: var(--color-text-light);
+    font-weight: 500;
+}
+
+/* =========================================
+   RESPONSIVE DESIGN - TABLET
+   ========================================= */
+
+@media (max-width: 1024px) {
+    :root {
+        --spacing-xl: 4rem;
+        --spacing-lg: 3rem;
+    }
+    
+    .sculpture-title {
+        font-size: 3.5rem;
+    }
+    
+    .sculpture-subtitle p {
+        font-size: 1.4rem;
+    }
+    
+    .sculpture-info-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .sculpture-archive-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* =========================================
+   RESPONSIVE DESIGN - MOBILE
+   ========================================= */
+
+@media (max-width: 768px) {
+    :root {
+        --spacing-xl: 3rem;
+        --spacing-lg: 2rem;
+        --spacing-md: 1.5rem;
+    }
+    
+    body {
+        font-size: 16px;
+    }
+    
+    .sculpture-single-container {
+        padding: var(--spacing-lg) var(--spacing-sm);
+    }
+    
+    .sculpture-title {
+        font-size: 2.5rem;
+    }
+    
+    .sculpture-subtitle p {
+        font-size: 1.2rem;
+    }
+    
+    .info-box-title {
+        font-size: 1.75rem;
+    }
+    
+    .sculpture-info-grid {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-sm);
+    }
+    
+    .sculpture-description h2 {
+        font-size: 2rem;
+    }
+    
+    .sculpture-description p {
+        font-size: 1rem;
+    }
+    
+    .sculpture-archive-grid {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-md);
+    }
+    
+    .sculpture-card-image {
+        height: 300px;
+    }
+    
+    .btn-back-to-gallery {
+        padding: 0.875rem 2rem;
+        font-size: 0.85rem;
+    }
 }
 
 /* =========================================
@@ -217,14 +565,37 @@
     text-align: center;
 }
 
+.text-gold {
+    color: var(--color-gold);
+}
+
+.bg-mist {
+    background-color: var(--color-mist);
+}
+
 .mb-0 {
     margin-bottom: 0 !important;
 }
 
-.mt-40 {
-    margin-top: 40px;
+.mt-lg {
+    margin-top: var(--spacing-lg);
 }
 
-.mb-40 {
-    margin-bottom: 40px;
+.mb-lg {
+    margin-bottom: var(--spacing-lg);
+}
+
+/* =========================================
+   PRINT STYLES
+   ========================================= */
+
+@media print {
+    .sculpture-navigation,
+    .btn-back-to-gallery {
+        display: none;
+    }
+    
+    .sculpture-single-container {
+        max-width: 100%;
+    }
 }
