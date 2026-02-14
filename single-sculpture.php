@@ -20,10 +20,9 @@ while (have_posts()) : the_post();
 <article class="sculpture-page">
     
     <?php
-    // Load components
+    get_template_part('template-parts/sculpture/content', 'header'); 
     get_template_part('template-parts/sculpture/content', 'image');
-    get_template_part('template-parts/sculpture/content', 'header');
-    get_template_part('template-parts/sculpture/content', 'info');
+    get_template_part('template-parts/sculpture/content', 'info'); 
     get_template_part('template-parts/sculpture/content', 'description');
     get_template_part('template-parts/sculpture/content', 'navigation');
     ?>
