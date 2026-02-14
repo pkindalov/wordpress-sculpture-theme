@@ -1,71 +1,48 @@
 <?php
 /**
- * Sculpture Info Box Component
- * Displays all ACF technical details
+ * Sculpture Info Component
+ * Technical details grid
  */
-
-// Get all fields
-$year = get_field('year');
-$materials = get_field('materials');
-$dimensions = get_field('dimensions');
-$price = get_field('price');
-$currency = get_field('currency');
-$availability = get_field('availability');
-
-// Only show box if at least one field has value
-if ($year || $materials || $dimensions || $price || $availability):
 ?>
 
-<div class="sculpture-info-box">
-    <h2 class="info-box-title">Sculpture Details</h2>
+<div class="sculpture-info">
     
-    <div class="sculpture-info-grid">
-        
-        <?php if ($year): ?>
-            <div class="info-item">
-                <span class="info-label">Year:</span>
-                <span class="info-value"><?php echo esc_html($year); ?></span>
+    <?php if ($y = get_field('year')): ?>
+        <div class="info-box">
+            <div class="label">YEAR</div>
+            <div class="value"><?php echo esc_html($y); ?></div>
+        </div>
+    <?php endif; ?>
+    
+    <?php if ($m = get_field('materials')): ?>
+        <div class="info-box">
+            <div class="label">MATERIALS</div>
+            <div class="value"><?php echo esc_html($m); ?></div>
+        </div>
+    <?php endif; ?>
+    
+    <?php if ($d = get_field('dimensions')): ?>
+        <div class="info-box">
+            <div class="label">DIMENSIONS</div>
+            <div class="value"><?php echo esc_html($d); ?></div>
+        </div>
+    <?php endif; ?>
+    
+    <?php if ($p = get_field('price')): ?>
+        <div class="info-box info-box-price">
+            <div class="label">PRICE</div>
+            <div class="value">
+                <?php echo get_field('currency') ? esc_html(get_field('currency')) . ' ' : ''; ?>
+                <?php echo esc_html(number_format($p, 0)); ?>
             </div>
-        <?php endif; ?>
-        
-        <?php if ($materials): ?>
-            <div class="info-item">
-                <span class="info-label">Materials:</span>
-                <span class="info-value"><?php echo esc_html($materials); ?></span>
-            </div>
-        <?php endif; ?>
-        
-        <?php if ($dimensions): ?>
-            <div class="info-item">
-                <span class="info-label">Dimensions:</span>
-                <span class="info-value"><?php echo esc_html($dimensions); ?></span>
-            </div>
-        <?php endif; ?>
-        
-        <?php if ($price): ?>
-            <div class="info-item">
-                <span class="info-label">Price:</span>
-                <span class="info-value">
-                    <?php 
-                    if ($currency) {
-                        echo esc_html($currency) . ' ';
-                    }
-                    echo esc_html(number_format($price, 2)); 
-                    ?>
-                </span>
-            </div>
-        <?php endif; ?>
-        
-        <?php if ($availability): ?>
-            <div class="info-item">
-                <span class="info-label">Availability:</span>
-                <span class="info-value availability-<?php echo esc_attr(strtolower($availability)); ?>">
-                    <?php echo esc_html($availability); ?>
-                </span>
-            </div>
-        <?php endif; ?>
-        
-    </div>
+        </div>
+    <?php endif; ?>
+    
+    <?php if ($a = get_field('availability')): ?>
+        <div class="info-box">
+            <div class="label">STATUS</div>
+            <div class="value"><?php echo esc_html($a); ?></div>
+        </div>
+    <?php endif; ?>
+    
 </div>
-
-<?php endif; ?>

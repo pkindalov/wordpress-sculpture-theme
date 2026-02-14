@@ -1,15 +1,15 @@
 <?php
 /**
  * Sculpture Description Component
- * Displays Gutenberg content
+ * Main content area
  */
 
-if (get_the_content()):
+if (!get_the_content()) {
+    return;
+}
 ?>
 
 <div class="sculpture-description">
     <h2>About This Work</h2>
     <?php the_content(); ?>
 </div>
-
-<?php endif; ?>

@@ -5,8 +5,8 @@
  */
 ?>
 
-<div class="sculpture-navigation">
-    <a href="<?php echo esc_url(get_post_type_archive_link('sculpture')); ?>" class="btn-back-to-gallery">
-        ← Back to Gallery
+<div class="sculpture-nav">
+    <a href="<?php echo esc_url(get_post_type_archive_link('sculpture')); ?>" class="btn-back">
+        ← BACK TO GALLERY
     </a>
 </div>
