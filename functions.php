@@ -53,3 +53,21 @@ require_once SCULPTURE_THEME_DIR . '/inc/template-functions.php';
  * after all modules are loaded
  */
 do_action('sculpture_theme_init');
+
+// KILL Astra completely for sculptures
+add_action('template_redirect', 'sculpture_kill_astra');
+function sculpture_kill_astra() {
+    if (is_singular('sculpture')) {
+        remove_all_actions('astra_header');
+        remove_all_actions('astra_content_top');
+        remove_all_actions('astra_entry_top');
+        remove_all_actions('astra_entry_content_before');
+        remove_all_actions('astra_entry_content_after');
+        remove_all_actions('astra_entry_bottom');
+        remove_all_actions('astra_content_bottom');
+        
+        add_filter('theme_mod_ast-container-width', function() { return 100; });
+        add_filter('astra_page_layout', function() { return 'no-sidebar'; });
+        add_filter('astra_content_layout', function() { return 'plain-container'; });
+    }
+}

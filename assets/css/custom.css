@@ -1,601 +1,243 @@
-/**
- * Sculpture Theme - Custom Styles
- * Modern Gallery Design with Earth Tones
- * 
- * @package Sculpture_Theme
- * @since   1.0.0
- */
+/* SCULPTURE PAGE - BOLD EDITORIAL */
 
-/* =========================================
-   CSS VARIABLES - COLOR PALETTE
-   ========================================= */
-
-:root {
-    /* Brand Colors */
-    --color-dark-forest: #1F3A2A;
-    --color-gold: #E7C871;
-    --color-forest: #40543D;
-    --color-sage: #6A8B58;
-    --color-mist: #DDE7D1;
-    --color-cream: #FFFCE6;
-    
-    /* Functional Colors */
-    --color-text-primary: #1F3A2A;
-    --color-text-secondary: #40543D;
-    --color-text-light: #6A8B58;
-    --color-background: #FFFCE6;
-    --color-background-alt: #DDE7D1;
-    --color-accent: #E7C871;
-    
-    /* Typography */
-    --font-heading: 'Cormorant Garamond', 'Georgia', serif;
-    --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    
-    /* Spacing */
-    --spacing-xs: 0.5rem;
-    --spacing-sm: 1rem;
-    --spacing-md: 2rem;
-    --spacing-lg: 4rem;
-    --spacing-xl: 6rem;
-    
-    /* Shadows */
-    --shadow-sm: 0 2px 8px rgba(31, 58, 42, 0.08);
-    --shadow-md: 0 4px 20px rgba(31, 58, 42, 0.12);
-    --shadow-lg: 0 8px 40px rgba(31, 58, 42, 0.16);
-    
-    /* Transitions */
-    --transition-fast: 0.2s ease;
-    --transition-base: 0.3s ease;
-    --transition-slow: 0.5s ease;
+body.single-sculpture .site-content,
+body.single-sculpture .ast-container,
+body.single-sculpture #primary,
+body.single-sculpture .entry-content {
+    max-width: 100% !important;
+    width: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
 }
 
-/* =========================================
-   GLOBAL STYLES
-   ========================================= */
-
-body {
-    background-color: var(--color-background);
-    color: var(--color-text-primary);
-    font-family: var(--font-body);
-    font-size: 18px;
-    line-height: 1.7;
+body.single-sculpture {
+    background: #FFFCE6 !important;
 }
 
-/* Import elegant serif font for headings */
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
-
-/* =========================================
-   SINGLE SCULPTURE PAGE - DESKTOP FIRST
-   ========================================= */
-
-.sculpture-single-container {
-    max-width: 1400px;
+/* Main Wrapper */
+body.single-sculpture .sculpture-page {
+    max-width: 1600px;
     margin: 0 auto;
-    padding: var(--spacing-xl) var(--spacing-md);
-    background: var(--color-background);
+    padding: 60px 60px 100px;
 }
 
-/* =========================================
-   HEADER SECTION - HERO STYLE
-   ========================================= */
-
-.sculpture-header {
-    text-align: center;
-    margin-bottom: var(--spacing-xl);
-    padding: var(--spacing-lg) 0;
+/* Image - Asymmetric & Large */
+body.single-sculpture .sculpture-image {
+    margin-bottom: 60px;
     position: relative;
 }
 
-.sculpture-title {
-    font-family: var(--font-heading);
-    font-size: 5rem;
-    font-weight: 300;
-    letter-spacing: -0.02em;
-    margin-bottom: var(--spacing-md);
-    color: var(--color-dark-forest);
-    line-height: 1.1;
-    animation: fadeInUp 0.8s ease;
-}
-
-/* Featured Badge - Elegant & Subtle */
-.sculpture-badge {
-    display: inline-block;
-    padding: 0.75rem 2rem;
-    border-radius: 50px;
-    font-size: 0.75rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    margin-bottom: var(--spacing-md);
-    animation: fadeIn 1s ease 0.3s both;
-}
-
-.featured-badge {
-    background: var(--color-gold);
-    color: var(--color-dark-forest);
-    box-shadow: 0 4px 20px rgba(231, 200, 113, 0.3);
-}
-
-/* Subtitle - Elegant Typography */
-.sculpture-subtitle {
-    max-width: 900px;
-    margin: 0 auto var(--spacing-lg);
-    animation: fadeInUp 0.8s ease 0.2s both;
-}
-
-.sculpture-subtitle p {
-    font-family: var(--font-heading);
-    font-size: 1.75rem;
-    font-weight: 300;
-    color: var(--color-text-secondary);
-    font-style: italic;
-    line-height: 1.6;
-    margin: 0;
-}
-
-/* =========================================
-   FEATURED IMAGE - GALLERY STYLE
-   ========================================= */
-
-.sculpture-featured-image {
-    margin: var(--spacing-xl) auto;
-    max-width: 1100px;
-    border-radius: 2px;
-    overflow: hidden;
-    box-shadow: var(--shadow-lg);
-    animation: fadeInScale 1s ease 0.4s both;
-    position: relative;
-}
-
-.sculpture-featured-image::before {
+body.single-sculpture .sculpture-image::before {
     content: '';
     position: absolute;
-    inset: 0;
-    background: linear-gradient(
-        180deg,
-        rgba(31, 58, 42, 0) 0%,
-        rgba(31, 58, 42, 0.05) 100%
-    );
-    pointer-events: none;
+    top: -20px;
+    left: -20px;
+    width: 200px;
+    height: 200px;
+    background: #E7C871;
+    z-index: -1;
+    opacity: 0.3;
 }
 
-.sculpture-featured-image img {
-    width: 100%;
+body.single-sculpture .sculpture-image img {
+    max-width: 100%;
     height: auto;
+    border-radius: 0;
+    box-shadow: 0 30px 80px rgba(31,58,42,0.25);
+}
+
+/* Header - Left Aligned & Bold */
+body.single-sculpture .sculpture-header {
+    text-align: left;
+    margin-bottom: 80px;
+    padding-bottom: 40px;
+    border-bottom: 4px solid #1F3A2A;
+}
+
+body.single-sculpture .sculpture-header h1 {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 82px;
+    font-weight: 900;
+    color: #1F3A2A;
+    margin: 0 0 30px;
+    line-height: 0.95;
+    letter-spacing: -0.03em;
+    text-transform: uppercase;
+}
+
+body.single-sculpture .sculpture-header .subtitle {
+    font-size: 24px;
+    font-weight: 400;
+    color: #40543D;
+    margin: 0;
+    line-height: 1.5;
+    max-width: 700px;
+}
+
+/* Info - Stacked Cards */
+body.single-sculpture .sculpture-info {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 0;
+    margin-bottom: 100px;
+}
+
+body.single-sculpture .info-box {
+    background: #1F3A2A;
+    color: #FFFCE6;
+    padding: 50px 30px;
+    text-align: center;
+    border: none;
+    border-right: 2px solid #FFFCE6;
+    transition: all 0.3s;
+}
+
+body.single-sculpture .info-box:last-child {
+    border-right: none;
+}
+
+body.single-sculpture .info-box:hover {
+    background: #40543D;
+    transform: translateY(-5px);
+}
+
+body.single-sculpture .info-box-price {
+    background: #E7C871;
+    color: #1F3A2A;
+}
+
+body.single-sculpture .info-box-price:hover {
+    background: #d4b55e;
+}
+
+body.single-sculpture .info-box .label {
+    font-size: 11px;
+    font-weight: 900;
+    letter-spacing: 3px;
+    color: inherit;
+    margin-bottom: 20px;
     display: block;
-    transition: transform var(--transition-slow);
+    opacity: 0.7;
 }
 
-.sculpture-featured-image:hover img {
-    transform: scale(1.02);
+body.single-sculpture .info-box .value {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 32px;
+    font-weight: 900;
+    color: inherit;
+    display: block;
+    letter-spacing: -0.02em;
 }
 
-/* =========================================
-   INFO BOX - MODERN CARD DESIGN
-   ========================================= */
+body.single-sculpture .info-box-price .value {
+    font-size: 42px;
+}
 
-.sculpture-info-box {
-    background: linear-gradient(
-        135deg,
-        var(--color-mist) 0%,
-        rgba(221, 231, 209, 0.5) 100%
-    );
-    padding: var(--spacing-lg);
-    border-radius: 8px;
-    margin: var(--spacing-xl) auto;
+/* Description - Wide & Modern */
+body.single-sculpture .sculpture-description {
     max-width: 1200px;
-    box-shadow: var(--shadow-md);
-    border: 1px solid rgba(106, 139, 88, 0.2);
-    position: relative;
-    overflow: hidden;
+    margin: 0 auto 100px;
+    padding: 60px;
+    background: linear-gradient(135deg, #DDE7D1 0%, rgba(221,231,209,0.3) 100%);
+    border-left: 8px solid #E7C871;
 }
 
-.sculpture-info-box::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 4px;
-    background: linear-gradient(
-        90deg,
-        var(--color-sage) 0%,
-        var(--color-gold) 50%,
-        var(--color-sage) 100%
-    );
-}
-
-.info-box-title {
-    font-family: var(--font-heading);
-    font-size: 2.5rem;
-    font-weight: 400;
-    margin-bottom: var(--spacing-lg);
-    color: var(--color-dark-forest);
-    text-align: center;
-    letter-spacing: -0.01em;
-}
-
-.sculpture-info-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: var(--spacing-md);
-}
-
-.info-item {
-    background: rgba(255, 252, 230, 0.8);
-    padding: var(--spacing-md);
-    border-radius: 4px;
-    border-left: 3px solid var(--color-sage);
-    transition: all var(--transition-base);
-    backdrop-filter: blur(10px);
-}
-
-.info-item:hover {
-    transform: translateY(-4px);
-    box-shadow: var(--shadow-sm);
-    border-left-color: var(--color-gold);
-}
-
-.info-label {
-    display: block;
-    font-family: var(--font-body);
-    font-weight: 600;
-    font-size: 0.75rem;
+body.single-sculpture .sculpture-description h2 {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 48px;
+    font-weight: 900;
+    color: #1F3A2A;
+    margin-bottom: 40px;
     text-transform: uppercase;
-    letter-spacing: 1.5px;
-    color: var(--color-text-light);
-    margin-bottom: 0.5rem;
+    letter-spacing: -0.02em;
+    border: none;
+    padding: 0;
 }
 
-.info-value {
-    display: block;
-    font-family: var(--font-heading);
-    font-size: 1.5rem;
-    color: var(--color-dark-forest);
-    font-weight: 400;
-}
-
-/* Availability Status - Color Coded */
-.availability-available {
-    color: var(--color-sage);
-    font-weight: 600;
-}
-
-.availability-sold {
-    color: #8B4545;
-    font-weight: 600;
-}
-
-.availability-exhibition {
-    color: var(--color-gold);
-    font-weight: 600;
-}
-
-.availability-reserved {
-    color: var(--color-forest);
-    font-weight: 600;
-}
-
-/* =========================================
-   DESCRIPTION SECTION - EDITORIAL STYLE
-   ========================================= */
-
-.sculpture-description {
-    margin: var(--spacing-xl) auto;
-    max-width: 850px;
-    padding: 0 var(--spacing-md);
-}
-
-.sculpture-description h2 {
-    font-family: var(--font-heading);
-    font-size: 3rem;
-    font-weight: 400;
-    margin-bottom: var(--spacing-lg);
-    color: var(--color-dark-forest);
-    letter-spacing: -0.01em;
-    position: relative;
-    padding-bottom: var(--spacing-md);
-}
-
-.sculpture-description h2::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 80px;
-    height: 2px;
-    background: var(--color-gold);
-}
-
-.sculpture-description p {
-    font-size: 1.125rem;
+body.single-sculpture .sculpture-description p {
+    font-size: 21px;
     line-height: 1.8;
-    color: var(--color-text-secondary);
-    margin-bottom: 1.75em;
+    color: #1F3A2A;
+    margin-bottom: 28px;
     font-weight: 400;
 }
 
-.sculpture-description p:first-of-type {
-    font-size: 1.25rem;
-    color: var(--color-text-primary);
+body.single-sculpture .sculpture-description p:first-of-type {
+    font-size: 24px;
+    font-weight: 600;
 }
 
-/* Gutenberg blocks styling */
-.sculpture-description .wp-block-image {
-    margin: var(--spacing-lg) 0;
-}
-
-.sculpture-description blockquote {
-    border-left: 4px solid var(--color-gold);
-    padding-left: var(--spacing-md);
-    margin: var(--spacing-lg) 0;
-    font-family: var(--font-heading);
-    font-size: 1.5rem;
-    font-style: italic;
-    color: var(--color-text-secondary);
-}
-
-/* =========================================
-   NAVIGATION - MINIMAL & ELEGANT
-   ========================================= */
-
-.sculpture-navigation {
+/* Nav - Bold Button */
+body.single-sculpture .sculpture-nav {
     text-align: center;
-    margin-top: var(--spacing-xl);
-    padding-top: var(--spacing-lg);
-    border-top: 1px solid rgba(106, 139, 88, 0.2);
+    padding-top: 0;
+    border: none;
 }
 
-.btn-back-to-gallery {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.75rem;
-    padding: 1rem 2.5rem;
-    background: var(--color-dark-forest);
-    color: var(--color-cream);
+body.single-sculpture .btn-back {
+    display: inline-block;
+    padding: 24px 60px;
+    background: #1F3A2A;
+    color: #FFFCE6;
     text-decoration: none;
-    border-radius: 2px;
-    font-weight: 500;
-    font-size: 0.95rem;
-    letter-spacing: 0.5px;
-    transition: all var(--transition-base);
-    box-shadow: var(--shadow-sm);
+    border-radius: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 900;
+    font-size: 16px;
+    letter-spacing: 2px;
     text-transform: uppercase;
+    box-shadow: 0 10px 40px rgba(31,58,42,0.3);
+    transition: all 0.3s;
+    border: 4px solid #1F3A2A;
 }
 
-.btn-back-to-gallery:hover {
-    background: var(--color-forest);
-    transform: translateX(-4px);
-    box-shadow: var(--shadow-md);
-    color: var(--color-cream);
+body.single-sculpture .btn-back:hover {
+    background: #FFFCE6;
+    color: #1F3A2A;
+    transform: translateY(-3px);
+    box-shadow: 0 15px 50px rgba(31,58,42,0.4);
 }
 
-/* =========================================
-   ANIMATIONS
-   ========================================= */
-
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
-}
-
-@keyframes fadeInScale {
-    from {
-        opacity: 0;
-        transform: scale(0.95);
-    }
-    to {
-        opacity: 1;
-        transform: scale(1);
-    }
-}
-
-/* =========================================
-   ARCHIVE / GALLERY VIEW
-   ========================================= */
-
-.sculpture-archive-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: var(--spacing-lg);
-    margin: var(--spacing-xl) auto;
-    max-width: 1400px;
-    padding: 0 var(--spacing-md);
-}
-
-.sculpture-card {
-    background: var(--color-cream);
-    border-radius: 4px;
-    overflow: hidden;
-    box-shadow: var(--shadow-sm);
-    transition: all var(--transition-base);
-    border: 1px solid rgba(106, 139, 88, 0.1);
-}
-
-.sculpture-card:hover {
-    transform: translateY(-8px);
-    box-shadow: var(--shadow-lg);
-}
-
-.sculpture-card-image {
-    width: 100%;
-    height: 400px;
-    object-fit: cover;
-    transition: transform var(--transition-slow);
-}
-
-.sculpture-card:hover .sculpture-card-image {
-    transform: scale(1.05);
-}
-
-.sculpture-card-content {
-    padding: var(--spacing-md);
-}
-
-.sculpture-card-title {
-    font-family: var(--font-heading);
-    font-size: 1.75rem;
-    font-weight: 400;
-    margin-bottom: var(--spacing-sm);
-    line-height: 1.3;
-}
-
-.sculpture-card-title a {
-    color: var(--color-dark-forest);
-    text-decoration: none;
-    transition: color var(--transition-fast);
-}
-
-.sculpture-card-title a:hover {
-    color: var(--color-gold);
-}
-
-.sculpture-card-meta {
-    font-size: 0.9rem;
-    color: var(--color-text-light);
-    font-weight: 500;
-}
-
-/* =========================================
-   RESPONSIVE DESIGN - TABLET
-   ========================================= */
-
+/* TABLET */
 @media (max-width: 1024px) {
-    :root {
-        --spacing-xl: 4rem;
-        --spacing-lg: 3rem;
+    body.single-sculpture .sculpture-header h1 {
+        font-size: 56px;
     }
     
-    .sculpture-title {
-        font-size: 3.5rem;
-    }
-    
-    .sculpture-subtitle p {
-        font-size: 1.4rem;
-    }
-    
-    .sculpture-info-grid {
+    body.single-sculpture .sculpture-info {
         grid-template-columns: repeat(2, 1fr);
     }
     
-    .sculpture-archive-grid {
-        grid-template-columns: repeat(2, 1fr);
+    body.single-sculpture .info-box {
+        border-right: none;
+        border-bottom: 2px solid #FFFCE6;
     }
 }
 
-/* =========================================
-   RESPONSIVE DESIGN - MOBILE
-   ========================================= */
-
+/* MOBILE */
 @media (max-width: 768px) {
-    :root {
-        --spacing-xl: 3rem;
-        --spacing-lg: 2rem;
-        --spacing-md: 1.5rem;
+    body.single-sculpture .sculpture-page {
+        padding: 40px 20px 60px;
     }
     
-    body {
-        font-size: 16px;
+    body.single-sculpture .sculpture-header h1 {
+        font-size: 36px;
     }
     
-    .sculpture-single-container {
-        padding: var(--spacing-lg) var(--spacing-sm);
-    }
-    
-    .sculpture-title {
-        font-size: 2.5rem;
-    }
-    
-    .sculpture-subtitle p {
-        font-size: 1.2rem;
-    }
-    
-    .info-box-title {
-        font-size: 1.75rem;
-    }
-    
-    .sculpture-info-grid {
+    body.single-sculpture .sculpture-info {
         grid-template-columns: 1fr;
-        gap: var(--spacing-sm);
     }
     
-    .sculpture-description h2 {
-        font-size: 2rem;
+    body.single-sculpture .sculpture-description {
+        padding: 40px 30px;
+        border-left-width: 4px;
     }
     
-    .sculpture-description p {
-        font-size: 1rem;
+    body.single-sculpture .sculpture-description h2 {
+        font-size: 32px;
     }
     
-    .sculpture-archive-grid {
-        grid-template-columns: 1fr;
-        gap: var(--spacing-md);
-    }
-    
-    .sculpture-card-image {
-        height: 300px;
-    }
-    
-    .btn-back-to-gallery {
-        padding: 0.875rem 2rem;
-        font-size: 0.85rem;
-    }
-}
-
-/* =========================================
-   UTILITY CLASSES
-   ========================================= */
-
-.text-center {
-    text-align: center;
-}
-
-.text-gold {
-    color: var(--color-gold);
-}
-
-.bg-mist {
-    background-color: var(--color-mist);
-}
-
-.mb-0 {
-    margin-bottom: 0 !important;
-}
-
-.mt-lg {
-    margin-top: var(--spacing-lg);
-}
-
-.mb-lg {
-    margin-bottom: var(--spacing-lg);
-}
-
-/* =========================================
-   PRINT STYLES
-   ========================================= */
-
-@media print {
-    .sculpture-navigation,
-    .btn-back-to-gallery {
-        display: none;
-    }
-    
-    .sculpture-single-container {
-        max-width: 100%;
+    body.single-sculpture .sculpture-description p {
+        font-size: 18px;
     }
 }
