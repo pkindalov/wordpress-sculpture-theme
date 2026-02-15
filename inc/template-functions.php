@@ -129,4 +129,90 @@ function sculpture_body_classes($classes) {
     
     return $classes;
 }
+
+
+/**
+ * Featured Sculptures Shortcode
+ * 
+ * Display sculpture grid on homepage/any page
+ * Usage: [featured_sculptures count="6"]
+ * 
+ * @param array $atts Shortcode attributes
+ * @return string HTML output
+ */
+function sculpture_featured_shortcode($atts) {
+    
+    // Default attributes
+    $atts = shortcode_atts(array(
+        'count' => 6,
+        'featured_only' => false,
+    ), $atts);
+    
+    // Query args
+    $query_args = array(
+        'post_type'      => 'sculpture',
+        'posts_per_page' => intval($atts['count']),
+        'orderby'        => 'date',
+        'order'          => 'DESC',
+    );
+    
+    // Filter only featured sculptures
+    if ($atts['featured_only'] === 'true') {
+        $query_args['meta_query'] = array(
+            array(
+                'key'     => 'featured',
+                'value'   => '1',
+                'compare' => '=',
+            ),
+        );
+    }
+    
+    $sculptures = new WP_Query($query_args);
+    
+    // Start output buffering
+    ob_start();
+    
+    if ($sculptures->have_posts()):
+    ?>
+    
+    <section class="homepage-sculptures">
+        
+        <div class="homepage-sculptures-header">
+            <h2 class="section-title">Featured Works</h2>
+            <p class="section-subtitle">Discover our latest sculptures</p>
+        </div>
+        
+        <div class="sculptures-grid sculptures-grid-homepage">
+            
+            <?php 
+            while ($sculptures->have_posts()): 
+                $sculptures->the_post();
+                
+                // Load card component
+                get_template_part('template-parts/sculpture/card');
+                
+            endwhile; 
+            ?>
+            
+        </div>
+        
+        <div class="homepage-sculptures-footer">
+            <a href="<?php echo esc_url(get_post_type_archive_link('sculpture')); ?>" class="btn-view-all">
+                View All Sculptures →
+            </a>
+        </div>
+        
+    </section>
+    
+    <?php
+    endif;
+    
+    // Reset post data
+    wp_reset_postdata();
+    
+    // Return output
+    return ob_get_clean();
+}
+
 add_filter('body_class', 'sculpture_body_classes');
+add_shortcode('featured_sculptures', 'sculpture_featured_shortcode');
