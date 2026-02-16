@@ -63,15 +63,33 @@ $filter_data = isset($args['filter_data']) ? $args['filter_data'] : array();
             
             <!-- Dropdowns -->
             <div class="filters-dropdowns-row">
-                <div class="filter-dropdown-group">
-                    <label class="filter-dropdown-label">Availability:</label>
-                    <select name="availability" class="filter-dropdown-select">
-                        <option value="">All Sculptures</option>
-                        <option value="Available" <?php selected($filters['availability'], 'Available'); ?>>Available</option>
-                        <option value="Sold" <?php selected($filters['availability'], 'Sold'); ?>>Sold</option>
-                        <option value="Reserved" <?php selected($filters['availability'], 'Reserved'); ?>>Reserved</option>
-                    </select>
-                </div>
+                <!-- Availability Dropdown (Dynamic from ACF) -->
+<div class="filter-dropdown-group">
+    <label class="filter-dropdown-label">Availability:</label>
+    <select name="availability" class="filter-dropdown-select">
+        <option value="">All Sculptures</option>
+        <?php
+        // Get choices dynamically from ACF field
+        $availability_choices = sculpture_get_acf_choices('availability');
+        
+        if (!empty($availability_choices)) {
+            foreach ($availability_choices as $value => $label) {
+                printf(
+                    '<option value="%s" %s>%s</option>',
+                    esc_attr($value),
+                    selected($filters['availability'], $value, false),
+                    esc_html($label)
+                );
+            }
+        } else {
+            // Fallback if ACF field not found
+            echo '<option value="available">Available</option>';
+            echo '<option value="sold">Sold</option>';
+            echo '<option value="reserved">Reserved</option>';
+        }
+        ?>
+    </select>
+</div>
                 
                 <?php if (!empty($filter_data['materials'])): ?>
                 <div class="filter-dropdown-group">

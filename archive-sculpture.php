@@ -336,3 +336,41 @@ function sculpture_search_where_filter($where, $query) {
     
     return $where;
 }
+
+
+/**
+ * Get dynamic choices from ACF select field
+ * 
+ * @param string $field_name ACF field name
+ * @return array Array of choices (value => label)
+ */
+function sculpture_get_acf_choices($field_name) {
+    static $cache = array();
+    
+    // Return cached if exists
+    if (isset($cache[$field_name])) {
+        return $cache[$field_name];
+    }
+    
+    // Get one sculpture post to read field definition
+    $posts = get_posts(array(
+        'post_type'      => 'sculpture',
+        'posts_per_page' => 1,
+        'fields'         => 'ids',
+    ));
+    
+    if (empty($posts)) {
+        return array();
+    }
+    
+    // Get field object with all settings
+    $field = get_field_object($field_name, $posts[0]);
+    
+    // Extract choices
+    if ($field && isset($field['choices']) && is_array($field['choices'])) {
+        $cache[$field_name] = $field['choices'];
+        return $field['choices'];
+    }
+    
+    return array();
+}
