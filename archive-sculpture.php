@@ -287,10 +287,10 @@ function sculpture_get_filter_data() {
             $sculptures->the_post();
             
             // Materials
-            $material = get_field('materials');
-            if ($material && !in_array($material, $data['materials'])) {
-                $data['materials'][] = $material;
-            }
+            // $material = get_field('materials');
+            // if ($material && !in_array($material, $data['materials'])) {
+            //     $data['materials'][] = $material;
+            // }
             
             // Price range
             $price = get_field('price');
@@ -310,7 +310,7 @@ function sculpture_get_filter_data() {
         wp_reset_postdata();
     }
     
-    sort($data['materials']);
+    // sort($data['materials']);
     
     $cache = $data;
     return $data;

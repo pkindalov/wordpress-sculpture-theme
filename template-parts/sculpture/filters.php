@@ -91,19 +91,42 @@ $filter_data = isset($args['filter_data']) ? $args['filter_data'] : array();
     </select>
 </div>
                 
-                <?php if (!empty($filter_data['materials'])): ?>
-                <div class="filter-dropdown-group">
-                    <label class="filter-dropdown-label">Material:</label>
-                    <select name="materials" class="filter-dropdown-select">
-                        <option value="">All Materials</option>
-                        <?php foreach ($filter_data['materials'] as $material): ?>
-                            <option value="<?php echo esc_attr($material); ?>" <?php selected($filters['materials'], $material); ?>>
-                                <?php echo esc_html($material); ?>
-                            </option>
-                        <?php endforeach; ?>
-                    </select>
-                </div>
-                <?php endif; ?>
+                <!-- Materials Dropdown (Dynamic from ACF) -->
+<div class="filter-dropdown-group">
+    <label class="filter-dropdown-label">Material:</label>
+    <select name="materials" class="filter-dropdown-select">
+        <option value="">All Materials</option>
+        <?php
+        // Get choices dynamically from ACF field
+        $material_choices = sculpture_get_acf_choices('materials');
+        
+        if (!empty($material_choices)) {
+            foreach ($material_choices as $value => $label) {
+                printf(
+                    '<option value="%s" %s>%s</option>',
+                    esc_attr($value),
+                    selected($filters['materials'], $value, false),
+                    esc_html($label)
+                );
+            }
+        } else {
+            // Fallback: show materials that exist in sculptures
+            if (!empty($filter_data['materials'])) {
+                foreach ($filter_data['materials'] as $material) {
+                    printf(
+                        '<option value="%s" %s>%s</option>',
+                        esc_attr($material),
+                        selected($filters['materials'], $material, false),
+                        esc_html($material)
+                    );
+                }
+            }
+        }
+        ?>
+    </select>
+</div>
+
+
             </div>
             
             <!-- Sliders -->

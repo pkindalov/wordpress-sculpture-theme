@@ -6,6 +6,7 @@ Desktop.ini
 # Editor directories
 .vscode/
 .idea/
+.prettierrc
 *.sublime-project
 *.sublime-workspace
 
