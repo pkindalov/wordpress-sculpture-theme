@@ -11,7 +11,7 @@
 <article class="sculpture-card">
     
     <!-- Featured Badge -->
-    <?php if (get_field('featured')): ?>
+    <?php if (get_field("featured")): ?>
         <span class="card-badge">Featured</span>
     <?php endif; ?>
     
@@ -19,7 +19,7 @@
     <a href="<?php the_permalink(); ?>" class="card-image-link">
         <?php if (has_post_thumbnail()): ?>
             <div class="card-image">
-                <?php the_post_thumbnail('large'); ?>
+                <?php the_post_thumbnail("large"); ?>
             </div>
         <?php else: ?>
             <div class="card-image card-image-placeholder">
@@ -91,46 +91,52 @@
         
         <!-- Meta Info -->
         <div class="card-meta">
-            <?php 
-            $year = get_field('year');
-            $materials = get_field('materials');
-            
-            if ($year || $materials):
-            ?>
+            <?php
+            $year = get_field("year");
+            $materials = get_field("materials");
+
+            if ($year || $materials): ?>
                 <span class="card-meta-item">
-                    <?php 
-                    echo $year ? esc_html($year) : '';
-                    if ($year && $materials) echo ' • ';
-                    echo $materials ? esc_html($materials) : '';
+                    <?php
+                    echo $year ? esc_html($year) : "";
+                    if ($year && $materials) {
+                        echo " • ";
+                    }
+                    echo $materials ? esc_html($materials) : "";
                     ?>
                 </span>
-            <?php endif; ?>
+            <?php endif;
+            ?>
         </div>
         
         <!-- Price/Status -->
-        <?php 
-        $price = get_field('price');
-        $availability = get_field('availability');
-        
-        if ($price || $availability):
-        ?>
+        <?php
+        $price = get_field("price");
+        $availability = get_field("availability");
+
+        if ($price || $availability): ?>
             <div class="card-footer">
                 <?php if ($price): ?>
                     <span class="card-price">
-                        <?php 
-                        echo get_field('currency') ? esc_html(get_field('currency')) . ' ' : '';
+                        <?php
+                        echo get_field("currency")
+                            ? esc_html(get_field("currency")) . " "
+                            : "";
                         echo esc_html(number_format($price, 0));
                         ?>
                     </span>
                 <?php endif; ?>
                 
                 <?php if ($availability): ?>
-                    <span class="card-status status-<?php echo esc_attr(sanitize_title($availability)); ?>">
+                    <span class="card-status status-<?php echo esc_attr(
+                        sanitize_title($availability),
+                    ); ?>">
                         <?php echo esc_html($availability); ?>
                     </span>
                 <?php endif; ?>
             </div>
-        <?php endif; ?>
+        <?php endif;
+        ?>
         
     </div>
     

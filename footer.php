@@ -47,11 +47,21 @@
                     <h3 class="footer-title">Explore</h3>
                     <nav class="footer-nav">
                         <ul>
-                            <li><a href="<?php echo esc_url(home_url('/')); ?>">Home</a></li>
-                            <li><a href="<?php echo esc_url(get_post_type_archive_link('sculpture')); ?>">Gallery</a></li>
-                            <li><a href="<?php echo esc_url(home_url('/about')); ?>">About</a></li>
-                            <li><a href="<?php echo esc_url(home_url('/exhibitions')); ?>">Exhibitions</a></li>
-                            <li><a href="<?php echo esc_url(home_url('/contact')); ?>">Contact</a></li>
+                            <li><a href="<?php echo esc_url(
+                                home_url("/"),
+                            ); ?>">Home</a></li>
+                            <li><a href="<?php echo esc_url(
+                                get_post_type_archive_link("sculpture"),
+                            ); ?>">Gallery</a></li>
+                            <li><a href="<?php echo esc_url(
+                                home_url("/about"),
+                            ); ?>">About</a></li>
+                            <li><a href="<?php echo esc_url(
+                                home_url("/exhibitions"),
+                            ); ?>">Exhibitions</a></li>
+                            <li><a href="<?php echo esc_url(
+                                home_url("/contact"),
+                            ); ?>">Contact</a></li>
                         </ul>
                     </nav>
                 </div>
@@ -88,12 +98,18 @@
         <div class="footer-bottom">
             <div class="footer-container">
                 <p class="copyright">
-                    © <?php echo date('Y'); ?> <?php bloginfo('name'); ?>. All rights reserved.
+                    © <?php echo date("Y"); ?> <?php bloginfo(
+     "name",
+ ); ?>. All rights reserved.
                 </p>
                 <p class="credits">
-                    <a href="<?php echo esc_url(home_url('/privacy-policy')); ?>">Privacy Policy</a>
+                    <a href="<?php echo esc_url(
+                        home_url("/privacy-policy"),
+                    ); ?>">Privacy Policy</a>
                     <span class="separator">•</span>
-                    <a href="<?php echo esc_url(home_url('/terms')); ?>">Terms of Use</a>
+                    <a href="<?php echo esc_url(
+                        home_url("/terms"),
+                    ); ?>">Terms of Use</a>
                 </p>
             </div>
         </div>

@@ -6,8 +6,7 @@
 
 if (!get_the_content()) {
     return;
-}
-?>
+} ?>
 
 <div class="sculpture-description">
     <h2>About This Work</h2>

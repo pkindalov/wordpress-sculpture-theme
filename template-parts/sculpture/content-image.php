@@ -6,9 +6,8 @@
 
 if (!has_post_thumbnail()) {
     return;
-}
-?>
+} ?>
 
 <div class="sculpture-image">
-    <?php the_post_thumbnail('full'); ?>
+    <?php the_post_thumbnail("full"); ?>
 </div>

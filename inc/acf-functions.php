@@ -7,54 +7,58 @@
  */
 
 // Exit if accessed directly
-if (!defined('ABSPATH')) {
-    exit;
+if (!defined("ABSPATH")) {
+    exit();
 }
 
 /**
  * ACF Shortcode
- * 
+ *
  * Display ACF field values using shortcode
  * Usage: [acf field="field_name"]
- * 
+ *
  * @param array $atts Shortcode attributes
  * @return string Field value or empty string
  */
-function sculpture_acf_shortcode($atts) {
-    
+function sculpture_acf_shortcode($atts)
+{
     // Default attributes
-    $atts = shortcode_atts(array(
-        'field'   => '',
-        'post_id' => false,
-    ), $atts, 'acf');
-    
+    $atts = shortcode_atts(
+        [
+            "field" => "",
+            "post_id" => false,
+        ],
+        $atts,
+        "acf",
+    );
+
     // Return empty if no field specified
-    if (empty($atts['field'])) {
-        return '';
+    if (empty($atts["field"])) {
+        return "";
     }
-    
+
     // Get field value
-    $value = get_field($atts['field'], $atts['post_id']);
-    
+    $value = get_field($atts["field"], $atts["post_id"]);
+
     // Return empty if no value
     if (!$value) {
-        return '';
+        return "";
     }
-    
+
     // If value is array (gallery, repeater, etc.), don't display
     // These complex fields should be handled in templates
     if (is_array($value)) {
-        return '';
+        return "";
     }
-    
+
     // Security: Escape output - allows safe HTML
     return wp_kses_post($value);
 }
-add_shortcode('acf', 'sculpture_acf_shortcode');
+add_shortcode("acf", "sculpture_acf_shortcode");
 
 /**
  * ACF Options Page (optional)
- * 
+ *
  * Creates a theme settings page in admin
  * Uncomment to enable
  */
@@ -74,7 +78,7 @@ if (function_exists('acf_add_options_page')) {
 
 /**
  * Register ACF field groups programmatically (optional)
- * 
+ *
  * Example of creating ACF fields via code instead of UI
  * Uncomment and modify as needed
  */
