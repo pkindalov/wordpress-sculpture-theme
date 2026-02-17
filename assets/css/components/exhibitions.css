@@ -1,0 +1,368 @@
+/* ========================================
+   EXHIBITIONS ARCHIVE & TIMELINE
+   ======================================== */
+
+/* Archive Container */
+.exhibitions-archive-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 60px 20px;
+}
+
+/* Archive Header */
+.archive-header {
+    text-align: center;
+    margin-bottom: 80px;
+}
+
+.archive-title {
+    font-size: 64px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: #1F3A2A;
+    letter-spacing: -0.02em;
+}
+
+.archive-description {
+    font-size: 18px;
+    color: #6B7280;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* Timeline Container */
+.exhibitions-timeline {
+    position: relative;
+}
+
+/* Exhibition Groups */
+.exhibition-group {
+    margin-bottom: 80px;
+}
+
+.exhibition-group-title {
+    font-size: 32px;
+    font-weight: 600;
+    margin-bottom: 40px;
+    color: #1F3A2A;
+    text-align: center;
+}
+
+/* Timeline List */
+.exhibition-timeline-list {
+    position: relative;
+    padding: 0;
+}
+
+/* Timeline Vertical Line - ЦЕНТРИРАНА */
+.exhibition-timeline-list::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(
+        to bottom,
+        #E7C871 0%,
+        #A8B5A0 50%,
+        #DDE7D1 100%
+    );
+}
+
+/* ========================================
+   TIMELINE ITEM - ZIGZAG LAYOUT
+   ======================================== */
+
+.exhibition-timeline-item {
+    position: relative;
+    margin-bottom: 60px;
+    padding-bottom: 60px;
+    width: 50%;
+    box-sizing: border-box;
+}
+
+.exhibition-timeline-item:last-child {
+    padding-bottom: 0;
+}
+
+/* ЛЯВО */
+.exhibition-timeline-item.timeline-left {
+    padding-right: 50px;
+    padding-left: 0;
+    text-align: right;
+}
+
+/* ДЯСНО */
+.exhibition-timeline-item.timeline-right {
+    margin-left: 50%;
+    padding-left: 50px;
+    padding-right: 0;
+    text-align: left;
+}
+
+/* Timeline Dot - ЦЕНТРИРАН */
+.exhibition-timeline-dot {
+    position: absolute;
+    top: 5px;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: #E7C871;
+    border: 3px solid #fff;
+    box-shadow: 0 0 0 2px #E7C871;
+    z-index: 2;
+}
+
+/* Dot позиция за ЛЯВО */
+.exhibition-timeline-item.timeline-left .exhibition-timeline-dot {
+    right: -9px;
+}
+
+/* Dot позиция за ДЯСНО */
+.exhibition-timeline-item.timeline-right .exhibition-timeline-dot {
+    left: -9px;
+}
+
+/* Dot variations by status */
+.exhibition-status-upcoming .exhibition-timeline-dot {
+    width: 14px;
+    height: 14px;
+    background: #6B7280;
+    box-shadow: 0 0 0 2px #6B7280;
+}
+
+.exhibition-status-upcoming.timeline-left .exhibition-timeline-dot {
+    right: -7px;
+}
+
+.exhibition-status-upcoming.timeline-right .exhibition-timeline-dot {
+    left: -7px;
+}
+
+.exhibition-status-past .exhibition-timeline-dot {
+    width: 14px;
+    height: 14px;
+    background: #DDE7D1;
+    box-shadow: 0 0 0 2px #DDE7D1;
+}
+
+.exhibition-status-past.timeline-left .exhibition-timeline-dot {
+    right: -7px;
+}
+
+.exhibition-status-past.timeline-right .exhibition-timeline-dot {
+    left: -7px;
+}
+
+/* Current status glow effect */
+.exhibition-status-current .exhibition-timeline-dot {
+    animation: pulse-glow 2s ease-in-out infinite;
+}
+
+@keyframes pulse-glow {
+    0%, 100% {
+        box-shadow: 0 0 0 2px #E7C871, 0 0 20px rgba(231, 200, 113, 0.3);
+    }
+    50% {
+        box-shadow: 0 0 0 2px #E7C871, 0 0 30px rgba(231, 200, 113, 0.5);
+    }
+}
+
+/* ========================================
+   EXHIBITION CONTENT
+   ======================================== */
+
+.exhibition-content {
+    position: relative;
+}
+
+/* Status Badge */
+.exhibition-status-badge {
+    display: inline-block;
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 16px;
+}
+
+/* Badge colors by status */
+.exhibition-status-current .exhibition-status-badge {
+    background: #1F3A2A;
+    color: #E7C871;
+}
+
+.exhibition-status-upcoming .exhibition-status-badge {
+    background: #F9FAFB;
+    color: #1F3A2A;
+    border: 1px solid #E5E7EB;
+}
+
+.exhibition-status-past .exhibition-status-badge {
+    background: #DDE7D1;
+    color: #6B7280;
+}
+
+/* Exhibition Title */
+.exhibition-title {
+    font-size: 32px;
+    font-weight: 600;
+    margin-bottom: 16px;
+    line-height: 1.2;
+}
+
+.exhibition-title a {
+    color: #1F3A2A;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.exhibition-title a:hover {
+    color: #E7C871;
+}
+
+/* Past exhibitions - reduced opacity */
+.exhibition-status-past .exhibition-title,
+.exhibition-status-past .exhibition-meta,
+.exhibition-status-past .exhibition-description {
+    opacity: 0.7;
+}
+
+/* ========================================
+   EXHIBITION META
+   ======================================== */
+
+.exhibition-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+    margin-bottom: 20px;
+}
+
+/* Align meta за ЛЯВО */
+.exhibition-timeline-item.timeline-left .exhibition-meta {
+    justify-content: flex-end;
+}
+
+/* Align meta за ДЯСНО */
+.exhibition-timeline-item.timeline-right .exhibition-meta {
+    justify-content: flex-start;
+}
+
+.exhibition-meta-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    color: #6B7280;
+}
+
+.meta-icon {
+    flex-shrink: 0;
+    color: #A8B5A0;
+}
+
+/* Description */
+.exhibition-description {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #4B5563;
+}
+
+.exhibition-description p {
+    margin: 0;
+}
+
+/* ========================================
+   NO EXHIBITIONS MESSAGE
+   ======================================== */
+
+.no-exhibitions {
+    text-align: center;
+    padding: 80px 20px;
+    color: #6B7280;
+    font-size: 18px;
+}
+
+/* ========================================
+   RESPONSIVE - Mobile връща на една колонка
+   ======================================== */
+
+@media (max-width: 768px) {
+    
+    .exhibitions-archive-container {
+        padding: 40px 16px;
+    }
+    
+    .archive-header {
+        margin-bottom: 50px;
+    }
+    
+    .archive-title {
+        font-size: 42px;
+    }
+    
+    .exhibition-group {
+        margin-bottom: 50px;
+    }
+    
+    .exhibition-group-title {
+        font-size: 24px;
+        margin-bottom: 30px;
+    }
+    
+    /* MOBILE: Връщаме timeline на една колонка */
+    .exhibition-timeline-list {
+        padding-left: 40px;
+    }
+    
+    .exhibition-timeline-list::before {
+        left: 8px;
+        transform: none;
+    }
+    
+    .exhibition-timeline-item {
+        width: 100%;
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+        text-align: left !important;
+        margin-left: 0 !important;
+    }
+    
+    .exhibition-timeline-item.timeline-left,
+    .exhibition-timeline-item.timeline-right {
+        width: 100%;
+        padding-left: 0;
+        padding-right: 0;
+        text-align: left;
+        margin-left: 0;
+    }
+    
+    .exhibition-timeline-dot {
+        left: -34px !important;
+        right: auto !important;
+    }
+    
+    .exhibition-status-upcoming .exhibition-timeline-dot,
+    .exhibition-status-past .exhibition-timeline-dot {
+        left: -32px !important;
+        right: auto !important;
+    }
+    
+    .exhibition-meta {
+        justify-content: flex-start !important;
+    }
+    
+    .exhibition-title {
+        font-size: 24px;
+    }
+    
+    .exhibition-meta {
+        gap: 16px;
+    }
+    
+}
