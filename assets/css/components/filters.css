@@ -71,7 +71,6 @@
 
 .sort-select-modern {
     width: 100%;
-    padding: 14px 40px 14px 20px;
     background: rgba(255, 252, 230, 0.1);
     border: 2px solid rgba(231, 200, 113, 0.3);
     border-radius: 8px;
@@ -236,7 +235,6 @@
 }
 
 .filter-dropdown-select {
-    padding: 14px 40px 14px 20px;
     background: rgba(255, 252, 230, 0.1);
     border: 2px solid rgba(231, 200, 113, 0.3);
     border-radius: 8px;
@@ -463,41 +461,99 @@
 /* RESPONSIVE - MOBILE */
 @media (max-width: 768px) {
     .sculpture-filters-modern {
-        padding: 0 30px;
+        padding: 0 0;
     }
 
     .filters-form-modern {
-        padding: 30px 25px;
+        padding: 20px 15px;
+        box-sizing: border-box;
+        width: 100%;
+        overflow: hidden;
+    }
+
+    .filters-compact-bar {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        width: 100%;
+    }
+
+    .filter-search-modern {
+        max-width: 100%;
+        width: 100%;
+    }
+
+    .search-input-modern {
+        width: 100%;
+        box-sizing: border-box;
     }
 
     .filter-sort-modern {
-        min-width: auto;
+        width: 100%;
+        min-width: 0;
+    }
+
+    .sort-select-modern {
+        width: 100%;
+        box-sizing: border-box;
+        background-color: #1F3A2A;
+        color: #FFFCE6;
+    }
+
+    .filter-dropdown-select {
+        width: 100%;
+        box-sizing: border-box;
+        background-color: #1F3A2A;
+        color: #FFFCE6;
+        /*padding: 12px 36px 12px 15px;*/
+    }
+
+    .sort-select-modern option,
+    .filter-dropdown-select option {
+        background: #1F3A2A;
+        color: #FFFCE6;
+    }
+
+    .filter-toggle-modern {
+        width: 100%;
+    }
+
+    .btn-toggle-advanced {
+        width: 100%;
+        justify-content: center;
+        box-sizing: border-box;
     }
 
     .filters-dropdowns-row {
         grid-template-columns: 1fr;
+        width: 100%;
     }
 
     .filters-sliders-row {
-        padding: 20px;
+        grid-template-columns: 1fr;
+        padding: 15px;
         gap: 25px;
+        width: 100%;
+        box-sizing: border-box;
     }
 
     .slider-value {
-        font-size: 14px;
+        font-size: 13px;
     }
 
     .filters-actions {
         flex-direction: column;
+        width: 100%;
     }
 
     .btn-apply-filters,
     .btn-clear-filters {
         width: 100%;
+        box-sizing: border-box;
     }
 
     .results-info-modern {
-        padding: 0 30px;
+        padding: 0 15px;
     }
 
     .results-count {
