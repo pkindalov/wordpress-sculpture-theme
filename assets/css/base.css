@@ -1,0 +1,27 @@
+/* =========================================
+   BASE - CSS Variables & Global Styles
+   ========================================= */
+
+:root {
+    --color-dark:    #1F3A2A;
+    --color-forest:  #40543D;
+    --color-sage:    #6A8B58;
+    --color-gold:    #E7C871;
+    --color-mist:    #DDE7D1;
+    --color-cream:   #FFFCE6;
+    --color-red:     #C0392B;
+
+    --font-main: Arial, Helvetica, sans-serif;
+
+    --max-width: 1800px;
+    --transition: all 0.3s;
+}
+
+html, body {
+    overflow-x: hidden;
+    max-width: 100%;
+}
+
+.ast-container {
+    max-width: var(--max-width);
+}

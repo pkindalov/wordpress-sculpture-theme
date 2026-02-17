@@ -1,0 +1,280 @@
+/* =========================================
+   PAGE - Single Sculpture
+   ========================================= */
+
+body.single-sculpture {
+    background: #FFFCE6 !important;
+}
+
+body.single-sculpture .sculpture-page {
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 60px 60px 100px;
+    overflow-x: hidden;
+}
+
+/* Header */
+body.single-sculpture .sculpture-header {
+    text-align: left;
+    margin-bottom: 60px;
+    padding-bottom: 40px;
+    border-bottom: 4px solid #1F3A2A;
+}
+
+body.single-sculpture .sculpture-header h1 {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 82px;
+    font-weight: 900;
+    color: #1F3A2A;
+    margin: 0 0 30px;
+    line-height: 0.95;
+    letter-spacing: -0.03em;
+    text-transform: uppercase;
+}
+
+body.single-sculpture .sculpture-header .subtitle {
+    font-size: 24px;
+    font-weight: 400;
+    color: #40543D;
+    margin: 0;
+    line-height: 1.5;
+    max-width: 700px;
+}
+
+/* Two Column Layout */
+body.single-sculpture .sculpture-body {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    margin-bottom: 80px;
+    align-items: start;
+}
+
+/* Image */
+body.single-sculpture .sculpture-image {
+    position: relative;
+    top: 0;
+}
+
+body.single-sculpture .sculpture-image::before {
+    content: '';
+    position: absolute;
+    top: -20px;
+    left: -20px;
+    width: 200px;
+    height: 200px;
+    background: #E7C871;
+    z-index: -1;
+    opacity: 0.3;
+}
+
+body.single-sculpture .sculpture-image img {
+    width: 100%;
+    height: auto;
+    max-height: 700px;
+    object-fit: cover;
+    box-shadow: 0 30px 80px rgba(31,58,42,0.25);
+}
+
+/* Info Grid */
+body.single-sculpture .sculpture-info {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    margin-bottom: 0;
+    align-content: start;
+}
+
+body.single-sculpture .info-box {
+    background: #1F3A2A;
+    color: #FFFCE6;
+    padding: 40px 25px;
+    text-align: center;
+    border-right: 2px solid #FFFCE6;
+    border-bottom: 2px solid #FFFCE6;
+    transition: all 0.3s;
+}
+
+body.single-sculpture .info-box:nth-child(even) {
+    border-right: none;
+}
+
+body.single-sculpture .info-box:nth-last-child(-n+2) {
+    border-bottom: none;
+}
+
+body.single-sculpture .info-box:hover {
+    background: #40543D;
+    transform: translateY(-5px);
+}
+
+body.single-sculpture .info-box-price {
+    background: #E7C871;
+    color: #1F3A2A;
+}
+
+body.single-sculpture .info-box-price:hover {
+    background: #d4b55e;
+}
+
+body.single-sculpture .info-box .label {
+    font-size: 11px;
+    font-weight: 900;
+    letter-spacing: 3px;
+    color: inherit;
+    margin-bottom: 15px;
+    display: block;
+    opacity: 0.7;
+}
+
+body.single-sculpture .info-box .value {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 26px;
+    font-weight: 900;
+    color: inherit;
+    display: block;
+    letter-spacing: -0.02em;
+}
+
+body.single-sculpture .info-box-price .value {
+    font-size: 36px;
+}
+
+/* Description */
+body.single-sculpture .sculpture-description {
+    max-width: 100%;
+    margin: 0 0 100px;
+    padding: 60px;
+    background: linear-gradient(135deg, #DDE7D1 0%, rgba(221,231,209,0.3) 100%);
+    border-left: 8px solid #E7C871;
+}
+
+body.single-sculpture .sculpture-description h2 {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 48px;
+    font-weight: 900;
+    color: #1F3A2A;
+    margin-bottom: 40px;
+    text-transform: uppercase;
+    letter-spacing: -0.02em;
+    border: none;
+    padding: 0;
+}
+
+body.single-sculpture .sculpture-description p {
+    font-size: 21px;
+    line-height: 1.8;
+    color: #1F3A2A;
+    margin-bottom: 28px;
+    font-weight: 400;
+}
+
+body.single-sculpture .sculpture-description p:first-of-type {
+    font-size: 24px;
+    font-weight: 600;
+}
+
+/* Nav */
+body.single-sculpture .sculpture-nav {
+    text-align: center;
+    padding-top: 0;
+    border: none;
+}
+
+body.single-sculpture .btn-back {
+    display: inline-block;
+    padding: 24px 60px;
+    background: #1F3A2A;
+    color: #FFFCE6;
+    text-decoration: none;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 900;
+    font-size: 16px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    box-shadow: 0 10px 40px rgba(31,58,42,0.3);
+    transition: all 0.3s;
+    border: 4px solid #1F3A2A;
+}
+
+body.single-sculpture .btn-back:hover {
+    background: #FFFCE6;
+    color: #1F3A2A;
+    transform: translateY(-3px);
+    box-shadow: 0 15px 50px rgba(31,58,42,0.4);
+}
+
+/* TABLET */
+@media (max-width: 1024px) {
+    body.single-sculpture .sculpture-header h1 {
+        font-size: 56px;
+    }
+
+    body.single-sculpture .sculpture-body {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+
+    body.single-sculpture .sculpture-info {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    body.single-sculpture .info-box {
+        border-right: none;
+        border-bottom: 2px solid #FFFCE6;
+    }
+
+    body.single-sculpture .info-box:nth-last-child(-n+2) {
+        border-bottom: 2px solid #FFFCE6;
+    }
+
+    body.single-sculpture .info-box:last-child {
+        border-bottom: none;
+    }
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+    body.single-sculpture .sculpture-page {
+        padding: 40px 20px 60px;
+    }
+
+    body.single-sculpture .sculpture-header h1 {
+        font-size: 36px;
+        word-break: break-word;
+    }
+
+    body.single-sculpture .sculpture-header .subtitle {
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        word-break: break-word;
+        overflow-x: hidden;
+    }
+
+    body.single-sculpture .sculpture-body {
+        gap: 30px;
+    }
+
+    body.single-sculpture .sculpture-info {
+        grid-template-columns: 1fr;
+    }
+
+    body.single-sculpture .sculpture-description {
+        padding: 40px 30px;
+        border-left-width: 4px;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        word-break: break-word;
+        overflow-x: hidden;
+    }
+
+    body.single-sculpture .sculpture-description h2 {
+        font-size: 32px;
+        word-break: break-word;
+    }
+
+    body.single-sculpture .sculpture-description p {
+        font-size: 18px;
+        word-break: break-word;
+    }
+}

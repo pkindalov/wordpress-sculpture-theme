@@ -1,0 +1,28 @@
+/* =========================================
+   RESPONSIVE - Mobile Overflow Fixes
+   ========================================= */
+
+/* Hide decorative pseudo-element on mobile */
+@media (max-width: 768px) {
+    body.single-sculpture .sculpture-image::before {
+        display: none;
+    }
+
+    .sculpture-archive,
+    .sculpture-filters-modern,
+    .sculptures-grid,
+    .homepage-sculptures,
+    .homepage-promo,
+    .footer-main,
+    .footer-bottom {
+        max-width: 100%;
+        overflow-x: hidden;
+    }
+}
+
+/* Show on desktop */
+@media (min-width: 769px) {
+    body.single-sculpture .sculpture-image::before {
+        display: block;
+    }
+}

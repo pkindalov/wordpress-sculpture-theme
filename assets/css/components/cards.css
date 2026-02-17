@@ -1,0 +1,348 @@
+/* =========================================
+   COMPONENT - Sculpture Cards
+   ========================================= */
+
+   /* Grid */
+.sculptures-grid {
+    display: grid;
+    max-width: 1800px;
+    grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+    gap: 50px;
+    margin-bottom: 80px;
+}
+
+@media (max-width: 1024px) {
+    .sculptures-grid {
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+        gap: 40px;
+    }
+}
+
+@media (max-width: 768px) {
+    .sculptures-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+}
+
+.sculpture-card {
+    position: relative;
+    background: #FFFCE6;
+    border: 2px solid #DDE7D1;
+    transition: all 0.3s;
+    overflow: hidden;
+}
+
+.sculpture-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 60px rgba(31,58,42,0.2);
+    border-color: #E7C871;
+}
+
+/* Badges */
+.card-badge {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: #E7C871;
+    color: #1F3A2A;
+    padding: 8px 16px;
+    font-size: 11px;
+    font-weight: 900;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    z-index: 10;
+}
+
+.badge-featured {
+    background: #E7C871;
+    color: #1F3A2A;
+}
+
+.badge-promo {
+    background: #C0392B !important;
+    color: #fff !important;
+    font-size: 14px !important;
+    padding: 10px 16px !important;
+}
+
+/* Featured Card */
+.sculpture-card.is-featured {
+    background: #1F3A2A;
+    border-color: #E7C871;
+}
+
+.sculpture-card.is-featured .card-title a {
+    color: #FFFCE6;
+}
+
+.sculpture-card.is-featured .card-title a:hover {
+    color: #E7C871;
+}
+
+.sculpture-card.is-featured .card-meta {
+    border-bottom-color: rgba(255, 252, 230, 0.2);
+}
+
+.sculpture-card.is-featured .card-meta-item {
+    color: rgba(255, 252, 230, 0.7);
+}
+
+.sculpture-card.is-featured .card-content {
+    border-top: 3px solid #E7C871;
+}
+
+.sculpture-card.is-featured .card-price {
+    color: #E7C871;
+}
+
+.sculpture-card.is-featured .status-available {
+    background: rgba(106, 139, 88, 0.3);
+    color: #DDE7D1;
+}
+
+.sculpture-card.is-featured .status-sold {
+    background: rgba(139, 69, 69, 0.3);
+    color: #ffaaaa;
+}
+
+.sculpture-card.is-featured .status-reserved {
+    background: rgba(231, 200, 113, 0.2);
+    color: #E7C871;
+}
+
+.sculpture-card.is-featured:hover {
+    border-color: #E7C871;
+    box-shadow: 0 20px 60px rgba(231, 200, 113, 0.3);
+}
+
+.sculpture-card.is-featured .card-badge {
+    background: #E7C871;
+    color: #1F3A2A;
+}
+
+/* Promo Card */
+.sculpture-card.is-on-promo {
+    border-color: #C0392B;
+}
+
+.sculpture-card.is-on-promo .card-content {
+    border-top: 3px solid #C0392B;
+}
+
+.sculpture-card.is-on-promo:hover {
+    box-shadow: 0 20px 60px rgba(192, 57, 43, 0.2);
+    border-color: #C0392B;
+}
+
+.sculpture-card.is-featured.is-on-promo {
+    border-color: #C0392B;
+}
+
+/* Card Image */
+.card-image-link {
+    display: block;
+    position: relative;
+    overflow: hidden;
+}
+
+.card-image {
+    width: 100%;
+    height: 400px;
+    overflow: hidden;
+    background: #DDE7D1;
+}
+
+.card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s;
+}
+
+.sculpture-card:hover .card-image img {
+    transform: scale(1.08);
+}
+
+.card-image-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #DDE7D1;
+    transition: opacity 0.3s;
+}
+
+.sculpture-card:hover .card-image-placeholder {
+    opacity: 0.9;
+}
+
+.card-image-placeholder svg {
+    width: 100%;
+    height: 100%;
+}
+
+/* Card Content */
+.card-content {
+    padding: 30px;
+}
+
+.card-title {
+    margin: 0 0 15px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 28px;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: -0.02em;
+}
+
+.card-title a {
+    color: #1F3A2A;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.card-title a:hover {
+    color: #E7C871;
+}
+
+/* Card Meta */
+.card-meta {
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #DDE7D1;
+}
+
+.card-meta-item {
+    font-size: 14px;
+    color: #6A8B58;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Card Footer */
+.card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Prices */
+.card-price {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 24px;
+    font-weight: 900;
+    color: #E7C871;
+}
+
+.card-price-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.card-price-original {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: #999;
+    text-decoration: line-through;
+}
+
+.card-price-promo {
+    color: #C0392B !important;
+    font-size: 26px !important;
+}
+
+.sculpture-card.is-featured .card-price-original {
+    color: rgba(255, 252, 230, 0.5);
+}
+
+/* Status */
+.card-status {
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 6px 12px;
+    border-radius: 2px;
+}
+
+.status-available {
+    background: rgba(106,139,88,0.2);
+    color: #6A8B58;
+}
+
+.status-sold {
+    background: rgba(139,69,69,0.2);
+    color: #8B4545;
+}
+
+.status-reserved {
+    background: rgba(231,200,113,0.2);
+    color: #E7C871;
+}
+
+/* Promo Ends */
+.card-promo-ends {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid rgba(192, 57, 43, 0.2);
+    font-size: 12px;
+    font-weight: 700;
+    color: #C0392B;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.sculpture-card.is-featured .card-promo-ends {
+    color: #ffaaaa;
+    border-top-color: rgba(192, 57, 43, 0.3);
+}
+
+/* No Results */
+.no-sculptures {
+    text-align: center;
+    padding: 100px 20px;
+    font-size: 20px;
+    color: #6A8B58;
+}
+
+.no-sculptures-modern {
+    max-width: 600px;
+    margin: 100px auto;
+    text-align: center;
+    padding: 60px 40px;
+    background: rgba(221, 231, 209, 0.3);
+    border-radius: 12px;
+}
+
+.no-sculptures-modern svg {
+    color: #6A8B58;
+    margin-bottom: 20px;
+    opacity: 0.5;
+}
+
+.no-sculptures-modern h3 {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 28px;
+    font-weight: 900;
+    color: #1F3A2A;
+    margin: 0 0 10px;
+}
+
+.no-sculptures-modern p {
+    font-size: 16px;
+    color: #6A8B58;
+    margin: 0 0 30px;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .card-image {
+        height: 350px;
+    }
+}

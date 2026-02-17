@@ -1,0 +1,112 @@
+/* =========================================
+   PAGE - Archive / Gallery
+   ========================================= */
+
+body.post-type-archive-sculpture .sculpture-archive {
+    max-width: 1800px;
+    margin: 0 auto;
+    padding: 100px 60px;
+}
+
+/* Header */
+.archive-header {
+    text-align: center;
+    margin-bottom: 80px;
+}
+
+.archive-title {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 72px;
+    font-weight: 900;
+    color: #1F3A2A;
+    margin: 0 0 20px;
+    text-transform: uppercase;
+    letter-spacing: -0.03em;
+}
+
+.archive-subtitle {
+    font-size: 22px;
+    color: #6A8B58;
+    margin: 0;
+}
+
+/* Grid */
+/*.sculptures-grid {
+    display: grid;
+    max-width: 1800px;
+    grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+    gap: 50px;
+    margin-bottom: 80px;
+}*/
+
+/* Pagination */
+.pagination {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 60px;
+    padding-top: 60px;
+    border-top: 2px solid #DDE7D1;
+}
+
+.pagination .page-numbers {
+    display: inline-block;
+    padding: 12px 20px;
+    background: #DDE7D1;
+    color: #1F3A2A;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 14px;
+    transition: all 0.3s;
+}
+
+.pagination .page-numbers:hover,
+.pagination .page-numbers.current {
+    background: #1F3A2A;
+    color: #FFFCE6;
+}
+
+.pagination .prev,
+.pagination .next {
+    background: #1F3A2A;
+    color: #FFFCE6;
+}
+
+.pagination .prev:hover,
+.pagination .next:hover {
+    background: #E7C871;
+    color: #1F3A2A;
+}
+
+/* RESPONSIVE - TABLET */
+@media (max-width: 1024px) {
+    .sculptures-grid {
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+        gap: 40px;
+    }
+
+    .archive-title {
+        font-size: 56px;
+    }
+}
+
+/* RESPONSIVE - MOBILE */
+@media (max-width: 768px) {
+    body.post-type-archive-sculpture .sculpture-archive {
+        padding: 60px 30px;
+    }
+
+    .archive-header {
+        margin-bottom: 50px;
+    }
+
+    .archive-title {
+        font-size: 36px;
+        word-break: break-word;
+    }
+
+    .sculptures-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+}

@@ -1,0 +1,71 @@
+/* =========================================
+   COMPONENT - Promotions
+   ========================================= */
+
+/* Homepage Promo Section */
+.homepage-promo {
+    max-width: 1800px;
+    margin: 0 auto;
+    padding: 80px 60px;
+    background: #fff5f5;
+    border-top: 4px solid #C0392B;
+    border-bottom: 4px solid #C0392B;
+}
+
+.homepage-promo-header {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.homepage-promo-header .section-title {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 56px;
+    font-weight: 900;
+    color: #C0392B;
+    margin: 0 0 15px;
+    text-transform: uppercase;
+    letter-spacing: -0.02em;
+}
+
+.homepage-promo-header .section-subtitle {
+    font-size: 18px;
+    color: #666;
+    margin: 0;
+}
+
+.homepage-promo-footer {
+    text-align: center;
+    margin-top: 50px;
+}
+
+.btn-view-promo {
+    display: inline-block;
+    padding: 18px 40px;
+    background: #C0392B;
+    color: #fff;
+    text-decoration: none;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 15px;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    border: 3px solid #C0392B;
+    transition: all 0.3s;
+}
+
+.btn-view-promo:hover {
+    background: transparent;
+    color: #C0392B;
+    transform: translateY(-2px);
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .homepage-promo {
+        padding: 60px 30px;
+    }
+
+    .homepage-promo-header .section-title {
+        font-size: 36px;
+    }
+}
