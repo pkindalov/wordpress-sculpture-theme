@@ -20,7 +20,7 @@ function sculpture_theme_enqueue_styles()
 {
     $css_dir = get_stylesheet_directory() . "/assets/css/";
     $css_uri = get_stylesheet_directory_uri() . "/assets/css/";
-
+    
     // Base - винаги зарежда
     wp_enqueue_style(
         "sculpture-base",
@@ -28,9 +28,9 @@ function sculpture_theme_enqueue_styles()
         [],
         filemtime($css_dir . "base.css"),
     );
-
+    
     // Components - винаги зареждат
-    $components = ["cards", "filters", "footer", "promotions"];
+    $components = ["cards", "filters", "footer", "promotions", "exhibitions"];
     foreach ($components as $component) {
         wp_enqueue_style(
             "sculpture-" . $component,
@@ -39,7 +39,7 @@ function sculpture_theme_enqueue_styles()
             filemtime($css_dir . "components/" . $component . ".css"),
         );
     }
-
+    
     // Pages - зареждат само на нужната страница
     if (is_singular("sculpture")) {
         wp_enqueue_style(
@@ -49,7 +49,7 @@ function sculpture_theme_enqueue_styles()
             filemtime($css_dir . "pages/single.css"),
         );
     }
-
+    
     if (is_post_type_archive("sculpture")) {
         wp_enqueue_style(
             "sculpture-archive",
@@ -58,7 +58,7 @@ function sculpture_theme_enqueue_styles()
             filemtime($css_dir . "pages/archive.css"),
         );
     }
-
+    
     if (is_front_page() || is_home()) {
         wp_enqueue_style(
             "sculpture-homepage",
@@ -67,7 +67,7 @@ function sculpture_theme_enqueue_styles()
             filemtime($css_dir . "pages/homepage.css"),
         );
     }
-
+    
     wp_enqueue_style(
         "sculpture-mobile",
         $css_uri . "responsive/mobile.css",

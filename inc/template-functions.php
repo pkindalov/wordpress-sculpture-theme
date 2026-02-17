@@ -389,6 +389,132 @@ function sculpture_promo_shortcode($atts)
     wp_reset_postdata();
     return ob_get_clean();
 }
+
+// ========================================
+// EXHIBITIONS HELPER FUNCTIONS
+// ========================================
+
+/**
+ * Get exhibition status based on dates
+ * 
+ * @param int|null $post_id Exhibition post ID
+ * @return string 'current', 'upcoming', or 'past'
+ */
+function exhibition_get_status($post_id = null) {
+    $start_date = get_field('start_date', $post_id);
+    $end_date = get_field('end_date', $post_id);
+    
+    if (!$start_date || !$end_date) {
+        return 'upcoming';
+    }
+    
+    $today = date('Ymd');
+    
+    if ($today >= $start_date && $today <= $end_date) {
+        return 'current';
+    } elseif ($today < $start_date) {
+        return 'upcoming';
+    } else {
+        return 'past';
+    }
+}
+
+/**
+ * Get exhibition status label
+ * 
+ * @param string $status Status value
+ * @return string Translated label
+ */
+function exhibition_get_status_label($status) {
+    $labels = array(
+        'current'  => __('Current', 'sculpture-theme'),
+        'upcoming' => __('Upcoming', 'sculpture-theme'),
+        'past'     => __('Past', 'sculpture-theme'),
+    );
+    
+    return isset($labels[$status]) ? $labels[$status] : '';
+}
+
+/**
+ * Get formatted date range for exhibition
+ * 
+ * @param int|null $post_id Exhibition post ID
+ * @return string Formatted date range
+ */
+function exhibition_get_date_range($post_id = null) {
+    $start_date = get_field('start_date', $post_id);
+    $end_date = get_field('end_date', $post_id);
+    
+    if (!$start_date || !$end_date) {
+        return '';
+    }
+    
+    // Convert from Ymd to readable format
+    $start = DateTime::createFromFormat('Ymd', $start_date);
+    $end = DateTime::createFromFormat('Ymd', $end_date);
+    
+    if (!$start || !$end) {
+        return '';
+    }
+    
+    // Format: "15 Jan - 28 Feb 2025"
+    if ($start->format('Y') === $end->format('Y')) {
+        if ($start->format('m') === $end->format('m')) {
+            // Same month: "15-28 Jan 2025"
+            return $start->format('j') . '–' . $end->format('j M Y');
+        } else {
+            // Different months, same year: "15 Jan - 28 Feb 2025"
+            return $start->format('j M') . ' – ' . $end->format('j M Y');
+        }
+    } else {
+        // Different years: "15 Jan 2025 - 28 Feb 2026"
+        return $start->format('j M Y') . ' – ' . $end->format('j M Y');
+    }
+}
+
+/**
+ * Check if exhibition is currently active
+ * 
+ * @param int|null $post_id Exhibition post ID
+ * @return bool
+ */
+function exhibition_is_current($post_id = null) {
+    return exhibition_get_status($post_id) === 'current';
+}
+
+/**
+ * Get exhibitions grouped by status
+ * 
+ * @param int $posts_per_status Posts per status group (-1 for all)
+ * @return array Array with 'current', 'upcoming', 'past' keys
+ */
+function exhibition_get_grouped_by_status($posts_per_status = -1) {
+    $args = array(
+        'post_type'      => 'exhibition',
+        'posts_per_page' => -1,
+        'post_status'    => 'publish',
+        'meta_key'       => 'start_date',
+        'orderby'        => 'meta_value',
+        'order'          => 'ASC',
+    );
+    
+    $exhibitions = get_posts($args);
+    
+    $grouped = array(
+        'current'  => array(),
+        'upcoming' => array(),
+        'past'     => array(),
+    );
+    
+    foreach ($exhibitions as $exhibition) {
+        $status = exhibition_get_status($exhibition->ID);
+        $grouped[$status][] = $exhibition;
+    }
+    
+    return $grouped;
+}
+
+
 add_shortcode("promo_sculptures", "sculpture_promo_shortcode");
 
 add_filter("body_class", "sculpture_body_classes");
