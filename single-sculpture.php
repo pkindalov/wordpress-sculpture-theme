@@ -20,11 +20,16 @@ while (have_posts()):
 <article class="sculpture-page">
     
     <?php
-    get_template_part("template-parts/sculpture/content", "header");
-    get_template_part("template-parts/sculpture/content", "image");
-    get_template_part("template-parts/sculpture/content", "info");
-    get_template_part("template-parts/sculpture/content", "description");
-    get_template_part("template-parts/sculpture/content", "navigation");
+    get_template_part('template-parts/sculpture/content', 'header');
+
+// Two column layout wrapper
+echo '<div class="sculpture-body">';
+get_template_part('template-parts/sculpture/content', 'image');
+get_template_part('template-parts/sculpture/content', 'info');
+echo '</div>';
+
+get_template_part('template-parts/sculpture/content', 'description');
+get_template_part('template-parts/sculpture/content', 'navigation');
     ?>
     
 </article>
