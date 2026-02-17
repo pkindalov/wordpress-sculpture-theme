@@ -212,7 +212,6 @@ function sculpture_featured_shortcode($atts)
     return ob_get_clean();
 }
 
-
 /**
  * Check if a sculpture is currently on promotion
  * Checks both on_promotion flag and promotion_ends date
@@ -220,20 +219,27 @@ function sculpture_featured_shortcode($atts)
  * @param int $post_id Post ID (optional)
  * @return bool
  */
-function sculpture_is_on_promotion($post_id = null) {
-    if (!$post_id) $post_id = get_the_ID();
-    
-    // Check if promotion is enabled
-    $on_promotion = get_field('on_promotion', $post_id);
-    if (!$on_promotion) return false;
-    
-    // Check expiry date if set
-    $promotion_ends = get_field('promotion_ends', $post_id);
-    if ($promotion_ends) {
-        $today = date('Ymd');
-        if ($today > $promotion_ends) return false;
+function sculpture_is_on_promotion($post_id = null)
+{
+    if (!$post_id) {
+        $post_id = get_the_ID();
     }
-    
+
+    // Check if promotion is enabled
+    $on_promotion = get_field("on_promotion", $post_id);
+    if (!$on_promotion) {
+        return false;
+    }
+
+    // Check expiry date if set
+    $promotion_ends = get_field("promotion_ends", $post_id);
+    if ($promotion_ends) {
+        $today = date("Ymd");
+        if ($today > $promotion_ends) {
+            return false;
+        }
+    }
+
     return true;
 }
 
@@ -244,26 +250,31 @@ function sculpture_is_on_promotion($post_id = null) {
  * @param int $post_id Post ID (optional)
  * @return float|null Promotion price or null
  */
-function sculpture_get_promotion_price($post_id = null) {
-    if (!$post_id) $post_id = get_the_ID();
-    
+function sculpture_get_promotion_price($post_id = null)
+{
+    if (!$post_id) {
+        $post_id = get_the_ID();
+    }
+
     // Not on promotion = no price
-    if (!sculpture_is_on_promotion($post_id)) return null;
-    
-    $price      = get_field('price', $post_id);
-    $manual     = get_field('promotion_price', $post_id);
-    $percentage = get_field('promotion_percentage', $post_id);
-    
+    if (!sculpture_is_on_promotion($post_id)) {
+        return null;
+    }
+
+    $price = get_field("price", $post_id);
+    $manual = get_field("promotion_price", $post_id);
+    $percentage = get_field("promotion_percentage", $post_id);
+
     // Priority 1: Manual override
     if ($manual) {
         return round($manual, 2);
     }
-    
+
     // Priority 2: Calculate from percentage
     if ($price && $percentage) {
         return round($price * (1 - $percentage / 100), 2);
     }
-    
+
     return null;
 }
 
@@ -273,19 +284,24 @@ function sculpture_get_promotion_price($post_id = null) {
  * @param int $post_id Post ID (optional)
  * @return int|null Percentage or null
  */
-function sculpture_get_promotion_percentage($post_id = null) {
-    if (!$post_id) $post_id = get_the_ID();
-    if (!sculpture_is_on_promotion($post_id)) return null;
-    
-    $percentage     = get_field('promotion_percentage', $post_id);
-    $price          = get_field('price', $post_id);
-    $manual_price   = get_field('promotion_price', $post_id);
-    
+function sculpture_get_promotion_percentage($post_id = null)
+{
+    if (!$post_id) {
+        $post_id = get_the_ID();
+    }
+    if (!sculpture_is_on_promotion($post_id)) {
+        return null;
+    }
+
+    $percentage = get_field("promotion_percentage", $post_id);
+    $price = get_field("price", $post_id);
+    $manual_price = get_field("promotion_price", $post_id);
+
     // If manual price - calculate actual percentage
     if ($manual_price && $price) {
         return round((1 - $manual_price / $price) * 100);
     }
-    
+
     return $percentage ? intval($percentage) : null;
 }
 
@@ -296,46 +312,50 @@ function sculpture_get_promotion_percentage($post_id = null) {
  *
  * Usage: [promo_sculptures count="3"]
  */
-function sculpture_promo_shortcode($atts) {
-    $atts = shortcode_atts(array(
-        'count' => 3,
-    ), $atts);
+function sculpture_promo_shortcode($atts)
+{
+    $atts = shortcode_atts(
+        [
+            "count" => 3,
+        ],
+        $atts,
+    );
 
-    $today = date('Ymd');
+    $today = date("Ymd");
 
-    $sculptures = new WP_Query(array(
-        'post_type'      => 'sculpture',
-        'posts_per_page' => intval($atts['count']),
-        'meta_query'     => array(
-            'relation' => 'AND',
-            array(
-                'key'     => 'on_promotion',
-                'value'   => '1',
-                'compare' => '='
-            ),
-            array(
-                'relation' => 'OR',
-                array(
-                    'key'     => 'promotion_ends',
-                    'compare' => 'NOT EXISTS'
-                ),
-                array(
-                    'key'     => 'promotion_ends',
-                    'value'   => '',
-                    'compare' => '='
-                ),
-                array(
-                    'key'     => 'promotion_ends',
-                    'value'   => $today,
-                    'compare' => '>='
-                )
-            )
-        )
-    ));
+    $sculptures = new WP_Query([
+        "post_type" => "sculpture",
+        "posts_per_page" => intval($atts["count"]),
+        "meta_query" => [
+            "relation" => "AND",
+            [
+                "key" => "on_promotion",
+                "value" => "1",
+                "compare" => "=",
+            ],
+            [
+                "relation" => "OR",
+                [
+                    "key" => "promotion_ends",
+                    "compare" => "NOT EXISTS",
+                ],
+                [
+                    "key" => "promotion_ends",
+                    "value" => "",
+                    "compare" => "=",
+                ],
+                [
+                    "key" => "promotion_ends",
+                    "value" => $today,
+                    "compare" => ">=",
+                ],
+            ],
+        ],
+    ]);
 
     // Hide section completely if no active promotions
     if (!$sculptures->have_posts()) {
-        return '';
+        return "";
     }
 
     ob_start();
@@ -349,16 +369,16 @@ function sculpture_promo_shortcode($atts) {
         </div>
 
         <div class="sculptures-grid">
-            <?php
-            while ($sculptures->have_posts()):
+            <?php while ($sculptures->have_posts()):
                 $sculptures->the_post();
-                get_template_part('template-parts/sculpture/card');
-            endwhile;
-            ?>
+                get_template_part("template-parts/sculpture/card");
+            endwhile; ?>
         </div>
 
         <div class="homepage-promo-footer">
-            <a href="<?php echo esc_url(get_post_type_archive_link('sculpture')); ?>?on_promotion=1" class="btn-view-promo">
+            <a href="<?php echo esc_url(
+                get_post_type_archive_link("sculpture"),
+            ); ?>?on_promotion=1" class="btn-view-promo">
                 View All Offers
             </a>
         </div>
@@ -369,7 +389,7 @@ function sculpture_promo_shortcode($atts) {
     wp_reset_postdata();
     return ob_get_clean();
 }
-add_shortcode('promo_sculptures', 'sculpture_promo_shortcode');
+add_shortcode("promo_sculptures", "sculpture_promo_shortcode");
 
 add_filter("body_class", "sculpture_body_classes");
 add_shortcode("featured_sculptures", "sculpture_featured_shortcode");

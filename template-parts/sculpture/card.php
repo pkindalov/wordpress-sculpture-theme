@@ -6,20 +6,22 @@
  * @since   1.0.0
  */
 
-$post_id        = get_the_ID();
-$is_featured    = get_field('featured', $post_id);
-$is_on_promo    = sculpture_is_on_promotion($post_id);
-$price          = get_field('price', $post_id);
-$promo_price    = sculpture_get_promotion_price($post_id);
-$promo_pct      = sculpture_get_promotion_percentage($post_id);
-$promo_ends     = get_field('promotion_ends', $post_id);
-$year           = get_field('year', $post_id);
-$materials      = get_field('materials', $post_id);
-$availability   = get_field('availability', $post_id);
-$currency       = get_field('currency', $post_id) ?: '€';
+$post_id = get_the_ID();
+$is_featured = get_field("featured", $post_id);
+$is_on_promo = sculpture_is_on_promotion($post_id);
+$price = get_field("price", $post_id);
+$promo_price = sculpture_get_promotion_price($post_id);
+$promo_pct = sculpture_get_promotion_percentage($post_id);
+$promo_ends = get_field("promotion_ends", $post_id);
+$year = get_field("year", $post_id);
+$materials = get_field("materials", $post_id);
+$availability = get_field("availability", $post_id);
+$currency = get_field("currency", $post_id) ?: "€";
 ?>
 
-<article class="sculpture-card <?php echo $is_featured ? 'is-featured' : ''; ?> <?php echo $is_on_promo ? 'is-on-promo' : ''; ?>">
+<article class="sculpture-card <?php echo $is_featured
+    ? "is-featured"
+    : ""; ?> <?php echo $is_on_promo ? "is-on-promo" : ""; ?>">
 
     <!-- Badges -->
     <?php if ($is_on_promo && $promo_pct): ?>
@@ -34,7 +36,7 @@ $currency       = get_field('currency', $post_id) ?: '€';
     <a href="<?php the_permalink(); ?>" class="card-image-link">
         <?php if (has_post_thumbnail()): ?>
             <div class="card-image">
-                <?php the_post_thumbnail('large'); ?>
+                <?php the_post_thumbnail("large"); ?>
             </div>
         <?php else: ?>
             <div class="card-image card-image-placeholder">
@@ -73,9 +75,11 @@ $currency       = get_field('currency', $post_id) ?: '€';
             <div class="card-meta">
                 <span class="card-meta-item">
                     <?php
-                    echo $year ? esc_html($year) : '';
-                    if ($year && $materials) echo ' • ';
-                    echo $materials ? esc_html($materials) : '';
+                    echo $year ? esc_html($year) : "";
+                    if ($year && $materials) {
+                        echo " • ";
+                    }
+                    echo $materials ? esc_html($materials) : "";
                     ?>
                 </span>
             </div>
@@ -89,21 +93,29 @@ $currency       = get_field('currency', $post_id) ?: '€';
                 <div class="card-price-wrapper">
                     <?php if ($is_on_promo && $promo_price): ?>
                         <span class="card-price-original">
-                            <?php echo esc_html($currency . number_format($price, 0)); ?>
+                            <?php echo esc_html(
+                                $currency . number_format($price, 0),
+                            ); ?>
                         </span>
                         <span class="card-price card-price-promo">
-                            <?php echo esc_html($currency . number_format($promo_price, 0)); ?>
+                            <?php echo esc_html(
+                                $currency . number_format($promo_price, 0),
+                            ); ?>
                         </span>
                     <?php elseif ($price): ?>
                         <span class="card-price">
-                            <?php echo esc_html($currency . number_format($price, 0)); ?>
+                            <?php echo esc_html(
+                                $currency . number_format($price, 0),
+                            ); ?>
                         </span>
                     <?php endif; ?>
                 </div>
 
                 <!-- Availability -->
                 <?php if ($availability): ?>
-                    <span class="card-status status-<?php echo esc_attr(sanitize_title($availability)); ?>">
+                    <span class="card-status status-<?php echo esc_attr(
+                        sanitize_title($availability),
+                    ); ?>">
                         <?php echo esc_html($availability); ?>
                     </span>
                 <?php endif; ?>
@@ -118,7 +130,7 @@ $currency       = get_field('currency', $post_id) ?: '€';
                     <path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z"/>
                     <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z"/>
                 </svg>
-                Ends: <?php echo date('d M Y', strtotime($promo_ends)); ?>
+                Ends: <?php echo date("d M Y", strtotime($promo_ends)); ?>
             </div>
         <?php endif; ?>
 

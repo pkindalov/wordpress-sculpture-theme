@@ -69,15 +69,15 @@ $filter_data = isset($args["filter_data"]) ? $args["filter_data"] : [];
             </div>
 
             <!-- On Promotion Toggle -->
-<div class="filter-toggle-modern">
-    <label class="toggle-switch">
-        <input type="checkbox" name="on_promotion" value="1"
-               <?php checked($filters["on_promotion"] ?? "", "1"); ?>
-               onchange="this.form.submit()">
-        <span class="toggle-slider toggle-slider-promo"></span>
-    </label>
-    <span class="toggle-label" style="color:#E7C871;">On Sale</span>
-</div>
+        <div class="filter-toggle-modern">
+            <label class="toggle-switch">
+                <input type="checkbox" name="on_promotion" value="1"
+                       <?php checked($filters["on_promotion"] ?? "", "1"); ?>
+                       onchange="this.form.submit()">
+                <span class="toggle-slider toggle-slider-promo"></span>
+            </label>
+            <span class="toggle-label" style="color:#E7C871;">On Sale</span>
+        </div>
             
             <!-- Advanced Toggle -->
             <button type="button" class="btn-toggle-advanced" id="toggleAdvanced">
