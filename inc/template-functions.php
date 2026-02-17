@@ -178,7 +178,7 @@ function sculpture_featured_shortcode($atts)
     <section class="homepage-sculptures">
         
         <div class="homepage-sculptures-header">
-            <h2 class="section-title">Featured Works</h2>
+            <h2 class="section-title">Selected Works</h2>
             <p class="section-subtitle">Discover our latest sculptures</p>
         </div>
         
