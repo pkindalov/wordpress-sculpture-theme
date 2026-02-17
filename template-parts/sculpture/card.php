@@ -8,7 +8,7 @@
  */
 ?>
 
-<article class="sculpture-card">
+<article class="sculpture-card <?php echo get_field('featured') ? 'is-featured' : ''; ?>">
     
     <!-- Featured Badge -->
     <?php if (get_field("featured")): ?>

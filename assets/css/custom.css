@@ -319,6 +319,62 @@ body.post-type-archive-sculpture .sculpture-archive {
     z-index: 10;
 }
 
+/* Featured Card - Inverted Style */
+.sculpture-card.is-featured {
+    background: #1F3A2A;
+    border-color: #E7C871;
+}
+
+.sculpture-card.is-featured .card-title a {
+    color: #FFFCE6;
+}
+
+.sculpture-card.is-featured .card-title a:hover {
+    color: #E7C871;
+}
+
+.sculpture-card.is-featured .card-meta {
+    border-bottom-color: rgba(255, 252, 230, 0.2);
+}
+
+.sculpture-card.is-featured .card-meta-item {
+    color: rgba(255, 252, 230, 0.7);
+}
+
+.sculpture-card.is-featured .card-content {
+    border-top: 3px solid #E7C871;
+}
+
+.sculpture-card.is-featured .card-price {
+    color: #E7C871;
+}
+
+.sculpture-card.is-featured .status-available {
+    background: rgba(106, 139, 88, 0.3);
+    color: #DDE7D1;
+}
+
+.sculpture-card.is-featured .status-sold {
+    background: rgba(139, 69, 69, 0.3);
+    color: #ffaaaa;
+}
+
+.sculpture-card.is-featured .status-reserved {
+    background: rgba(231, 200, 113, 0.2);
+    color: #E7C871;
+}
+
+.sculpture-card.is-featured:hover {
+    border-color: #E7C871;
+    box-shadow: 0 20px 60px rgba(231, 200, 113, 0.3);
+}
+
+/* Featured Badge - updated */
+.sculpture-card.is-featured .card-badge {
+    background: #E7C871;
+    color: #1F3A2A;
+}
+
 /* Card Image */
 .card-image-link {
     display: block;
