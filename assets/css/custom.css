@@ -1563,3 +1563,155 @@ body.post-type-archive-sculpture .sculpture-archive {
         justify-content: center;
     }
 }
+
+
+/* =========================================
+   PROMOTION STYLES
+   ========================================= */
+
+/* Promo Badge */
+.badge-promo {
+    background: #C0392B !important;
+    color: #fff !important;
+    font-size: 14px !important;
+    padding: 10px 16px !important;
+}
+
+.badge-featured {
+    background: #E7C871;
+    color: #1F3A2A;
+}
+
+/* Promo Card */
+.sculpture-card.is-on-promo {
+    border-color: #C0392B;
+}
+
+.sculpture-card.is-on-promo .card-content {
+    border-top: 3px solid #C0392B;
+}
+
+.sculpture-card.is-on-promo:hover {
+    box-shadow: 0 20px 60px rgba(192, 57, 43, 0.2);
+    border-color: #C0392B;
+}
+
+/* Prices */
+.card-price-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.card-price-original {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: #999;
+    text-decoration: line-through;
+}
+
+.card-price-promo {
+    color: #C0392B !important;
+    font-size: 26px !important;
+}
+
+/* Promo Ends */
+.card-promo-ends {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid rgba(192, 57, 43, 0.2);
+    font-size: 12px;
+    font-weight: 700;
+    color: #C0392B;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Featured + Promo combined */
+.sculpture-card.is-featured.is-on-promo {
+    border-color: #C0392B;
+}
+
+.sculpture-card.is-featured .card-price-original {
+    color: rgba(255, 252, 230, 0.5);
+}
+
+.sculpture-card.is-featured .card-promo-ends {
+    color: #ffaaaa;
+    border-top-color: rgba(192, 57, 43, 0.3);
+}
+
+/* =========================================
+   HOMEPAGE PROMOTION SECTION
+   ========================================= */
+
+.homepage-promo {
+    max-width: 1800px;
+    margin: 0 auto;
+    padding: 80px 60px;
+    background: #fff5f5;
+    border-top: 4px solid #C0392B;
+    border-bottom: 4px solid #C0392B;
+}
+
+.homepage-promo-header {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.homepage-promo-header .section-title {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 56px;
+    font-weight: 900;
+    color: #C0392B;
+    margin: 0 0 15px;
+    text-transform: uppercase;
+    letter-spacing: -0.02em;
+}
+
+.homepage-promo-header .section-subtitle {
+    font-size: 18px;
+    color: #666;
+    margin: 0;
+}
+
+.homepage-promo-footer {
+    text-align: center;
+    margin-top: 50px;
+}
+
+.btn-view-promo {
+    display: inline-block;
+    padding: 18px 40px;
+    background: #C0392B;
+    color: #fff;
+    text-decoration: none;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 15px;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    border: 3px solid #C0392B;
+    transition: all 0.3s;
+}
+
+.btn-view-promo:hover {
+    background: transparent;
+    color: #C0392B;
+    transform: translateY(-2px);
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .homepage-promo {
+        padding: 60px 30px;
+    }
+
+    .homepage-promo-header .section-title {
+        font-size: 36px;
+    }
+}

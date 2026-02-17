@@ -49,6 +49,7 @@ $filters = [
         isset($_GET["year_max"]) && $_GET["year_max"] !== ""
             ? intval($_GET["year_max"])
             : "",
+            'on_promotion' => isset($_GET['on_promotion']) ? sanitize_text_field($_GET['on_promotion']) : '',
 ];
 
 // ========================================
@@ -195,6 +196,36 @@ function sculpture_build_query_args($filters)
             $args["order"] = "DESC";
     }
 
+    // On Promotion filter
+if (!empty($filters['on_promotion'])) {
+    $today = date('Ymd');
+    $meta_query[] = array(
+        'relation' => 'AND',
+        array(
+            'key'     => 'on_promotion',
+            'value'   => '1',
+            'compare' => '='
+        ),
+        array(
+            'relation' => 'OR',
+            array(
+                'key'     => 'promotion_ends',
+                'compare' => 'NOT EXISTS'
+            ),
+            array(
+                'key'     => 'promotion_ends',
+                'value'   => '',
+                'compare' => '='
+            ),
+            array(
+                'key'     => 'promotion_ends',
+                'value'   => $today,
+                'compare' => '>='
+            )
+        )
+    );
+}
+
     // Build meta query
     $meta_query = ["relation" => "AND"];
 
@@ -224,6 +255,38 @@ function sculpture_build_query_args($filters)
             "compare" => "=",
         ];
     }
+
+
+// On Promotion filter
+if (!empty($filters['on_promotion'])) {
+    $today = date('Ymd');
+    $meta_query[] = array(
+        'relation' => 'AND',
+        array(
+            'key'     => 'on_promotion',
+            'value'   => '1',
+            'compare' => '='
+        ),
+        array(
+            'relation' => 'OR',
+            array(
+                'key'     => 'promotion_ends',
+                'compare' => 'NOT EXISTS'
+            ),
+            array(
+                'key'     => 'promotion_ends',
+                'value'   => '',
+                'compare' => '='
+            ),
+            array(
+                'key'     => 'promotion_ends',
+                'value'   => $today,
+                'compare' => '>='
+            )
+        )
+    );
+}
+    
 
     // Price range filter
     if ($filters["price_min"] !== "" || $filters["price_max"] !== "") {
