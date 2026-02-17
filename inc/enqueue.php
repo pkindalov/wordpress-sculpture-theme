@@ -18,31 +18,66 @@ if (!defined("ABSPATH")) {
  */
 function sculpture_theme_enqueue_styles()
 {
-    // Parent theme (Astra) stylesheet
+    $css_dir = get_stylesheet_directory() . "/assets/css/";
+    $css_uri = get_stylesheet_directory_uri() . "/assets/css/";
+
+    // Base - винаги зарежда
     wp_enqueue_style(
-        "astra-parent-style",
-        get_template_directory_uri() . "/style.css",
+        "sculpture-base",
+        $css_uri . "base.css",
         [],
-        wp_get_theme("astra")->get("Version"),
+        filemtime($css_dir . "base.css"),
     );
 
-    // Child theme main stylesheet
-    wp_enqueue_style(
-        "sculpture-child-style",
-        get_stylesheet_directory_uri() . "/style.css",
-        ["astra-parent-style"],
-        SCULPTURE_THEME_VERSION,
-    );
+    // Components - винаги зареждат
+    $components = ["cards", "filters", "footer", "promotions"];
+    foreach ($components as $component) {
+        wp_enqueue_style(
+            "sculpture-" . $component,
+            $css_uri . "components/" . $component . ".css",
+            ["sculpture-base"],
+            filemtime($css_dir . "components/" . $component . ".css"),
+        );
+    }
 
-    // Custom CSS file (if you want separate custom styles)
+    // Pages - зареждат само на нужната страница
+    if (is_singular("sculpture")) {
+        wp_enqueue_style(
+            "sculpture-single",
+            $css_uri . "pages/single.css",
+            ["sculpture-base"],
+            filemtime($css_dir . "pages/single.css"),
+        );
+    }
+
+    if (is_post_type_archive("sculpture")) {
+        wp_enqueue_style(
+            "sculpture-archive",
+            $css_uri . "pages/archive.css",
+            ["sculpture-base"],
+            filemtime($css_dir . "pages/archive.css"),
+        );
+    }
+
+    if (is_front_page() || is_home()) {
+        wp_enqueue_style(
+            "sculpture-homepage",
+            $css_uri . "pages/homepage.css",
+            ["sculpture-base"],
+            filemtime($css_dir . "pages/homepage.css"),
+        );
+    }
+
     wp_enqueue_style(
-        "sculpture-custom-style",
-        SCULPTURE_THEME_URI . "/assets/css/custom.css",
-        ["sculpture-child-style"],
-        SCULPTURE_THEME_VERSION,
+        "sculpture-mobile",
+        $css_uri . "responsive/mobile.css",
+        ["sculpture-base"],
+        filemtime($css_dir . "responsive/mobile.css"),
     );
 }
 add_action("wp_enqueue_scripts", "sculpture_theme_enqueue_styles");
+
+
 
 /**
  * Enqueue custom JavaScript
