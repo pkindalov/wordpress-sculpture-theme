@@ -76,7 +76,7 @@ $filter_data = isset($args["filter_data"]) ? $args["filter_data"] : [];
                        onchange="this.form.submit()">
                 <span class="toggle-slider toggle-slider-promo"></span>
             </label>
-            <span class="toggle-label" style="color:#E7C871;">On Sale</span>
+            <span class="toggle-label toggle-label-promo">On Promotion</span>
         </div>
             
             <!-- Advanced Toggle -->
