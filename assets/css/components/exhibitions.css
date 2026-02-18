@@ -366,3 +366,64 @@
     }
     
 }
+
+/* ========================================
+   PAGINATION
+   ======================================== */
+
+.exhibitions-pagination {
+    margin-top: 80px;
+    padding-top: 40px;
+    border-top: 1px solid #E5E7EB;
+}
+
+.pagination-numbers {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.page-number,
+.pagination-nav {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 44px;
+    height: 44px;
+    padding: 0 16px;
+    background: #F9FAFB;
+    color: #6B7280;
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 500;
+    border-radius: 8px;
+    border: 1px solid #E5E7EB;
+    transition: all 0.3s ease;
+}
+
+.page-number:hover,
+.pagination-nav:hover {
+    background: #F3F4F6;
+    color: #1F3A2A;
+    border-color: #D1D5DB;
+}
+
+.page-number.current {
+    background: #1F3A2A;
+    color: #E7C871;
+    border-color: #1F3A2A;
+    font-weight: 600;
+    cursor: default;
+}
+
+@media (max-width: 768px) {
+    .page-number,
+    .pagination-nav {
+        min-width: 40px;
+        height: 40px;
+        padding: 0 12px;
+        font-size: 14px;
+    }
+}
