@@ -519,7 +519,150 @@ function exhibition_get_grouped_by_status($posts_per_status = -1)
     return $grouped;
 }
 
+// ========================================
+// EXHIBITIONS SHORTCODE FOR HOMEPAGE
+// ========================================
+
+/**
+ * Exhibitions Timeline Shortcode
+ *
+ * Display recent exhibitions on homepage
+ * Usage: [exhibitions_timeline count="3"]
+ *
+ * @param array $atts Shortcode attributes
+ * @return string HTML output
+ */
+/**
+ * Exhibitions Timeline Shortcode
+ *
+ * Display recent exhibitions on homepage
+ * Usage: [exhibitions_timeline count="4"]
+ *
+ * @param array $atts Shortcode attributes
+ * @return string HTML output
+ */
+function sculpture_exhibitions_timeline_shortcode($atts)
+{
+    $atts = shortcode_atts(
+        [
+            "count" => 4,
+        ],
+        $atts,
+        "exhibitions_timeline",
+    );
+
+    // Get ALL exhibitions
+    $all_args = [
+        "post_type" => "exhibition",
+        "posts_per_page" => -1,
+        "post_status" => "publish",
+    ];
+
+    $all_query = new WP_Query($all_args);
+
+    // Sort by status
+    $grouped = [
+        "current" => [],
+        "upcoming" => [],
+        "past" => [],
+    ];
+
+    if ($all_query->have_posts()) {
+        while ($all_query->have_posts()) {
+            $all_query->the_post();
+            $status = exhibition_get_status(get_the_ID());
+            $start_date = get_field("start_date", get_the_ID());
+
+            $grouped[$status][] = [
+                "post" => get_post(),
+                "start_date" => $start_date,
+            ];
+        }
+        wp_reset_postdata();
+    }
+
+    // Sort each group
+    usort($grouped["current"], function ($a, $b) {
+        return strcmp($b["start_date"], $a["start_date"]);
+    });
+
+    usort($grouped["past"], function ($a, $b) {
+        return strcmp($b["start_date"], $a["start_date"]);
+    });
+
+    usort($grouped["upcoming"], function ($a, $b) {
+        return strcmp($a["start_date"], $b["start_date"]);
+    });
+
+    // Merge: Current → Upcoming → Past
+    $sorted = [];
+    foreach ($grouped["current"] as $item) {
+        $sorted[] = $item["post"];
+    }
+    foreach ($grouped["upcoming"] as $item) {
+        $sorted[] = $item["post"];
+    }
+    foreach ($grouped["past"] as $item) {
+        $sorted[] = $item["post"];
+    }
+
+    // Limit to count
+    $limited = array_slice($sorted, 0, intval($atts["count"]));
+
+    if (empty($limited)) {
+        return "";
+    }
+
+    // Output
+    ob_start();
+
+    global $post;
+    ?>
+    
+    <div class="homepage-exhibitions-section">
+        <div class="section-header">
+            <h2 class="section-title">Exhibitions</h2>
+            <a href="<?php echo get_post_type_archive_link(
+                "exhibition",
+            ); ?>" class="view-all-link">
+                View All Exhibitions →
+            </a>
+        </div>
+        
+        <div class="exhibition-timeline-list homepage-timeline">
+            <?php
+            $counter = 0;
+
+            foreach ($limited as $post):
+                setup_postdata($post);
+                $counter++;
+                $side_class =
+                    $counter % 2 === 1 ? "timeline-left" : "timeline-right";
+                set_query_var("timeline_side", $side_class);
+                get_template_part("template-parts/exhibition/timeline-item");
+            endforeach;
+
+            wp_reset_postdata();
+            ?>
+        </div>
+        
+        <div class="section-footer">
+            <a href="<?php echo get_post_type_archive_link(
+                "exhibition",
+            ); ?>" class="view-all-button">
+                View All Exhibitions
+            </a>
+        </div>
+    </div>
+    
+    <?php return ob_get_clean();
+}
+
 add_shortcode("promo_sculptures", "sculpture_promo_shortcode");
 
 add_filter("body_class", "sculpture_body_classes");
 add_shortcode("featured_sculptures", "sculpture_featured_shortcode");
+add_shortcode(
+    "exhibitions_timeline",
+    "sculpture_exhibitions_timeline_shortcode",
+);

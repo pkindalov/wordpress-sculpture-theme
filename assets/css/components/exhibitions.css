@@ -367,6 +367,107 @@
     
 }
 
+
+/* ========================================
+   HOMEPAGE EXHIBITIONS SECTION
+   ======================================== */
+
+.homepage-exhibitions-section {
+    max-width: 1200px;
+    margin: 80px auto;
+    padding: 0 20px;
+}
+
+/* Section Header */
+.homepage-exhibitions-section .section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 60px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid #E5E7EB;
+}
+
+.homepage-exhibitions-section .section-title {
+    font-size: 48px;
+    font-weight: 700;
+    color: #1F3A2A;
+    margin: 0;
+}
+
+.homepage-exhibitions-section .view-all-link {
+    font-size: 16px;
+    font-weight: 600;
+    color: #6B7280;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.homepage-exhibitions-section .view-all-link:hover {
+    color: #1F3A2A;
+}
+
+/* Homepage timeline - slightly smaller */
+.homepage-timeline.exhibition-timeline-list {
+    position: relative;
+}
+
+.homepage-timeline .exhibition-title {
+    font-size: 28px;
+}
+
+.homepage-timeline .exhibition-description {
+    font-size: 15px;
+}
+
+/* Section Footer */
+.homepage-exhibitions-section .section-footer {
+    text-align: center;
+    margin-top: 60px;
+}
+
+.view-all-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 32px;
+    background: #1F3A2A;
+    color: #E7C871;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.view-all-button:hover {
+    background: #2A4D3A;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(31, 58, 42, 0.3);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .homepage-exhibitions-section {
+        margin: 60px auto;
+    }
+    
+    .homepage-exhibitions-section .section-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+    }
+    
+    .homepage-exhibitions-section .section-title {
+        font-size: 36px;
+    }
+    
+    .homepage-timeline .exhibition-title {
+        font-size: 24px;
+    }
+}
+
+
 /* ========================================
    PAGINATION
    ======================================== */
