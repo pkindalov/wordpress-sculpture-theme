@@ -30,7 +30,7 @@ function sculpture_theme_enqueue_styles()
     );
     
     // Components - винаги зареждат
-    $components = ["cards", "filters", "footer", "promotions", "exhibitions"];
+    $components = ["cards", "filters", "footer", "promotions", "exhibitions", "publications"];
     foreach ($components as $component) {
         wp_enqueue_style(
             "sculpture-" . $component,

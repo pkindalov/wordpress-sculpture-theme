@@ -658,6 +658,76 @@ function sculpture_exhibitions_timeline_shortcode($atts)
     <?php return ob_get_clean();
 }
 
+// ========================================
+// PUBLICATIONS HELPER FUNCTIONS
+// ========================================
+
+/**
+ * Get publication type label
+ * 
+ * @param string $type Type value ('by_me' or 'about_me')
+ * @return string Label
+ */
+function publication_get_type_label($type) {
+    $labels = array(
+        'by_me'    => __('Written by me', 'sculpture-theme'),
+        'about_me' => __('Written about me', 'sculpture-theme'),
+    );
+    
+    return isset($labels[$type]) ? $labels[$type] : '';
+}
+
+/**
+ * Get formatted publication date
+ * 
+ * @param int|null $post_id Post ID
+ * @return string Formatted date
+ */
+function publication_get_date($post_id = null) {
+    $date = get_field('publication_date', $post_id);
+    
+    if (!$date) {
+        return '';
+    }
+    
+    // Convert from Ymd to readable format
+    $date_obj = DateTime::createFromFormat('Ymd', $date);
+    
+    if (!$date_obj) {
+        return '';
+    }
+    
+    return $date_obj->format('d.m.Y');
+}
+
+/**
+ * Get publication meta string
+ * 
+ * @param int|null $post_id Post ID
+ * @return string Meta string (Publication, Date, Author if exists)
+ */
+function publication_get_meta($post_id = null) {
+    $publication = get_field('publication', $post_id);
+    $date = publication_get_date($post_id);
+    $author = get_field('author', $post_id);
+    
+    $meta_parts = array();
+    
+    if ($publication) {
+        $meta_parts[] = $publication;
+    }
+    
+    if ($date) {
+        $meta_parts[] = $date;
+    }
+    
+    if ($author) {
+        $meta_parts[] = __('Author:', 'sculpture-theme') . ' ' . $author;
+    }
+    
+    return implode(' • ', $meta_parts);
+}
+
 add_shortcode("promo_sculptures", "sculpture_promo_shortcode");
 
 add_filter("body_class", "sculpture_body_classes");
