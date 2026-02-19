@@ -25,9 +25,8 @@ while (have_posts()):
     
     <div class="publication-container">
         
-        <!-- Header -->
-        <header class="publication-header">
-            
+        <!-- Back Navigation -->
+        <div class="publication-navigation">
             <a href="<?php echo get_post_type_archive_link(
                 "publication",
             ); ?>" class="back-link">
@@ -36,6 +35,10 @@ while (have_posts()):
                 </svg>
                 <?php _e("Back to Publications", "sculpture-theme"); ?>
             </a>
+        </div>
+        
+        <!-- Header -->
+        <header class="publication-header">
             
             <!-- Type Badge -->
             <span class="publication-type-badge"><?php echo esc_html(

@@ -294,42 +294,6 @@
 }
 
 /* ========================================
-   RESPONSIVE
-   ======================================== */
-
-@media (max-width: 968px) {
-    .publications-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 24px;
-    }
-}
-
-@media (max-width: 768px) {
-    .publications-archive-container {
-        padding: 40px 16px;
-    }
-    
-    .publications-archive-container .archive-title {
-        font-size: 42px;
-    }
-    
-    .publications-tabs {
-        gap: 4px;
-    }
-    
-    .publications-tabs .tab {
-        padding: 12px 20px;
-        font-size: 14px;
-    }
-    
-    .publications-grid {
-        grid-template-columns: 1fr;
-        gap: 20px;
-    }
-}
-
-
-/* ========================================
    SINGLE PUBLICATION
    ======================================== */
 
@@ -345,40 +309,46 @@
     padding: 60px 20px;
 }
 
-/* Header */
-.publication-header {
-    margin-bottom: 50px;
-    text-align: left;
+/* Navigation (Back button) */
+.publication-navigation {
+    margin-bottom: 60px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #F3F4F6;
 }
 
-.publication-header .back-link {
+.publication-navigation .back-link {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    margin-bottom: 50px;
-    padding: 10px 20px;
+    padding: 12px 24px;
     background: #F9FAFB;
     color: #6B7280;
     text-decoration: none;
     font-size: 14px;
     font-weight: 600;
-    border-radius: 6px;
+    border-radius: 8px;
     border: 1px solid #E5E7EB;
     transition: all 0.3s ease;
 }
 
-.publication-header .back-link:hover {
+.publication-navigation .back-link:hover {
     background: #F3F4F6;
     color: #1F3A2A;
     border-color: #D1D5DB;
 }
 
-.publication-header .back-link svg {
+.publication-navigation .back-link svg {
     transition: transform 0.3s ease;
 }
 
-.publication-header .back-link:hover svg {
+.publication-navigation .back-link:hover svg {
     transform: translateX(-4px);
+}
+
+/* Header (Badge + Title + Meta) */
+.publication-header {
+    margin-bottom: 50px;
+    text-align: center;
 }
 
 .publication-header .publication-type-badge {
@@ -418,6 +388,7 @@
     gap: 20px;
     padding-bottom: 24px;
     border-bottom: 2px solid #E5E7EB;
+    justify-content: center;
 }
 
 .publication-meta .meta-item {
@@ -453,6 +424,7 @@
     line-height: 1.8;
     color: #1F3A2A;
     margin-bottom: 50px;
+    text-align: left;
 }
 
 .publication-content p {
@@ -577,8 +549,41 @@
     box-shadow: 0 4px 12px rgba(31, 58, 42, 0.3);
 }
 
-/* Responsive */
+/* ========================================
+   RESPONSIVE
+   ======================================== */
+
+@media (max-width: 968px) {
+    .publications-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 24px;
+    }
+}
+
 @media (max-width: 768px) {
+    .publications-archive-container {
+        padding: 40px 16px;
+    }
+    
+    .publications-archive-container .archive-title {
+        font-size: 42px;
+    }
+    
+    .publications-tabs {
+        gap: 4px;
+    }
+    
+    .publications-tabs .tab {
+        padding: 12px 20px;
+        font-size: 14px;
+    }
+    
+    .publications-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    /* Single Publication Responsive */
     .publication-container {
         padding: 40px 16px;
     }
