@@ -335,24 +335,27 @@
 
 .single-publication {
     background: #FFFFFF;
+    width: 100%;
 }
 
 .publication-container {
     max-width: 800px;
-    margin: 0 auto;
+    margin-left: auto;
+    margin-right: auto;
     padding: 60px 20px;
 }
 
 /* Header */
 .publication-header {
     margin-bottom: 50px;
+    text-align: left;
 }
 
 .publication-header .back-link {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    margin-bottom: 30px;
+    margin-bottom: 50px;
     padding: 10px 20px;
     background: #F9FAFB;
     color: #6B7280;
@@ -386,7 +389,7 @@
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.05em;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
 }
 
 .publication-type-by_me .publication-header .publication-type-badge {
