@@ -446,6 +446,36 @@
     box-shadow: 0 4px 12px rgba(31, 58, 42, 0.3);
 }
 
+/* Back to Home button */
+.back-to-home {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 30px;
+    padding: 12px 24px;
+    background: #F9FAFB;
+    color: #1F3A2A;
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 600;
+    border-radius: 8px;
+    border: 1px solid #E5E7EB;
+    transition: all 0.3s ease;
+}
+
+.back-to-home:hover {
+    background: #F3F4F6;
+    border-color: #D1D5DB;
+}
+
+.back-to-home svg {
+    transition: transform 0.3s ease;
+}
+
+.back-to-home:hover svg {
+    transform: translateX(-4px);
+}
+
 /* Responsive */
 @media (max-width: 768px) {
     .homepage-exhibitions-section {
