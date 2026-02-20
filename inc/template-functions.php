@@ -728,6 +728,121 @@ function publication_get_meta($post_id = null) {
     return implode(' • ', $meta_parts);
 }
 
+
+/**
+ * Publications Shortcode
+ * 
+ * Display recent publications on homepage (grouped by type)
+ * Usage: [publications_showcase by_me="3" about_me="3"]
+ * 
+ * @param array $atts Shortcode attributes
+ * @return string HTML output
+ */
+function sculpture_publications_showcase_shortcode($atts) {
+    
+    $atts = shortcode_atts(array(
+        'by_me'    => 3,
+        'about_me' => 3,
+    ), $atts, 'publications_showcase');
+    
+    // Get "By Me" publications
+    $by_me_args = array(
+        'post_type'      => 'publication',
+        'posts_per_page' => intval($atts['by_me']),
+        'post_status'    => 'publish',
+        'orderby'        => 'date',
+        'order'          => 'DESC',
+        'meta_query'     => array(
+            array(
+                'key'     => 'article_type',
+                'value'   => 'by_me',
+                'compare' => '='
+            )
+        )
+    );
+    
+    $by_me_posts = new WP_Query($by_me_args);
+    
+    // Get "About Me" publications
+    $about_me_args = array(
+        'post_type'      => 'publication',
+        'posts_per_page' => intval($atts['about_me']),
+        'post_status'    => 'publish',
+        'orderby'        => 'date',
+        'order'          => 'DESC',
+        'meta_query'     => array(
+            array(
+                'key'     => 'article_type',
+                'value'   => 'about_me',
+                'compare' => '='
+            )
+        )
+    );
+    
+    $about_me_posts = new WP_Query($about_me_args);
+    
+    // Check if we have any posts
+    if (!$by_me_posts->have_posts() && !$about_me_posts->have_posts()) {
+        return '';
+    }
+    
+    // Output
+    ob_start();
+    ?>
+    
+    <div class="homepage-publications-section">
+        <div class="section-header">
+            <h2 class="section-title">Publications</h2>
+            <a href="<?php echo get_post_type_archive_link('publication'); ?>" class="view-all-link">
+                View All Publications →
+            </a>
+        </div>
+        
+        <?php if ($by_me_posts->have_posts()): ?>
+        <!-- Written by Me Section -->
+        <div class="publication-group">
+            <h3 class="group-title">Written by me</h3>
+            <div class="publications-grid homepage-publications-grid">
+                <?php 
+                while ($by_me_posts->have_posts()):
+                    $by_me_posts->the_post();
+                    get_template_part('template-parts/publication/card');
+                endwhile;
+                wp_reset_postdata();
+                ?>
+            </div>
+        </div>
+        <?php endif; ?>
+        
+        <?php if ($about_me_posts->have_posts()): ?>
+        <!-- Written about Me Section -->
+        <div class="publication-group">
+            <h3 class="group-title">Written about me</h3>
+            <div class="publications-grid homepage-publications-grid">
+                <?php 
+                while ($about_me_posts->have_posts()):
+                    $about_me_posts->the_post();
+                    get_template_part('template-parts/publication/card');
+                endwhile;
+                wp_reset_postdata();
+                ?>
+            </div>
+        </div>
+        <?php endif; ?>
+        
+        <div class="section-footer">
+            <a href="<?php echo get_post_type_archive_link('publication'); ?>" class="view-all-button">
+                View All Publications
+            </a>
+        </div>
+    </div>
+    
+    <?php
+    return ob_get_clean();
+}
+
+
+
 add_shortcode("promo_sculptures", "sculpture_promo_shortcode");
 
 add_filter("body_class", "sculpture_body_classes");
@@ -736,3 +851,4 @@ add_shortcode(
     "exhibitions_timeline",
     "sculpture_exhibitions_timeline_shortcode",
 );
+add_shortcode('publications_showcase', 'sculpture_publications_showcase_shortcode');
