@@ -801,7 +801,7 @@ function sculpture_publications_showcase_shortcode($atts) {
         <?php if ($by_me_posts->have_posts()): ?>
         <!-- Written by Me Section -->
         <div class="publication-group">
-            <h3 class="group-title">Written by me</h3>
+            <!-- <h3 class="group-title">Written by me</h3> -->
             <div class="publications-grid homepage-publications-grid">
                 <?php 
                 while ($by_me_posts->have_posts()):
@@ -817,7 +817,7 @@ function sculpture_publications_showcase_shortcode($atts) {
         <?php if ($about_me_posts->have_posts()): ?>
         <!-- Written about Me Section -->
         <div class="publication-group">
-            <h3 class="group-title">Written about me</h3>
+            <!-- <h3 class="group-title">Written about me</h3> -->
             <div class="publications-grid homepage-publications-grid">
                 <?php 
                 while ($about_me_posts->have_posts()):
