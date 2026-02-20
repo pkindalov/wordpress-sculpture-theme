@@ -30,7 +30,7 @@ function sculpture_theme_enqueue_styles()
     );
     
     // Components - винаги зареждат
-    $components = ["cards", "filters", "footer", "promotions", "exhibitions", "publications"];
+    $components = ["cards", "filters", "footer", "promotions", "exhibitions", "publications", "testimonials"];
     foreach ($components as $component) {
         wp_enqueue_style(
             "sculpture-" . $component,
@@ -100,6 +100,15 @@ function sculpture_theme_enqueue_scripts()
         "ajaxUrl" => admin_url("admin-ajax.php"),
         "nonce" => wp_create_nonce("sculpture-theme-nonce"),
     ]);
+
+    // Testimonials JavaScript
+    wp_enqueue_script(
+        'sculpture-testimonials',
+        SCULPTURE_THEME_URI . '/assets/js/testimonials.js',
+        array(),
+        SCULPTURE_THEME_VERSION,
+        true
+    );
 }
 add_action("wp_enqueue_scripts", "sculpture_theme_enqueue_scripts");
 

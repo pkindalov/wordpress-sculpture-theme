@@ -842,6 +842,180 @@ function sculpture_publications_showcase_shortcode($atts) {
 }
 
 
+// ========================================
+// TESTIMONIALS HELPER FUNCTIONS
+// ========================================
+
+/**
+ * Get star rating HTML
+ * 
+ * @param int $rating Rating value (1-5)
+ * @return string HTML
+ */
+function testimonial_get_stars($rating) {
+    $output = '<div class="testimonial-stars">';
+    
+    for ($i = 1; $i <= 5; $i++) {
+        if ($i <= $rating) {
+            // Filled star
+            $output .= '<svg class="star filled" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                <path d="M10 1l2.5 6.5L19 8l-5 4.5L15.5 19 10 15l-5.5 4L6 12.5 1 8l6.5-.5z"/>
+            </svg>';
+        } else {
+            // Empty star
+            $output .= '<svg class="star empty" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor">
+                <path d="M10 1l2.5 6.5L19 8l-5 4.5L15.5 19 10 15l-5.5 4L6 12.5 1 8l6.5-.5z" stroke-width="1.5"/>
+            </svg>';
+        }
+    }
+    
+    $output .= '</div>';
+    return $output;
+}
+
+/**
+ * Get testimonial meta info
+ * 
+ * @param int|null $post_id Post ID
+ * @return string HTML
+ */
+function testimonial_get_meta($post_id = null) {
+    $name = get_field('client_name', $post_id);
+    $company = get_field('client_company', $post_id);
+    
+    if (!$name) {
+        $name = get_the_title($post_id);
+    }
+    
+    $output = '<div class="testimonial-author">';
+    $output .= '<span class="author-name">' . esc_html($name) . '</span>';
+    
+    if ($company) {
+        $output .= '<span class="author-company">' . esc_html($company) . '</span>';
+    }
+    
+    $output .= '</div>';
+    
+    return $output;
+}
+
+// ========================================
+// TESTIMONIAL FORM SUBMISSION
+// ========================================
+
+/**
+ * Handle testimonial form submission via AJAX
+ */
+function sculpture_handle_testimonial_submission() {
+    
+    // Verify nonce
+    if (!isset($_POST['testimonial_nonce']) || !wp_verify_nonce($_POST['testimonial_nonce'], 'submit_testimonial')) {
+        wp_send_json_error(array(
+            'message' => __('Security check failed. Please refresh the page and try again.', 'sculpture-theme')
+        ));
+    }
+    
+    // Sanitize and validate inputs
+    $client_name = sanitize_text_field($_POST['client_name']);
+    $client_email = sanitize_email($_POST['client_email']);
+    $client_company = sanitize_text_field($_POST['client_company']);
+    $rating = intval($_POST['rating']);
+    $message = sanitize_textarea_field($_POST['message']);
+    $show_rating = isset($_POST['show_rating']) ? 1 : 0;
+    
+    // Validation
+    $errors = array();
+    
+    if (empty($client_name)) {
+        $errors[] = __('Name is required.', 'sculpture-theme');
+    }
+    
+    if (empty($client_email) || !is_email($client_email)) {
+        $errors[] = __('Valid email is required.', 'sculpture-theme');
+    }
+    
+    if ($rating < 1 || $rating > 5) {
+        $errors[] = __('Rating must be between 1 and 5.', 'sculpture-theme');
+    }
+    
+    if (empty($message)) {
+        $errors[] = __('Message is required.', 'sculpture-theme');
+    }
+    
+    if (!empty($errors)) {
+        wp_send_json_error(array(
+            'message' => implode(' ', $errors)
+        ));
+    }
+    
+    // Create testimonial post
+    $post_data = array(
+        'post_title'   => $client_name,
+        'post_content' => $message,
+        'post_status'  => 'pending', // Pending review
+        'post_type'    => 'testimonial',
+        'post_author'  => 1, // Admin user
+    );
+    
+    $post_id = wp_insert_post($post_data);
+    
+    if (is_wp_error($post_id)) {
+        wp_send_json_error(array(
+            'message' => __('Failed to submit testimonial. Please try again.', 'sculpture-theme')
+        ));
+    }
+    
+    // Save ACF fields
+    update_field('client_name', $client_name, $post_id);
+    update_field('client_email', $client_email, $post_id);
+    update_field('client_company', $client_company, $post_id);
+    update_field('rating', $rating, $post_id);
+    update_field('show_rating', $show_rating, $post_id);
+    update_field('featured', 0, $post_id);
+    
+    // Send email notification to admin
+    $admin_email = get_option('admin_email');
+    $subject = sprintf(__('[%s] New Testimonial Pending Review', 'sculpture-theme'), get_bloginfo('name'));
+    
+    $email_message = sprintf(
+        __("A new testimonial has been submitted and is pending your review.\n\nName: %s\nEmail: %s\nCompany: %s\nRating: %d/5\n\nMessage:\n%s\n\nReview it here: %s", 'sculpture-theme'),
+        $client_name,
+        $client_email,
+        $client_company ? $client_company : 'N/A',
+        $rating,
+        $message,
+        admin_url('post.php?post=' . $post_id . '&action=edit')
+    );
+    
+    wp_mail($admin_email, $subject, $email_message);
+    
+    // Success response
+    wp_send_json_success(array(
+        'message' => __('Thank you! Your testimonial has been submitted and is pending review.', 'sculpture-theme')
+    ));
+}
+
+/**
+ * Add notification badge to Testimonials menu for pending reviews
+ */
+function sculpture_testimonial_menu_badge() {
+    global $menu;
+    
+    // Count pending testimonials
+    $pending_count = wp_count_posts('testimonial')->pending;
+    
+    if ($pending_count > 0) {
+        // Find the testimonials menu item
+        foreach ($menu as $key => $item) {
+            if ($item[2] === 'edit.php?post_type=testimonial') {
+                // Add count badge
+                $menu[$key][0] .= ' <span class="awaiting-mod count-' . $pending_count . '"><span class="pending-count">' . number_format_i18n($pending_count) . '</span></span>';
+                break;
+            }
+        }
+    }
+}
+
 
 add_shortcode("promo_sculptures", "sculpture_promo_shortcode");
 
@@ -852,3 +1026,7 @@ add_shortcode(
     "sculpture_exhibitions_timeline_shortcode",
 );
 add_shortcode('publications_showcase', 'sculpture_publications_showcase_shortcode');
+
+add_action('wp_ajax_submit_testimonial', 'sculpture_handle_testimonial_submission');
+add_action('wp_ajax_nopriv_submit_testimonial', 'sculpture_handle_testimonial_submission');
+add_action('admin_menu', 'sculpture_testimonial_menu_badge', 999);

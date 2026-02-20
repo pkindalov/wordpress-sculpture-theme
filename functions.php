@@ -55,7 +55,6 @@ require_once SCULPTURE_THEME_DIR . "/inc/template-functions.php";
 do_action("sculpture_theme_init");
 
 // KILL Astra completely for sculptures
-add_action("template_redirect", "sculpture_kill_astra");
 function sculpture_kill_astra()
 {
     if (is_singular("sculpture")) {
@@ -78,3 +77,13 @@ function sculpture_kill_astra()
         });
     }
 }
+
+/**
+ * Include testimonial modal in footer
+ */
+function sculpture_testimonial_modal() {
+    get_template_part('template-parts/testimonial/form-modal');
+}
+
+add_action('wp_footer', 'sculpture_testimonial_modal');
+add_action("template_redirect", "sculpture_kill_astra");
