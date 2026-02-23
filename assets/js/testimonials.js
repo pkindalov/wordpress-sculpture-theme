@@ -35,20 +35,20 @@
         
         // Close on ESC key
         document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape' && modal.style.display !== 'none') {
+            if (e.key === 'Escape' && modal.classList.contains('is-open')) {
                 closeModal();
             }
         });
         
-        // Open modal function
+       // Open modal function
         function openModal() {
-            modal.style.display = 'flex';
+            modal.classList.add('is-open');
             document.body.style.overflow = 'hidden';
         }
         
         // Close modal function
         function closeModal() {
-            modal.style.display = 'none';
+            modal.classList.remove('is-open');
             document.body.style.overflow = '';
         }
         
@@ -130,6 +130,126 @@
             messages.className = 'form-messages ' + type;
             messages.textContent = text;
             messages.style.display = 'block';
+        }
+        
+        // ========================================
+        // TESTIMONIALS SLIDER
+        // ========================================
+        
+        const slider = document.getElementById('testimonials-slider');
+        
+        if (slider) {
+            const track = slider.querySelector('.slider-track');
+            const slides = track.querySelectorAll('.testimonial-card');
+            const prevBtn = document.getElementById('slider-prev');
+            const nextBtn = document.getElementById('slider-next');
+            const dotsContainer = document.getElementById('slider-dots');
+            
+            let currentSlide = 0;
+            const totalSlides = slides.length;
+            
+            // Create dots
+            for (let i = 0; i < totalSlides; i++) {
+                const dot = document.createElement('button');
+                dot.className = 'slider-dot';
+                dot.setAttribute('aria-label', 'Go to slide ' + (i + 1));
+                dot.addEventListener('click', () => goToSlide(i));
+                dotsContainer.appendChild(dot);
+            }
+            
+            const dots = dotsContainer.querySelectorAll('.slider-dot');
+            
+            // Update slider
+            function updateSlider() {
+                track.style.transform = `translateX(-${currentSlide * 100}%)`;
+                
+                // Update dots
+                dots.forEach((dot, index) => {
+                    dot.classList.toggle('active', index === currentSlide);
+                });
+                
+                // Update buttons
+                prevBtn.disabled = currentSlide === 0;
+                nextBtn.disabled = currentSlide === totalSlides - 1;
+            }
+            
+            // Go to specific slide
+            function goToSlide(index) {
+                currentSlide = index;
+                updateSlider();
+            }
+            
+            // Previous slide
+            if (prevBtn) {
+                prevBtn.addEventListener('click', () => {
+                    if (currentSlide > 0) {
+                        currentSlide--;
+                        updateSlider();
+                    }
+                });
+            }
+            
+            // Next slide
+            if (nextBtn) {
+                nextBtn.addEventListener('click', () => {
+                    if (currentSlide < totalSlides - 1) {
+                        currentSlide++;
+                        updateSlider();
+                    }
+                });
+            }
+            
+            // Keyboard navigation
+            document.addEventListener('keydown', (e) => {
+                if (slider && isElementInViewport(slider)) {
+                    if (e.key === 'ArrowLeft' && currentSlide > 0) {
+                        currentSlide--;
+                        updateSlider();
+                    } else if (e.key === 'ArrowRight' && currentSlide < totalSlides - 1) {
+                        currentSlide++;
+                        updateSlider();
+                    }
+                }
+            });
+            
+            // Check if element is in viewport
+            function isElementInViewport(el) {
+                const rect = el.getBoundingClientRect();
+                return (
+                    rect.top >= 0 &&
+                    rect.left >= 0 &&
+                    rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+                    rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+                );
+            }
+            
+            // Auto-play (optional)
+            let autoplayInterval;
+            
+            function startAutoplay() {
+                autoplayInterval = setInterval(() => {
+                    if (currentSlide < totalSlides - 1) {
+                        currentSlide++;
+                    } else {
+                        currentSlide = 0;
+                    }
+                    updateSlider();
+                }, 5000); // Change slide every 5 seconds
+            }
+            
+            function stopAutoplay() {
+                clearInterval(autoplayInterval);
+            }
+            
+            // Start autoplay
+            startAutoplay();
+            
+            // Pause on hover
+            slider.addEventListener('mouseenter', stopAutoplay);
+            slider.addEventListener('mouseleave', startAutoplay);
+            
+            // Initial update
+            updateSlider();
         }
         
     });

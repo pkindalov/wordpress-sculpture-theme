@@ -1017,6 +1017,122 @@ function sculpture_testimonial_menu_badge() {
 }
 
 
+// ========================================
+// TESTIMONIALS SLIDER SHORTCODE FOR HOMEPAGE
+// ========================================
+
+/**
+ * Testimonials Slider Shortcode
+ * 
+ * Display testimonials in a slider on homepage
+ * Usage: [testimonials_slider count="6"]
+ * 
+ * @param array $atts Shortcode attributes
+ * @return string HTML output
+ */
+function sculpture_testimonials_slider_shortcode($atts) {
+    
+    $atts = shortcode_atts(array(
+        'count' => 6,
+    ), $atts, 'testimonials_slider');
+    
+    // Get published testimonials
+    $args = array(
+        'post_type'      => 'testimonial',
+        'posts_per_page' => intval($atts['count']),
+        'post_status'    => 'publish',
+        'orderby'        => 'date',
+        'order'          => 'DESC',
+    );
+    
+    $testimonials = new WP_Query($args);
+    
+    if (!$testimonials->have_posts()) {
+        return '';
+    }
+    
+    // Output
+    ob_start();
+    ?>
+    
+    <div class="homepage-testimonials-section">
+        <div class="section-header">
+            <h2 class="section-title">What Our Clients Say</h2>
+            <a href="<?php echo get_post_type_archive_link('testimonial'); ?>" class="view-all-link">
+                View All Testimonials →
+            </a>
+        </div>
+        
+        <div class="testimonials-slider-container">
+            
+            <!-- Slider -->
+            <div class="testimonials-slider" id="testimonials-slider">
+                <div class="slider-track">
+                    <?php 
+                    while ($testimonials->have_posts()):
+                        $testimonials->the_post();
+                        get_template_part('template-parts/testimonial/card');
+                    endwhile;
+                    wp_reset_postdata();
+                    ?>
+                </div>
+            </div>
+
+
+            <!-- Navigation -->
+            <!-- <div class="slider-navigation">
+                <a type="button" class="slider-btn prev" id="slider-prev">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
+                    </svg>
+                </a>
+                <div class="slider-dots" id="slider-dots"></div>
+                <a type="button" class="slider-btn next" id="slider-next">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/>
+                    </svg>
+                </a>
+            </div> -->
+
+            <div class="slider-navigation">
+                <button type="button" class="slider-btn prev" id="slider-prev">‹</button>
+                <div class="slider-dots" id="slider-dots"></div>
+                <button type="button" class="slider-btn next" id="slider-next">›</button>
+            </div>
+            
+ <!-- Navigation -->
+            <!-- <div class="slider-navigation">
+                <button type="button" class="slider-btn prev" id="slider-prev">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
+                    </svg>
+                </button>
+                <div class="slider-dots" id="slider-dots"></div>
+                <button type="button" class="slider-btn next" id="slider-next">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/>
+                    </svg>
+                </button>
+            </div> -->
+        
+        <div class="section-footer">
+            <button class="testimonial-trigger">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                    <path d="M10 1l2.5 6.5L19 8l-5 4.5L15.5 19 10 15l-5.5 4L6 12.5 1 8l6.5-.5z"/>
+                </svg>
+                Share Your Experience
+            </button>
+            <a href="<?php echo get_post_type_archive_link('testimonial'); ?>" class="view-all-button">
+                View All Testimonials
+            </a>
+        </div>
+    </div>
+    
+    <?php
+    return ob_get_clean();
+}
+
+
 add_shortcode("promo_sculptures", "sculpture_promo_shortcode");
 
 add_filter("body_class", "sculpture_body_classes");
@@ -1026,6 +1142,7 @@ add_shortcode(
     "sculpture_exhibitions_timeline_shortcode",
 );
 add_shortcode('publications_showcase', 'sculpture_publications_showcase_shortcode');
+add_shortcode('testimonials_slider', 'sculpture_testimonials_slider_shortcode');
 
 add_action('wp_ajax_submit_testimonial', 'sculpture_handle_testimonial_submission');
 add_action('wp_ajax_nopriv_submit_testimonial', 'sculpture_handle_testimonial_submission');

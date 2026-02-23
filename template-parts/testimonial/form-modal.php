@@ -7,7 +7,7 @@
 ?>
 
 <!-- Modal Overlay -->
-<div id="testimonial-modal" class="testimonial-modal" style="display: none;">
+<div id="testimonial-modal" class="testimonial-modal">
     <div class="modal-overlay"></div>
     <div class="modal-container">
         
