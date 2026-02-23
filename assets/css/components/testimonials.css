@@ -69,7 +69,7 @@
     width: 40px;
     height: 40px;
     border: none;
-    background: #F3F4F6;
+    background: #1F3A2A;
     border-radius: 50%;
     cursor: pointer;
     display: flex;
@@ -81,7 +81,7 @@
 
 .modal-close:hover {
     background: #E5E7EB;
-    transform: rotate(90deg);
+    /*transform: rotate(90deg);*/
 }
 
 .modal-close svg {
@@ -694,44 +694,38 @@
 }
 
 .slider-btn {
-    /*width: 48px;
-    height: 48px;*/
-    width: 12px;
-    height: 12px;
+    width: auto;
+    height: auto;
     border: none;
-    /*background: #F9FAFB;*/
     background: none;
-    /*border-radius: 50%;*/
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
     transition: all 0.3s ease;
-    /*border: 1px solid #E5E7EB;*/
     position: relative;
-    font-size: 32px;
+    font-size: 48px;
     line-height: 1;
     color: #6B7280;
     font-family: Arial, sans-serif;
-    box-shadow: unset;
+    padding: 0;
+    box-shadow: none;
 }
 
-/*.slider-btn:hover:not(:disabled) {
-    background: #1F3A2A;
-    border-color: #1F3A2A;
-    color: #E7C871;
-}*/
+.slider-btn:hover:not(:disabled) {
+    color: #1F3A2A;
+    transform: scale(1.1);
+}
 
-.slider-btn:hover:not(:disabled){
-    border: none;
+.slider-btn:hover, .slider-btn:active, .slider-btn:focus {
+
     background-color: unset;
+    border-color: unset;
 }
 
 .slider-btn:disabled {
     opacity: 0.3;
     cursor: not-allowed;
-    border: none;
-    background-color: unset;
 }
 
 /* Slider Dots */

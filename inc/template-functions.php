@@ -1078,42 +1078,12 @@ function sculpture_testimonials_slider_shortcode($atts) {
                 </div>
             </div>
 
-
-            <!-- Navigation -->
-            <!-- <div class="slider-navigation">
-                <a type="button" class="slider-btn prev" id="slider-prev">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
-                    </svg>
-                </a>
-                <div class="slider-dots" id="slider-dots"></div>
-                <a type="button" class="slider-btn next" id="slider-next">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/>
-                    </svg>
-                </a>
-            </div> -->
-
             <div class="slider-navigation">
                 <button type="button" class="slider-btn prev" id="slider-prev">‹</button>
                 <div class="slider-dots" id="slider-dots"></div>
                 <button type="button" class="slider-btn next" id="slider-next">›</button>
             </div>
             
- <!-- Navigation -->
-            <!-- <div class="slider-navigation">
-                <button type="button" class="slider-btn prev" id="slider-prev">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
-                    </svg>
-                </button>
-                <div class="slider-dots" id="slider-dots"></div>
-                <button type="button" class="slider-btn next" id="slider-next">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/>
-                    </svg>
-                </button>
-            </div> -->
         
         <div class="section-footer">
             <button class="testimonial-trigger">
