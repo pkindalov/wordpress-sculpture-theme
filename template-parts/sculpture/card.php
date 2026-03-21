@@ -27,9 +27,14 @@ $currency = get_field("currency", $post_id) ?: "€";
     <?php if ($is_on_promo && $promo_pct): ?>
         <span class="card-badge badge-promo">-<?php echo $promo_pct; ?>%</span>
     <?php elseif ($is_on_promo): ?>
-        <span class="card-badge badge-promo">Sale</span>
+        <!-- <span class="card-badge badge-promo">Promoted</span> -->
+        <span class="card-badge badge-promo">
+            <?php echo (get_current_active_language() === "bg" ? product_mode_translations['bg']['promoted'] : product_mode_translations['en']['Промоция']); ?>
+        </span>
     <?php elseif ($is_featured): ?>
-        <span class="card-badge badge-featured">Featured</span>
+        <span class="card-badge badge-featured">
+            <?php echo (get_current_active_language() === "bg" ? product_mode_translations['bg']['featured'] : product_mode_translations['en']['На Фокус']); ?>
+        </span>
     <?php endif; ?>
 
     <!-- Image -->
@@ -65,7 +70,6 @@ $currency = get_field("currency", $post_id) ?: "€";
 
     <!-- Content -->
     <div class="card-content">
-
         <h2 class="card-title">
             <a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
         </h2>
@@ -79,7 +83,7 @@ $currency = get_field("currency", $post_id) ?: "€";
                     if ($year && $materials) {
                         echo " • ";
                     }
-                    echo $materials ? esc_html($materials) : "";
+                    echo $materials ? esc_html(translate_on_active_lang("material",$materials)) : "";
                     ?>
                 </span>
             </div>
@@ -94,19 +98,25 @@ $currency = get_field("currency", $post_id) ?: "€";
                     <?php if ($is_on_promo && $promo_price): ?>
                         <span class="card-price-original">
                             <?php echo esc_html(
-                                $currency . number_format($price, 0),
-                            ); ?>
+                                number_format($price, 0) . $currency . " ",
+                            ); 
+                            showPriceInLv($price);
+                            ?>
                         </span>
                         <span class="card-price card-price-promo">
                             <?php echo esc_html(
-                                $currency . number_format($promo_price, 0),
-                            ); ?>
+                                number_format($promo_price, 0) . $currency . " ",
+                            ); 
+                                showPriceInLv($promo_price);
+                            ?>
                         </span>
                     <?php elseif ($price): ?>
                         <span class="card-price">
                             <?php echo esc_html(
-                                $currency . number_format($price, 0),
-                            ); ?>
+                                number_format($price, 0) . $currency . " ",
+                            ); 
+                                showPriceInLv($price);
+                            ?>
                         </span>
                     <?php endif; ?>
                 </div>
@@ -114,9 +124,9 @@ $currency = get_field("currency", $post_id) ?: "€";
                 <!-- Availability -->
                 <?php if ($availability): ?>
                     <span class="card-status status-<?php echo esc_attr(
-                        sanitize_title($availability),
+                        sanitize_title(get_translated_word("en", "availability", $availability)),
                     ); ?>">
-                        <?php echo esc_html($availability); ?>
+                        <?php echo esc_html(translate_on_active_lang("availability", $availability)); ?>
                     </span>
                 <?php endif; ?>
 
@@ -130,7 +140,7 @@ $currency = get_field("currency", $post_id) ?: "€";
                     <path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z"/>
                     <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z"/>
                 </svg>
-                Ends: <?php echo date("d M Y", strtotime($promo_ends)); ?>
+                <?php echo translate_on_active_lang("product_mode", "Ends"); ?> : <?php echo translate_date_current_lang(date("d M Y", strtotime($promo_ends))); ?>
             </div>
         <?php endif; ?>
 

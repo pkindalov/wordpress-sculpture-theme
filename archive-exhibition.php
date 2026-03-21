@@ -73,6 +73,12 @@ $total_posts = count($sorted_exhibitions);
 $max_pages = ceil($total_posts / $per_page);
 $offset = ($paged - 1) * $per_page;
 $paged_exhibitions = array_slice($sorted_exhibitions, $offset, $per_page);
+
+$back_button_label = get_current_active_language() === "bg" ? buttons['bg']['Back to Home']  : buttons['en']['Към Начална Страница'];
+$prev_button_label = get_current_active_language() === "bg" ? buttons['bg']['Previous']  : buttons['en']['Предишна'];
+$next_button_label = get_current_active_language() === "bg" ? buttons['bg']['Next']  : buttons['en']['Следваща'];
+$exhibitions_heading = get_current_active_language() === "bg" ? common_translations['bg']['Exhibitions']  : common_translations['en']['Изложби'];
+$no_exhibitions_found_msg = get_current_active_language() === "bg" ? common_translations['bg']['No exhibitions found.'] : common_translations['en']['No exhibitions found.'];
 ?>
 
 <div class="exhibitions-archive-container">
@@ -82,10 +88,10 @@ $paged_exhibitions = array_slice($sorted_exhibitions, $offset, $per_page);
             <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
                 <path d="M12.5 15l-5-5 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
-            <?php _e("Back to Home", "sculpture-theme"); ?>
+            <?php _e($back_button_label, "sculpture-theme"); ?>
         </a>
         <h1 class="archive-title"><?php _e(
-            "Exhibitions",
+            $exhibitions_heading,
             "sculpture-theme",
         ); ?></h1>
     </header>
@@ -119,7 +125,7 @@ $paged_exhibitions = array_slice($sorted_exhibitions, $offset, $per_page);
                         <a href="<?php echo remove_query_arg(
                             "pg",
                         ); ?>" class="pagination-nav">
-                            ← <?php _e("Previous", "sculpture-theme"); ?>
+                            ← <?php _e($prev_button_label, "sculpture-theme"); ?>
                         </a>
                     <?php endif; ?>
                     
@@ -143,7 +149,7 @@ $paged_exhibitions = array_slice($sorted_exhibitions, $offset, $per_page);
                             "pg",
                             $paged + 1,
                         ); ?>" class="pagination-nav">
-                            <?php _e("Next", "sculpture-theme"); ?> →
+                            <?php _e($next_button_label, "sculpture-theme"); ?> →
                         </a>
                     <?php endif; ?>
                     
@@ -154,7 +160,7 @@ $paged_exhibitions = array_slice($sorted_exhibitions, $offset, $per_page);
         <?php else: ?>
         
             <div class="no-exhibitions">
-                <p><?php _e("No exhibitions found.", "sculpture-theme"); ?></p>
+                <p><?php _e($no_exhibitions_found_msg, "sculpture-theme"); ?></p>
             </div>
         
         <?php endif; ?>

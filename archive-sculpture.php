@@ -68,14 +68,16 @@ $sculptures = new WP_Query($query_args);
 // 4. GET FILTER OPTIONS (for dropdowns/sliders)
 // ========================================
 $filter_data = sculpture_get_filter_data();
+$next_btn_label = get_current_active_language() === 'bg' ? buttons['bg']['Next'] : buttons['en']['Следваща'];
+$previous_btn_label = get_current_active_language() === 'bg' ? buttons['bg']['Previous'] : buttons['en']['Предишна'];
 ?>
 
 <div class="sculpture-archive">
     
     <!-- Archive Header -->
     <header class="archive-header">
-        <h1 class="archive-title">Sculpture Gallery</h1>
-        <p class="archive-subtitle">Explore our collection of original artworks</p>
+        <h1 class="archive-title"><?php echo (get_current_active_language() === 'bg' ? common_translations['bg']['Sculpture Gallery'] : common_translations['en']['Галерия Със Скулптури']); ?></h1>
+        <p class="archive-subtitle"><?php echo (get_current_active_language() === 'bg' ? common_translations['bg']['Explore our collection of original artworks'] : common_translations['en']['Разгледайте нашата колекция от оригинални произведения на изкуството']); ?></p>
     </header>
 
     <!-- Filters Component -->
@@ -90,7 +92,7 @@ $filter_data = sculpture_get_filter_data();
             <span class="results-count"><?php echo esc_html(
                 $sculptures->found_posts,
             ); ?></span>
-            <span class="results-text">sculptures found</span>
+            <span class="results-text"><?php echo (get_current_active_language() === 'bg' ? common_translations['bg']['sculptures found'] : common_translations['en']['намерени скулптури']); ?></span>
         </div>
     <?php endif; ?>
 
@@ -110,8 +112,8 @@ $filter_data = sculpture_get_filter_data();
                 <?php echo paginate_links([
                     "total" => $sculptures->max_num_pages,
                     "current" => max(1, get_query_var("paged")),
-                    "prev_text" => "← Previous",
-                    "next_text" => "Next →",
+                    "prev_text" => "← " . $previous_btn_label,
+                    "next_text" => $next_btn_label . " →",
                 ]); ?>
             </div>
         <?php endif; ?>
@@ -123,12 +125,12 @@ $filter_data = sculpture_get_filter_data();
             <svg width="80" height="80" fill="currentColor" viewBox="0 0 16 16">
                 <path d="M6 10.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5zm-2-3a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm-2-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5z"/>
             </svg>
-            <h3>No sculptures found</h3>
-            <p>Try adjusting your filters to see more results</p>
+            <h3><?php echo (get_current_active_language() === 'bg' ? common_translations['bg']['No sculptures found'] : common_translations['en']['Не са намерени скулптури']); ?></h3>
+            <p><?php echo (get_current_active_language() === 'bg' ? common_translations['bg']['Try adjusting your filters to see more results'] : common_translations['en']['Опитайте да коригирате филтрите си, за да видите повече резултати']); ?></p>
             <a href="<?php echo esc_url(
                 get_post_type_archive_link("sculpture"),
             ); ?>" class="btn-clear-filters">
-                Clear All Filters
+                <?php echo (get_current_active_language() === 'bg' ? buttons['bg']['Clear All'] : buttons['en']['Премахни Филтри']); ?>
             </a>
         </div>
         
@@ -142,7 +144,7 @@ $filter_data = sculpture_get_filter_data();
             <svg width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
                 <path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0zm3.5 7.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z"/>
             </svg>
-            Back to Home
+            <?php echo (get_current_active_language() === 'bg' ? buttons['bg']['Back to Home'] : buttons['en']['Към Начална Страница']); ?>
         </a>
     </div>
     
@@ -358,7 +360,7 @@ function sculpture_get_filter_data()
     $data = [
         "materials" => [],
         "min_price" => 0,
-        "max_price" => 10000,
+        "max_price" => 200,
         "min_year" => date("Y") - 50,
         "max_year" => date("Y"),
     ];

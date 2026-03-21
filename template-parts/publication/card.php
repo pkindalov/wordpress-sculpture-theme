@@ -12,6 +12,9 @@ $article_type = get_field("article_type", $publication_id);
 $type_label = publication_get_type_label($article_type);
 $meta = publication_get_meta($publication_id);
 $external_url = get_field("external_url", $publication_id);
+$original_label = get_current_active_language() === 'bg' ? common_translations['bg']['Original'] : common_translations['en']['Източник'];
+$read_more_label = get_current_active_language() === 'bg' ? buttons['bg']['Read More'] : buttons['en']['Прочети Повече'];
+
 ?>
 
 <article class="publication-card publication-type-<?php echo esc_attr(
@@ -55,7 +58,7 @@ $external_url = get_field("external_url", $publication_id);
         <!-- Footer -->
         <div class="card-footer">
             <a href="<?php the_permalink(); ?>" class="read-more">
-                <?php _e("Read More", "sculpture-theme"); ?> →
+                <?php _e($read_more_label, "sculpture-theme"); ?> →
             </a>
             
             <?php if ($external_url): ?>
@@ -65,7 +68,7 @@ $external_url = get_field("external_url", $publication_id);
                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
                     <path d="M12 8.5v3.5a1 1 0 01-1 1H4a1 1 0 01-1-1V5a1 1 0 011-1h3.5M9 3h4m0 0v4m0-4L7 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
                 </svg>
-                <?php _e("Original", "sculpture-theme"); ?>
+                <?php _e($original_label, "sculpture-theme"); ?>
             </a>
             <?php endif; ?>
         </div>

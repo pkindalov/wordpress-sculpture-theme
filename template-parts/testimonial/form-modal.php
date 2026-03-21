@@ -4,6 +4,16 @@
  * 
  * @package Sculpture_Theme
  */
+$share_experience_label =  get_current_active_language() === 'bg' ? buttons['bg']['Share Your Experience'] : buttons['en']['Напишете отзив'];
+$modal_subtitle_label = get_current_active_language() === 'bg' ? common_translations['bg']['Your feedback helps us improve and helps others make informed decisions'] : common_translations['en']['Вашата обратна връзка ни помага да се усъвършенстваме и да помагаме на другите да вземат информирани решения'];
+$your_name_label = get_current_active_language() === 'bg' ? common_translations['bg']['Your Name'] : common_translations['en']['Име'];
+$your_email_label = get_current_active_language() === 'bg' ? common_translations['bg']['Email Address'] : common_translations['en']['Имейл адрес'];
+$display_information_label = get_current_active_language() === 'bg' ? common_translations['bg']['Will not be displayed publicly'] : common_translations['en']['Няма да бъде показано публично'];
+$company_position_label = get_current_active_language() === 'bg' ? common_translations['bg']['Company / Position'] : common_translations['en']['Компания / Длъжност'];
+$company_position_example_label = get_current_active_language() === 'bg' ? common_translations['bg']['CEO at Company Name'] : common_translations['en']['Главен изпълнителен директор на компанията'];
+$rating_label = get_current_active_language() === 'bg' ? common_translations['bg']['Rating'] : common_translations['en']['Оценка'];
+$testimonial_msg_label = get_current_active_language() === 'bg' ? common_translations['bg']['Your Testimonial'] : common_translations['en']['Отзив'];
+$displate_rating_public_label =  get_current_active_language() === 'bg' ? common_translations['bg']['Display my rating publicly'] : common_translations['en']['Покажи оценката ми публично'];
 ?>
 
 <!-- Modal Overlay -->
@@ -19,11 +29,11 @@
             
             <header class="modal-header">
                 <h2 class="modal-title"><?php _e(
-                    "Share Your Experience",
+                    $share_experience_label,
                     "sculpture-theme",
                 ); ?></h2>
                 <p class="modal-subtitle"><?php _e(
-                    "Your feedback helps us improve and helps others make informed decisions.",
+                    $modal_subtitle_label,
                     "sculpture-theme",
                 ); ?></p>
             </header>
@@ -40,7 +50,7 @@
                 <div class="form-group">
                     <label for="testimonial-name">
                         <?php _e(
-                            "Your Name",
+                            $your_name_label,
                             "sculpture-theme",
                         ); ?> <span class="required">*</span>
                     </label>
@@ -49,7 +59,7 @@
                         id="testimonial-name" 
                         name="client_name" 
                         required 
-                        placeholder="John Smith"
+                        placeholder="<?php echo $your_name_label; ?>"
                     >
                 </div>
                 
@@ -57,7 +67,7 @@
                 <div class="form-group">
                     <label for="testimonial-email">
                         <?php _e(
-                            "Email Address",
+                            $your_email_label,
                             "sculpture-theme",
                         ); ?> <span class="required">*</span>
                     </label>
@@ -66,10 +76,10 @@
                         id="testimonial-email" 
                         name="client_email" 
                         required 
-                        placeholder="john@example.com"
+                        placeholder="<?php echo $your_email_label; ?>"
                     >
                     <small class="form-help"><?php _e(
-                        "Will not be displayed publicly",
+                        $display_information_label,
                         "sculpture-theme",
                     ); ?></small>
                 </div>
@@ -77,13 +87,13 @@
                 <!-- Company/Position -->
                 <div class="form-group">
                     <label for="testimonial-company">
-                        <?php _e("Company / Position", "sculpture-theme"); ?>
+                        <?php _e($company_position_label, "sculpture-theme"); ?>
                     </label>
                     <input 
                         type="text" 
                         id="testimonial-company" 
                         name="client_company" 
-                        placeholder="CEO at Company Name"
+                        placeholder="<?php echo $company_position_example_label; ?>"
                     >
                 </div>
                 
@@ -91,7 +101,7 @@
                 <div class="form-group">
                     <label for="testimonial-rating">
                         <?php _e(
-                            "Rating",
+                            $rating_label,
                             "sculpture-theme",
                         ); ?> <span class="required">*</span>
                     </label>
@@ -108,7 +118,7 @@
                 <div class="form-group">
                     <label for="testimonial-message">
                         <?php _e(
-                            "Your Testimonial",
+                            $testimonial_msg_label,
                             "sculpture-theme",
                         ); ?> <span class="required">*</span>
                     </label>
@@ -117,7 +127,7 @@
                         name="message" 
                         rows="5" 
                         required
-                        placeholder="Share your experience..."
+                        placeholder="<?php echo $share_experience_label; ?>..."
                     ></textarea>
                 </div>
                 
@@ -126,7 +136,7 @@
                     <label>
                         <input type="checkbox" name="show_rating" value="1" checked>
                         <span><?php _e(
-                            "Display my rating publicly",
+                            $displate_rating_public_label,
                             "sculpture-theme",
                         ); ?></span>
                     </label>

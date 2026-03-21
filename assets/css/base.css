@@ -11,7 +11,8 @@
     --color-cream:   #FFFCE6;
     --color-red:     #C0392B;
 
-    --font-main: Arial, Helvetica, sans-serif;
+    /*--font-main: Arial, Helvetica, sans-serif;*/
+    --font-main: Inter, Helvetica, sans-serif;
 
     --max-width: 1800px;
     --transition: all 0.3s;

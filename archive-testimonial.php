@@ -21,6 +21,15 @@ $args = [
 ];
 
 $testimonials_query = new WP_Query($args);
+$back_to_home_btn_label = get_current_active_language() === 'bg' ? buttons['bg']['Back to Home'] : buttons['en']['Към Начална Страница'];
+$client_testimonials_label = get_current_active_language() === 'bg' ? common_translations['bg']['Client Testimonials'] : common_translations['en']['Отзиви на клиенти'];
+$client_testimonials_subhead = get_current_active_language() === 'bg' ? common_translations['bg']['What our clients say about working with us'] : common_translations['en']['Какво казват нашите клиенти за работата с нас'];
+$share_experience_btn_label = get_current_active_language() === 'bg' ? buttons['bg']['Share Your Experience'] : buttons['en']['Напишете отзив'];
+$previous_btn_label = get_current_active_language() === 'bg' ? buttons['bg']['Previous'] : buttons['en']['Предишна'];
+$next_btn_label = get_current_active_language() === 'bg' ? buttons['bg']['Next'] : buttons['en']['Следваща'];
+$no_testimonials_label = get_current_active_language() === 'bg' ? common_translations['bg']['No testimonials yet. Be the first to share your experience'] : common_translations['en']['Все още няма отзиви. Бъдете първият, който ще сподели своя опит'];
+$leave_review_btn_label = get_current_active_language() === 'bg' ? buttons['bg']['Leave a Review'] : buttons['en']['Оставете отзив'];
+
 ?>
 
 <div class="testimonials-archive-container">
@@ -30,14 +39,14 @@ $testimonials_query = new WP_Query($args);
             <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
                 <path d="M12.5 15l-5-5 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
-            <?php _e("Back to Home", "sculpture-theme"); ?>
+            <?php _e($back_to_home_btn_label, "sculpture-theme"); ?>
         </a>
         <h1 class="archive-title"><?php _e(
-            "Client Testimonials",
+            $client_testimonials_label,
             "sculpture-theme",
         ); ?></h1>
         <p class="archive-subtitle"><?php _e(
-            "What our clients say about working with us",
+            $client_testimonials_subhead,
             "sculpture-theme",
         ); ?></p>
     </header>
@@ -48,7 +57,7 @@ $testimonials_query = new WP_Query($args);
             <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
                 <path d="M10 1l2.5 6.5L19 8l-5 4.5L15.5 19 10 15l-5.5 4L6 12.5 1 8l6.5-.5z"/>
             </svg>
-            <?php _e("Share Your Experience", "sculpture-theme"); ?>
+            <?php _e($share_experience_btn_label, "sculpture-theme"); ?>
         </button>
     </div>
     
@@ -74,7 +83,7 @@ $testimonials_query = new WP_Query($args);
                         <a href="<?php echo remove_query_arg(
                             "pg",
                         ); ?>" class="pagination-nav">
-                            ← <?php _e("Previous", "sculpture-theme"); ?>
+                            ← <?php _e($previous_btn_label, "sculpture-theme"); ?>
                         </a>
                     <?php endif; ?>
                     
@@ -102,7 +111,7 @@ $testimonials_query = new WP_Query($args);
                             "pg",
                             $paged + 1,
                         ); ?>" class="pagination-nav">
-                            <?php _e("Next", "sculpture-theme"); ?> →
+                            <?php _e($next_btn_label, "sculpture-theme"); ?> →
                         </a>
                     <?php endif; ?>
                     
@@ -118,11 +127,11 @@ $testimonials_query = new WP_Query($args);
                     <path d="M20 28c0-2.21 1.79-4 4-4s4 1.79 4 4M36 28c0-2.21 1.79-4 4-4s4 1.79 4 4M22 40c2.5 3 6 4 10 4s7.5-1 10-4"/>
                 </svg>
                 <p><?php _e(
-                    "No testimonials yet. Be the first to share your experience!",
+                    $no_testimonials_label,
                     "sculpture-theme",
                 ); ?></p>
                 <button class="testimonial-trigger cta-button">
-                    <?php _e("Leave a Review", "sculpture-theme"); ?>
+                    <?php _e($leave_review_btn_label, "sculpture-theme"); ?>
                 </button>
             </div>
         

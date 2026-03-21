@@ -10,6 +10,7 @@
 
 $filters = isset($args["filters"]) ? $args["filters"] : [];
 $filter_data = isset($args["filter_data"]) ? $args["filter_data"] : [];
+$currency = get_field('currency');
 ?>
 
 <div class="sculpture-filters-modern">
@@ -25,9 +26,7 @@ $filter_data = isset($args["filter_data"]) ? $args["filter_data"] : [];
                 <svg class="search-icon" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
                     <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
                 </svg>
-                <input type="text" name="search_query" placeholder="Search sculptures..." value="<?php echo esc_attr(
-                    $filters["search"],
-                ); ?>" class="search-input-modern">
+                <input type="text" name="search_query" placeholder="<?php echo (get_current_active_language() === 'bg' ? filters_translations['bg']['Search...'] : filters_translations['en']['Търси...']); ?>" class="search-input-modern">
             </div>
             
             <!-- Sort -->
@@ -36,23 +35,23 @@ $filter_data = isset($args["filter_data"]) ? $args["filter_data"] : [];
                     <option value="date" <?php selected(
                         $filters["orderby"],
                         "date",
-                    ); ?>>Latest</option>
+                    ); ?>><?php echo (get_current_active_language() === 'bg' ? filters_translations['bg']['Latest'] : filters_translations['en']['Най-Нови']); ?></option>
                     <option value="title" <?php selected(
                         $filters["orderby"],
                         "title",
-                    ); ?>>A-Z</option>
+                    ); ?>><?php echo (get_current_active_language() === 'bg' ? filters_translations['bg']['A-Z'] : filters_translations['en']['А-Я']); ?></option>
                     <option value="year" <?php selected(
                         $filters["orderby"],
                         "year",
-                    ); ?>>Newest Year</option>
+                    ); ?>><?php echo (get_current_active_language() === 'bg' ? filters_translations['bg']['Newest (by Year)'] : filters_translations['en']['Най-Нови (По година)']); ?></option>
                     <option value="price_low" <?php selected(
                         $filters["orderby"],
                         "price_low",
-                    ); ?>>Price: Low</option>
+                    ); ?>><?php echo (get_current_active_language() === 'bg' ? filters_translations['bg']['Price: Low'] : filters_translations['en']['Цена: Възходяща']); ?></option>
                     <option value="price_high" <?php selected(
                         $filters["orderby"],
                         "price_high",
-                    ); ?>>Price: High</option>
+                    ); ?>><?php echo (get_current_active_language() === 'bg' ? filters_translations['bg']['Price: High'] : filters_translations['en']['Цена: Нисходяща']); ?></option>
                 </select>
             </div>
             
@@ -65,7 +64,7 @@ $filter_data = isset($args["filter_data"]) ? $args["filter_data"] : [];
                     ); ?> onchange="this.form.submit()">
                     <span class="toggle-slider"></span>
                 </label>
-                <span class="toggle-label">Featured</span>
+                <span class="toggle-label"><?php echo (get_current_active_language() === 'bg' ? filters_translations['bg']['Featured'] : filters_translations['en']['На Фокус']); ?></span>
             </div>
 
             <!-- On Promotion Toggle -->
@@ -76,7 +75,7 @@ $filter_data = isset($args["filter_data"]) ? $args["filter_data"] : [];
                        onchange="this.form.submit()">
                 <span class="toggle-slider toggle-slider-promo"></span>
             </label>
-            <span class="toggle-label toggle-label-promo">On Promotion</span>
+            <span class="toggle-label toggle-label-promo"><?php echo (get_current_active_language() === 'bg' ? filters_translations['bg']['On Promotion'] : filters_translations['en']['На Промоция']); ?></span>
         </div>
             
             <!-- Advanced Toggle -->
@@ -84,7 +83,7 @@ $filter_data = isset($args["filter_data"]) ? $args["filter_data"] : [];
                 <svg width="18" height="18" fill="currentColor" viewBox="0 0 16 16">
                     <path d="M6 10.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5zm-2-3a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm-2-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5z"/>
                 </svg>
-                <span>Advanced Filters</span>
+                <span><?php echo (get_current_active_language() === 'bg' ? filters_translations['bg']['Advanced Filters'] : filters_translations['en']['Повече Филтри']); ?></span>
                 <svg class="chevron" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
                     <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
                 </svg>
@@ -98,9 +97,9 @@ $filter_data = isset($args["filter_data"]) ? $args["filter_data"] : [];
             <div class="filters-dropdowns-row">
                 <!-- Availability Dropdown (Dynamic from ACF) -->
 <div class="filter-dropdown-group">
-    <label class="filter-dropdown-label">Availability:</label>
+    <label class="filter-dropdown-label"><?php echo (get_current_active_language() === 'bg' ? filters_translations['bg']['Availability'] : filters_translations['en']['Наличност']); ?>:</label>
     <select name="availability" class="filter-dropdown-select">
-        <option value="">All Sculptures</option>
+        <option value=""><?php echo (get_current_active_language() === 'bg' ? filters_translations['bg']['All Sculptures'] : filters_translations['en']['Всички Скулптури']); ?></option>
         <?php
         // Get choices dynamically from ACF field
         $availability_choices = sculpture_get_acf_choices("availability");
@@ -116,6 +115,13 @@ $filter_data = isset($args["filter_data"]) ? $args["filter_data"] : [];
             }
         } else {
             // Fallback if ACF field not found
+
+            if(get_current_active_language() === "bg") {
+                echo '<option value="available">' . availability_translations['bg']['available'] . '</option>';
+                echo '<option value="sold">' . availability_translations['bg']['sold'] . '</option>';
+                echo '<option value="reserved">' . availability_translations['bg']['reserved'] .'</option>';
+                return;
+            } 
             echo '<option value="available">Available</option>';
             echo '<option value="sold">Sold</option>';
             echo '<option value="reserved">Reserved</option>';
@@ -126,9 +132,9 @@ $filter_data = isset($args["filter_data"]) ? $args["filter_data"] : [];
                 
                 <!-- Materials Dropdown (Dynamic from ACF) -->
 <div class="filter-dropdown-group">
-    <label class="filter-dropdown-label">Material:</label>
+    <label class="filter-dropdown-label"><?php echo (get_current_active_language() === 'bg' ? filters_translations['bg']['Material'] : filters_translations['en']['Материал']); ?>:</label>
     <select name="materials" class="filter-dropdown-select">
-        <option value="">All Materials</option>
+        <option value=""><?php echo (get_current_active_language() === 'bg' ? filters_translations['bg']['All Materials'] : filters_translations['en']['Всички Материали']); ?></option>
         <?php
         // Get choices dynamically from ACF field
         $material_choices = sculpture_get_acf_choices("materials");
@@ -166,11 +172,11 @@ $filter_data = isset($args["filter_data"]) ? $args["filter_data"] : [];
             <div class="filters-sliders-row">
                 <div class="slider-group">
                     <div class="slider-header">
-                        <span class="slider-label">Price Range</span>
+                        <span class="slider-label"><?php echo (get_current_active_language() === 'bg' ? filters_translations['bg']['Price Range'] : filters_translations['en']['Ценови Диапазон']); ?></span>
                         <span class="slider-value" id="priceValue">
-                            €<?php echo $filters["price_min"] ?:
+                            <?php echo $currency; ?><?php echo $filters["price_min"] ?:
                                 $filter_data["min_price"]; ?> - 
-                            €<?php echo $filters["price_max"] ?:
+                            <?php echo $currency; ?><?php echo $filters["price_max"] ?:
                                 $filter_data["max_price"]; ?>
                         </span>
                     </div>
@@ -206,7 +212,7 @@ $filter_data = isset($args["filter_data"]) ? $args["filter_data"] : [];
                 
                 <div class="slider-group">
                     <div class="slider-header">
-                        <span class="slider-label">Year Range</span>
+                        <span class="slider-label"><?php echo (get_current_active_language() === 'bg' ? filters_translations['bg']['Year Range'] : filters_translations['en']['Годишен Диапазон']); ?></span>
                         <span class="slider-value" id="yearValue">
                             <?php echo $filters["year_min"] ?:
                                 $filter_data["min_year"]; ?> - 
@@ -251,7 +257,7 @@ $filter_data = isset($args["filter_data"]) ? $args["filter_data"] : [];
                     <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
                         <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z"/>
                     </svg>
-                    Apply Filters
+                    <?php echo (get_current_active_language() === 'bg' ? buttons['bg']['Apply Filters'] : buttons['en']['Приложи Филтри']); ?>
                 </button>
                 <a href="<?php echo esc_url(
                     get_post_type_archive_link("sculpture"),
@@ -259,7 +265,7 @@ $filter_data = isset($args["filter_data"]) ? $args["filter_data"] : [];
                     <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
                         <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
                     </svg>
-                    Clear All
+                    <?php echo (get_current_active_language() === 'bg' ? buttons['bg']['Clear All'] : buttons['en']['Премахни Филтри']); ?>
                 </a>
             </div>
         </div>
@@ -299,11 +305,12 @@ document.addEventListener('DOMContentLoaded', function() {
     const priceRange = document.getElementById('priceRange');
     
     function updatePrice() {
+        const currencySign = "<?php echo $currency; ?>";
         if (!priceMin || !priceMax) return;
         const min = parseInt(priceMin.value);
         const max = parseInt(priceMax.value);
         if (min > max) { priceMin.value = max; return; }
-        priceValue.textContent = '€' + min.toLocaleString() + ' - €' + max.toLocaleString();
+        priceValue.textContent = currencySign + min.toLocaleString() + ' - ' + currencySign + max.toLocaleString();
         const pMin = ((min - priceMin.min) / (priceMin.max - priceMin.min)) * 100;
         const pMax = ((max - priceMax.min) / (priceMax.max - priceMax.min)) * 100;
         priceRange.style.left = pMin + '%';

@@ -10,7 +10,16 @@ get_header();
 
 $paged = isset($_GET["pg"]) ? intval($_GET["pg"]) : 1;
 $active_tab = isset($_GET["type"]) ? sanitize_text_field($_GET["type"]) : "all";
-$per_page = 4; // 9 cards (3x3 grid)
+$per_page = 15; // 9 cards (3x3 grid)
+
+$back_btn_label = get_current_active_language() === 'bg' ? buttons['bg']['Back to Home'] : buttons['en']['Към Начална Страница'];
+$publications_label = get_current_active_language() === 'bg' ? common_translations['bg']['Publications'] : common_translations['en']['Публикации'];
+$all_tab_label = get_current_active_language() === 'bg' ? common_translations['bg']['All'] : common_translations['en']['Всички'];
+$written_by_me_label = get_current_active_language() === 'bg' ? common_translations['bg']['Written by me'] : common_translations['en']['Написани от мен'];
+$written_from_me_label = get_current_active_language() === 'bg' ? common_translations['bg']['Written about me'] : common_translations['en']['Написани за мен'];
+$previous_btn_label = get_current_active_language() === 'bg' ? buttons['bg']['Previous'] : buttons['en']['Предишна'];
+$next_btn_label = get_current_active_language() === 'bg' ? buttons['bg']['Next'] : buttons['en']['Следваща'];
+$no_publications_found_label = get_current_active_language() === 'bg' ? common_translations['bg']['No publications found'] : common_translations['en']['Не са намерени публикации'];
 
 // Build query args
 $args = [
@@ -43,10 +52,10 @@ $publications_query = new WP_Query($args);
             <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
                 <path d="M12.5 15l-5-5 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
-            <?php _e("Back to Home", "sculpture-theme"); ?>
+            <?php _e($back_btn_label, "sculpture-theme"); ?>
         </a>
         <h1 class="archive-title"><?php _e(
-            "Publications",
+            $publications_label,
             "sculpture-theme",
         ); ?></h1>
     </header>
@@ -55,7 +64,7 @@ $publications_query = new WP_Query($args);
     <nav class="publications-tabs">
         <a href="<?php echo remove_query_arg(["type", "pg"]); ?>" 
            class="tab <?php echo $active_tab === "all" ? "active" : ""; ?>">
-            <?php _e("All", "sculpture-theme"); ?>
+            <?php _e($all_tab_label, "sculpture-theme"); ?>
         </a>
         <a href="<?php echo add_query_arg(
             "type",
@@ -63,7 +72,7 @@ $publications_query = new WP_Query($args);
             remove_query_arg("pg"),
         ); ?>" 
            class="tab <?php echo $active_tab === "by_me" ? "active" : ""; ?>">
-            <?php _e("Written by me", "sculpture-theme"); ?>
+            <?php _e($written_by_me_label, "sculpture-theme"); ?>
         </a>
         <a href="<?php echo add_query_arg(
             "type",
@@ -73,7 +82,7 @@ $publications_query = new WP_Query($args);
            class="tab <?php echo $active_tab === "about_me"
                ? "active"
                : ""; ?>">
-            <?php _e("Written about me", "sculpture-theme"); ?>
+            <?php _e($written_from_me_label, "sculpture-theme"); ?>
         </a>
     </nav>
     
@@ -99,7 +108,7 @@ $publications_query = new WP_Query($args);
                         <a href="<?php echo remove_query_arg(
                             "pg",
                         ); ?>" class="pagination-nav">
-                            ← <?php _e("Previous", "sculpture-theme"); ?>
+                            ← <?php _e($previous_btn_label, "sculpture-theme"); ?>
                         </a>
                     <?php endif; ?>
                     
@@ -127,7 +136,7 @@ $publications_query = new WP_Query($args);
                             "pg",
                             $paged + 1,
                         ); ?>" class="pagination-nav">
-                            <?php _e("Next", "sculpture-theme"); ?> →
+                            <?php _e($next_btn_label, "sculpture-theme"); ?> →
                         </a>
                     <?php endif; ?>
                     
@@ -138,7 +147,7 @@ $publications_query = new WP_Query($args);
         <?php else: ?>
         
             <div class="no-publications">
-                <p><?php _e("No publications found.", "sculpture-theme"); ?></p>
+                <p><?php _e($no_publications_found_label, "sculpture-theme"); ?></p>
             </div>
         
         <?php endif; ?>

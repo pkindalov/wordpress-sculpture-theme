@@ -11,6 +11,428 @@ if (!defined("ABSPATH")) {
     exit();
 }
 
+//function which return the currently active language set on the page. - bg or en
+function get_current_active_language() {
+    $default_lang = 'bg';
+    return function_exists('pll_current_language') ? mb_strtolower(pll_current_language()) : $default_lang;
+}
+
+
+/**
+ * Translate material field
+ */
+function sculpture_translate_material($material) {
+    $material_lowercase = $material ? mb_strtolower($material) : 'brass'; 
+    if (get_current_active_language() === 'bg') {
+        $translations = array(
+            'bronze' => 'Бронз',
+            'marble' => 'Мрамор',
+            'stone' => 'Камък',
+            'wood' => 'Дърво',
+            'clay' => 'Глина',
+            'metal' => 'Метал',
+            'glass' => 'Стъкло',
+            'resin' => 'Смола',
+            'mixed media' => 'Смесена техника',
+            'ceramic' => 'Керамика',
+            'brass' => 'Месинг',
+        );
+        return isset($translations[$material_lowercase]) ? $translations[$material_lowercase] : $material_lowercase;
+    }
+    return $material;
+}
+
+
+const material_translations = [
+                "bg" => [
+                    'brass' => 'Месинг',
+                    'bronze' => 'Бронз',
+                    'marble' => 'Мрамор',
+                    'stone' => 'Камък',
+                    'wood' => 'Дърво',
+                    'clay' => 'Глина',
+                    'metal' => 'Метал',
+                    'glass' => 'Стъкло',
+                    'resin' => 'Смола',
+                    'mixed media' => 'Смесена техника',
+                    'ceramic' => 'Керамика',
+                ],
+                "en" => [
+                    'месинг' => 'Brass',
+                    'бронз' => 'Bronze',
+                    'мрамор' => 'Marble',
+                    'камък' => 'Stone',
+                    'дърво' => 'Wood',
+                    'глина' => 'Clay',
+                    'метал' => 'Metal',
+                    'стъкло' => 'Glass',
+                    'смола' => 'Resin',
+                    'смесена техника' => 'Mixed media',
+                    'керамика' => 'Ceramic',
+                ]
+];
+
+const availability_translations = [
+                "bg" => [
+                    'available' => 'Налично',
+                    'sold' => 'Продадено',
+                    'reserved' => 'Резервирано',
+                    'exhibition' => 'На изложба',
+                    'commissioned' => 'Поръчано',
+                    'collection' => 'Частна колекция',
+                ],
+                "en" => [
+                    'налично' => 'Available',
+                    'продадено' => 'Sold',
+                    'резервирано' => 'Reserved',
+                    'на изложба' => 'On Exhibition',
+                    'поръчано' => 'Commissioned',
+                    'частна колекция' => 'Private Collection',
+                ]
+]; 
+
+const product_mode_translations = [
+                "bg" => [
+                    'featured' => 'На Фокус',
+                    'promoted' => 'Промоция',
+                    'ends' => 'Свършва'
+                ],
+                "en" => [
+                    'На Фокус' => 'featured',
+                    'Промоция' => 'promoted',
+                    'Свършва' => 'Ends'
+                ]
+];
+
+const product_data_translations = [
+            "bg" => [
+                "year" => "година",
+                "materials" => "материали",
+                "dimensions" => "размери",
+                "price" => "цена",
+                "availability" => "наличност"
+            ],
+            "en" => [
+                "година" => "year",
+                "материали" => "materials",
+                "размери" => "dimensions",
+                "цена" => "price",
+                "наличност" => "availability"
+            ]
+];
+
+const common_translations = [
+    "bg" => [
+        "About This Work" =>    "За Творбата",
+        "Sculpture Gallery" => "Галерия Със Скулптури",
+        "Explore our collection of original artworks" => "Разгледайте нашата колекция от оригинални произведения на изкуството",
+        "sculptures found" => "намерени скулптури",
+        "No sculptures found" => "Не са намерени скулптури",
+        "Try adjusting your filters to see more results" => "Опитайте да коригирате филтрите си, за да видите повече резултати",
+        "Interested in a Commission?" => "Интересувате ли се от изработка по поръчка?",
+        "Let's create something unique together. Contact us to discuss your vision" => "Нека създадем нещо уникално заедно. Свържете се с нас, за да обсъдим вашата идея.",
+        "Exhibitions" => "Изложби",
+        "No exhibitions found." => "Не са намерени изложби.",
+        "Original" => "Източник",
+        "Publications" => "Публикации",
+        "All" => "Всички",
+        "Written by me" => "Написани от мен",
+        "Written about me" => "Написани за мен",
+        "Selected Works" => "Избрани произведения",
+        "Discover our latest sculptures" => "Разгледайте най-новите ни скулптури",
+        "Special Offers" => "Специални Оферти",
+        "Limited time prices on selected original sculptures" => "Промоционални цени за ограничено време на избрани оригинални скулптури",
+        "Author" => "Автор",
+        "Thank you! Your testimonial has been submitted and is pending review" => "Благодаря! Вашият отзив е изпратен и е в процес на преглед",
+        "What Our Clients Say" => "Отзиви от наши клиенти",
+        "Your feedback helps us improve and helps others make informed decisions" => "Вашата обратна връзка ни помага да се усъвършенстваме и да помагаме на другите да вземат информирани решения",
+        "Your Name" => "Име",
+        "Email Address" => "Имейл адрес",
+        "Will not be displayed publicly" => "Няма да бъде показано публично",
+        "Company / Position" => "Компания / Длъжност",
+        "CEO at Company Name" => "Главен изпълнителен директор на компанията",
+        "Rating" => "Оценка",
+        "Your Testimonial" => "Отзив",
+        "Display my rating publicly" => "Покажи оценката ми публично",
+        "No publications found" => "Не са намерени публикации",
+        "Client Testimonials" => "Отзиви на клиенти",
+        "What our clients say about working with us" => "Какво казват нашите клиенти за работата с нас",
+        "No testimonials yet. Be the first to share your experience" => "Все още няма отзиви. Бъдете първият, който ще сподели своя опит",
+        "About the Artist" => "За скулптора",
+        "Contemporary sculptor working with bronze, stone, and mixed media. Creating unique pieces that explore the intersection of form and emotion" => "Съвременен скулптор, работещ с бронз, камък и смесена техника. Създава уникални произведения, които изследват пресечната точка на формата и емоцията",
+        "Explore" => "Разгледайте",
+        "Get in Touch" => "Свържете се с нас",
+        "Pazardzhik, Bulgaria" => "Пазарджик, България",
+        "Unique Bronze Sculptures by Dr. Stan" => "Уникални бронзови скулптури от Станимир Куюмджиев",
+        "All rights reserved" => "Всички права запазени",
+        "Privacy Policy" => "Политика за поверителност",
+        "Terms of Use" => "Условия за ползване"
+    ] ,
+    "en" => [
+        "За Творбата" => "About This Work",
+        "Галерия Със Скулптури" => "Sculpture Gallery",
+        "Разгледайте нашата колекция от оригинални произведения на изкуството" => "Explore our collection of original artworks",
+        "намерени скулптури" => "sculptures found",
+        "Не са намерени скулптури" => "No sculptures found",
+        "Опитайте да коригирате филтрите си, за да видите повече резултати" => "Try adjusting your filters to see more results",
+        "Интересувате ли се от изработка по поръчка?" => "Interested in a Commission?",
+        "Нека създадем нещо уникално заедно. Свържете се с нас, за да обсъдим вашата идея." => "Let's create something unique together. Contact us to discuss your vision",
+        "Изложби" => "Exhibitions",
+        "Не са намерени изложби." => "No exhibitions found.",
+        "Източник" => "Original",
+        "Публикации" => "Publications",
+        "Всички" => "All",
+        "Написани от мен" => "Written by me",
+        "Написани за мен" => "Written about me",
+        "Избрани произведения" => "Selected Works",
+        "Разгледайте най-новите ни скулптури" => "Discover our latest sculptures",
+        "Специални Оферти" => "Special Offers",
+        "Промоционални цени за ограничено време на избрани оригинални скулптури" => "Limited time prices on selected original sculptures",
+        "Автор" => "Author",
+        "Благодаря! Вашият отзив е изпратен и е в процес на преглед" => "Thank you! Your testimonial has been submitted and is pending review",
+        "Отзиви от наши клиенти" => "What Our Clients Say",
+        "Вашата обратна връзка ни помага да се усъвършенстваме и да помагаме на другите да вземат информирани решения" => "Your feedback helps us improve and helps others make informed decisions",
+        "Име" => "Your Name",
+        "Имейл адрес" => "Email Address",
+        "Няма да бъде показано публично" => "Will not be displayed publicly",
+        "Компания / Длъжност" => "Company / Position",
+        "Главен изпълнителен директор на компанията" => "CEO at Company Name",
+        "Оценка" => "Rating",
+        "Отзив" => "Your Testimonial",
+        "Покажи оценката ми публично" => "Display my rating publicly",
+        "Не са намерени публикации" => "No publications found",
+        "Отзиви на клиенти" => "Client Testimonials",
+        "Какво казват нашите клиенти за работата с нас" => "What our clients say about working with us",
+        "Все още няма отзиви. Бъдете първият, който ще сподели своя опит" => "No testimonials yet. Be the first to share your experience",
+        "За скулптора" => "About the Artist",
+        "Съвременен скулптор, работещ с бронз, камък и смесена техника. Създава уникални произведения, които изследват пресечната точка на формата и емоцията" => "Contemporary sculptor working with bronze, stone, and mixed media. Creating unique pieces that explore the intersection of form and emotion",
+        "Разгледайте" => "Explore",
+        "Свържете се с нас" => "Get in Touch",
+        "Пазарджик, България" => "Pazardzhik, Bulgaria",
+        "Уникални бронзови скулптури от Станимир Куюмджиев" => "Unique Bronze Sculptures by Dr. Stan",
+        "Всички права запазени" => "All rights reserved",
+        "Политика за поверителност" => "Privacy Policy",
+        "Условия за ползване" => "Terms of Use"
+    ]
+];
+
+const exhibition_translations = [
+    "bg" => [
+        "Current" => "Актуална",
+        "Upcoming" => "Предстояща",
+        "Past" => "Минала"
+    ],
+    "en" => [
+        "Актуална" => "Current",
+        "Предстояща" => "Upcoming",
+        "Минала" => "Past"
+    ]
+];
+
+const filters_translations = [
+    "bg" => [
+         "Search..."  => "Търси...",
+        "Latest" => "Най-Нови",
+        "A-Z" => "А-Я",
+        "Newest (by Year)" => "Най-Нови (По година)",
+        "Price: Low" => "Цена: Възходяща",
+        "Price: High" => "Цена: Нисходяща",
+        "Featured" => "На Фокус",
+        "On Promotion" => "На Промоция",
+        "Advanced Filters" => "Повече Филтри",
+        "Availability" => "Наличност",
+        "All Sculptures" => "Всички Скулптури",
+        "Material" => "Материал",
+        "All Materials" => "Всички Материали",
+        "Price Range" => "Ценови Диапазон",
+        "Year Range" => "Годишен Диапазон"
+    ],
+    "en" => [
+        "Търси..."  => "Search...",
+        "Най-Нови" => "Latest",
+        "А-Я" => "A-Z",
+        "Най-Нови (По година)" => "Newest (by Year)",
+        "Цена: Възходяща" => "Price: Low",
+        "Цена: Нисходяща" => "Price: High",
+        "На Фокус" => "Featured",
+        "На Промоция" => "On Promotion",
+        "Повече Филтри" => "Advanced Filters",
+        "Наличност" => "Availability",
+        "Всички Скулптури"=> "All Sculptures",
+        "Материал" => "Material",
+        "Всички Материали" => "All Materials",
+        "Ценови Диапазон" => "Price Range",
+        "Годишен Диапазон" => "Year Range"
+    ]
+];
+
+const buttons = [
+    "bg" => [
+        "Back To Gallery" => "Към Галерията",
+        "Apply Filters" => "Приложи Филтри",
+        "Clear All" => "Премахни Филтри",
+        "Back to Home" => "Към Начална Страница",
+        "Get in Touch" => "Свържете се с нас",
+        "Previous" => "Предишна",
+        "Next" => "Следваща",
+        "Read More" => "Прочети Повече",
+        "View All Sculptures" => "Виж всички скулптури",
+        "View All Offers" => "Виж всички оферти",
+        "View All Exhibitions" => "Виж всички изложби",
+        "View All Publications" => "Виж всички публикации",
+        "View All Testimonials" => "Виж всички отзиви",
+        "Share Your Experience" => "Напишете отзив",
+        "Leave a Review" => "Оставете отзив"
+    ],
+    "en" => [
+        "Към Галерията" => "Back To Gallery",
+        "Приложи Филтри" => "Apply Filters",
+        "Премахни Филтри" => "Clear All",
+        "Към Начална Страница" => "Back to Home",
+        "Свържете се с нас" => "Get in Touch",
+        "Предишна" => "Previous",
+        "Следваща" => "Next",
+        "Прочети Повече" => "Read More",
+        "Виж всички скулптури" => "View All Sculptures",
+        "Виж всички оферти" => "View All Offers",
+        "Виж всички изложби" => "View All Exhibitions",
+        "Виж всички публикации" => "View All Publications",
+        "Виж всички отзиви" => "View All Testimonials",
+        "Напишете отзив" => "Share Your Experience",
+        "Оставете отзив" => "Leave a Review"
+    ]
+]; 
+
+const errors_translations = [
+    "bg" => [
+        "Security check failed. Please refresh the page and try again" => "Проверката за сигурност не бе успешна. Моля, обновете страницата и опитайте отново",
+        "Name is required" => "Името е задължително",
+        "Valid email is required" => "Изисква се валиден имейл адрес",
+        "Rating must be between 1 and 5" => "Оценката трябва да е между 1 и 5",
+        "Message is required" => "Съобщението е задължително",
+        "Failed to submit testimonial. Please try again" => "Изпращането на отзив не бе успешно. Моля, опитайте отново"
+    ],
+    "en" => [
+        "Проверката за сигурност не бе успешна. Моля, обновете страницата и опитайте отново" => "Security check failed. Please refresh the page and try again",
+        "Името е задължително" => "Name is required",
+        "Изисква се валиден имейл адрес" => "Valid email is required",
+        "Оценката трябва да е между 1 и 5" => "Rating must be between 1 and 5",
+        "Съобщението е задължително" => "Message is required",
+        "Изпращането на отзив не бе успешно. Моля, опитайте отново" => "Failed to submit testimonial. Please try again"
+    ]
+];
+
+const navigation_menus_translation = [
+    "bg" => [
+        "Home" => "Начало",
+        "Gallery" => "Галерия",
+        "About" => "За скулптора",
+        "Exhibitions" => "Изложби",
+        "Contact" => "Контакт"
+    ],
+    "en" => [
+        "Начало" => "Home",
+        "Галерия" => "Gallery",
+        "За скулптора" => "About",
+        "Изложби" => "Exhibitions",
+        "Контакт" => "Contact"
+    ]
+];         
+
+function translate_on_active_lang($type = "material",  $word = "") { 
+    $lang = function_exists('get_current_active_language') ? get_current_active_language() : "bg";
+    $translated_word = '';
+    switch($type) {
+        case 'material':
+            $translated_word = isset(material_translations[$lang][mb_strtolower($word)]) ? material_translations[$lang][mb_strtolower($word)] : $word;
+        break;
+        case 'availability':
+            $translated_word = isset(availability_translations[$lang][mb_strtolower($word)]) ? availability_translations[$lang][mb_strtolower($word)] : $word;    
+        break;
+        case 'product_mode':
+            $translated_word = isset(product_mode_translations[$lang][mb_strtolower($word)]) ? product_mode_translations[$lang][mb_strtolower($word)] : $word;    
+        break;
+        case 'product_data':
+            $translated_word = isset(product_data_translations[$lang][mb_strtolower($word)]) ? product_data_translations[$lang][mb_strtolower($word)] : $word;    
+        break;
+        case 'common':
+            $translated_word = isset(common_translations[$lang][mb_strtolower($word)]) ? common_translations[$lang][mb_strtolower($word)] : $word;
+        break;
+        case "buttons":
+            $translated_word = isset(buttons[$lang][mb_strtolower($word)]) ? buttons[$lang][mb_strtolower($word)] : $word;
+        break;
+        case "navigation":
+            $translated_word = isset(navigation_menus_translation[$lang][mb_strtolower($word)]) ? navigation_menus_translation[$lang][mb_strtolower($word)] : $word;
+        break;
+        case "errors":
+            $translated_word = isset(errors_translations[$lang][mb_strtolower($word)]) ? errors_translations[$lang][mb_strtolower($word)] : $word;
+        break;
+    }
+
+    return $translated_word;
+}
+
+const sculptur_email = "koumdjiev@mail.ru";
+
+//helper function to get  translated word
+//don't forget to update function if you add more arrays with translations
+function get_translated_word($lang = "bg", $dictionnaire_name = "material", $word = "") {
+    $translations = [];
+    switch($dictionnaire_name) {
+        case 'material':
+            $translations = material_translations;
+            break;
+        case 'availability':
+                $translations = availability_translations;
+                break; 
+        case 'product_mode':
+                $translations = product_mode_translations;
+                break;
+        case 'product_data':
+                $translations = product_data_translations;
+                break;
+        case 'common':
+                $translations = common_translations;
+                break;
+        case 'buttons':
+                $translations = buttons;
+                break;
+        case 'navigation':
+                $translations = navigation_menus_translation;
+                break;          
+        case 'errors':
+                $translations = errors_translations;
+                break;     
+    }
+
+    return isset($translations[$lang][mb_strtolower($word)]) ? $translations[$lang][mb_strtolower($word)] : $word;    
+}
+
+
+//temporaly function to show price in lv 
+function showPriceInLv($priceNum = 1) {
+    if(get_current_active_language() === 'bg') {
+        echo "(" . esc_html(number_format($priceNum * 1.9558, 0)  . "лв/lv") . ")";
+    }
+}
+
+
+//helper function for translating date on currently active language
+function translate_date_current_lang($date = null) {
+    // if(!$date) $date = date('d M Y');
+
+    if(get_current_active_language() === 'bg') {
+        $date = new DateTime($date);
+        $formatter = new IntlDateFormatter(
+        'bg_BG', 
+        IntlDateFormatter::LONG, // Формат на датата (напр. 2 март 2026 г.)
+        IntlDateFormatter::NONE  // Без час
+        );
+        return $formatter->format($date);
+    }
+    return $date;
+}
+
 /**
  * Get sculpture info field
  *
@@ -172,14 +594,17 @@ function sculpture_featured_shortcode($atts)
 
     // Start output buffering
     ob_start();
+    $selected_works_label =  get_current_active_language() === 'bg' ? common_translations['bg']['Selected Works'] : common_translations['en']['Избрани произведения'];
+    $discover_works_label =  get_current_active_language() === 'bg' ? common_translations['bg']['Discover our latest sculptures'] : common_translations['en']['Разгледайте най-новите ни скулптури'];
+    $view_all_sculptures_label =  get_current_active_language() === 'bg' ? buttons['bg']['View All Sculptures'] : buttons['en']['Виж всички скулптури'];
 
     if ($sculptures->have_posts()): ?>
     
     <section class="homepage-sculptures">
         
         <div class="homepage-sculptures-header">
-            <h2 class="section-title">Selected Works</h2>
-            <p class="section-subtitle">Discover our latest sculptures</p>
+            <h2 class="section-title"><?php echo $selected_works_label; ?></h2>
+            <p class="section-subtitle"><?php echo $discover_works_label; ?></p>
         </div>
         
         <div class="sculptures-grid sculptures-grid-homepage">
@@ -197,7 +622,7 @@ function sculpture_featured_shortcode($atts)
             <a href="<?php echo esc_url(
                 get_post_type_archive_link("sculpture"),
             ); ?>" class="btn-view-all">
-                View All Sculptures →
+                <?php echo $view_all_sculptures_label; ?> →
             </a>
         </div>
         
@@ -358,14 +783,19 @@ function sculpture_promo_shortcode($atts)
         return "";
     }
 
+    // $special_offers_label
+    $special_offers_label =  get_current_active_language() === 'bg' ? common_translations['bg']['Special Offers'] : common_translations['en']['Специални Оферти'];
+    $limited_offers_msg_label =  get_current_active_language() === 'bg' ? common_translations['bg']['Limited time prices on selected original sculptures'] : common_translations['en']['Промоционални цени за ограничено време на избрани оригинални скулптури'];
+    $view_all_offers_label =  get_current_active_language() === 'bg' ? buttons['bg']['View All Offers'] : buttons['en']['Виж всички оферти'];
+
     ob_start();
     ?>
 
     <section class="homepage-promo">
 
         <div class="homepage-promo-header">
-            <h2 class="section-title">Special Offers</h2>
-            <p class="section-subtitle">Limited time prices on selected original sculptures</p>
+            <h2 class="section-title"><?php echo $special_offers_label; ?></h2>
+            <p class="section-subtitle"><?php echo $limited_offers_msg_label;?></p>
         </div>
 
         <div class="sculptures-grid">
@@ -379,7 +809,7 @@ function sculpture_promo_shortcode($atts)
             <a href="<?php echo esc_url(
                 get_post_type_archive_link("sculpture"),
             ); ?>?on_promotion=1" class="btn-view-promo">
-                View All Offers
+               <?php echo $view_all_offers_label; ?>
             </a>
         </div>
 
@@ -428,10 +858,14 @@ function exhibition_get_status($post_id = null)
  */
 function exhibition_get_status_label($status)
 {
+    $current_label =  get_current_active_language() === 'bg' ? exhibition_translations['bg']['Current'] : exhibition_translations['en']['Актуална'];
+    $upcoming_label =  get_current_active_language() === 'bg' ? exhibition_translations['bg']['Upcoming'] : exhibition_translations['en']['Предстояща'];
+    $past_label =  get_current_active_language() === 'bg' ? exhibition_translations['bg']['Past'] : exhibition_translations['en']['Минала'];
+
     $labels = [
-        "current" => __("Current", "sculpture-theme"),
-        "upcoming" => __("Upcoming", "sculpture-theme"),
-        "past" => __("Past", "sculpture-theme"),
+        "current" => __($current_label, "sculpture-theme"),
+        "upcoming" => __($upcoming_label, "sculpture-theme"),
+        "past" => __($past_label, "sculpture-theme"),
     ];
 
     return isset($labels[$status]) ? $labels[$status] : "";
@@ -617,15 +1051,17 @@ function sculpture_exhibitions_timeline_shortcode($atts)
     ob_start();
 
     global $post;
+     $exhibitions_title =  get_current_active_language() === 'bg' ? common_translations['bg']['Exhibitions'] : common_translations['en']['Изложби'];
+     $view_all_exhibitions_btn_label = get_current_active_language() === 'bg' ? buttons['bg']['View All Exhibitions'] : buttons['en']['Виж всички изложби'];
     ?>
     
     <div class="homepage-exhibitions-section">
         <div class="section-header">
-            <h2 class="section-title">Exhibitions</h2>
+            <h2 class="section-title"><?php echo $exhibitions_title; ?></h2>
             <a href="<?php echo get_post_type_archive_link(
                 "exhibition",
             ); ?>" class="view-all-link">
-                View All Exhibitions →
+                <?php echo $view_all_exhibitions_btn_label; ?> →
             </a>
         </div>
         
@@ -650,7 +1086,7 @@ function sculpture_exhibitions_timeline_shortcode($atts)
             <a href="<?php echo get_post_type_archive_link(
                 "exhibition",
             ); ?>" class="view-all-button">
-                View All Exhibitions
+                <?php echo $view_all_exhibitions_btn_label; ?>
             </a>
         </div>
     </div>
@@ -669,9 +1105,11 @@ function sculpture_exhibitions_timeline_shortcode($atts)
  * @return string Label
  */
 function publication_get_type_label($type) {
+    $written_by_me_label = get_current_active_language() === 'bg' ? common_translations['bg']['Written by me'] : common_translations['en']['Написани от мен'];
+    $written_about_me_label = get_current_active_language() === 'bg' ? common_translations['bg']['Written about me'] : common_translations['en']['Написани за мен'];
     $labels = array(
-        'by_me'    => __('Written by me', 'sculpture-theme'),
-        'about_me' => __('Written about me', 'sculpture-theme'),
+        'by_me'    => __($written_by_me_label, 'sculpture-theme'),
+        'about_me' => __($written_about_me_label, 'sculpture-theme'),
     );
     
     return isset($labels[$type]) ? $labels[$type] : '';
@@ -710,6 +1148,7 @@ function publication_get_meta($post_id = null) {
     $publication = get_field('publication', $post_id);
     $date = publication_get_date($post_id);
     $author = get_field('author', $post_id);
+    $author_label = get_current_active_language() === 'bg' ? common_translations['bg']['Author'] : common_translations['en']['Автор'];
     
     $meta_parts = array();
     
@@ -722,7 +1161,7 @@ function publication_get_meta($post_id = null) {
     }
     
     if ($author) {
-        $meta_parts[] = __('Author:', 'sculpture-theme') . ' ' . $author;
+        $meta_parts[] = __($author_label . ':', 'sculpture-theme') . ' ' . $author;
     }
     
     return implode(' • ', $meta_parts);
@@ -788,13 +1227,17 @@ function sculpture_publications_showcase_shortcode($atts) {
     
     // Output
     ob_start();
+
+    $publications_label = get_current_active_language() === 'bg' ? common_translations['bg']['Publications'] : common_translations['en']['Публикации']; 
+    $view_all_publications_btn = get_current_active_language() === 'bg' ? buttons['bg']['View All Publications'] : buttons['en']['Виж всички публикации'];
+
     ?>
     
     <div class="homepage-publications-section">
         <div class="section-header">
-            <h2 class="section-title">Publications</h2>
+            <h2 class="section-title"><?php echo $publications_label; ?></h2>
             <a href="<?php echo get_post_type_archive_link('publication'); ?>" class="view-all-link">
-                View All Publications →
+                <?php echo $view_all_publications_btn; ?> →
             </a>
         </div>
         
@@ -832,7 +1275,7 @@ function sculpture_publications_showcase_shortcode($atts) {
         
         <div class="section-footer">
             <a href="<?php echo get_post_type_archive_link('publication'); ?>" class="view-all-button">
-                View All Publications
+                <?php echo $view_all_publications_btn; ?>
             </a>
         </div>
     </div>
@@ -907,11 +1350,12 @@ function testimonial_get_meta($post_id = null) {
  * Handle testimonial form submission via AJAX
  */
 function sculpture_handle_testimonial_submission() {
-    
     // Verify nonce
+    $security_check_err_label = get_current_active_language() === 'bg' ? errors_translations['bg']['Security check failed. Please refresh the page and try again'] : errors_translations['en']['Проверката за сигурност не бе успешна. Моля, обновете страницата и опитайте отново']; 
+
     if (!isset($_POST['testimonial_nonce']) || !wp_verify_nonce($_POST['testimonial_nonce'], 'submit_testimonial')) {
         wp_send_json_error(array(
-            'message' => __('Security check failed. Please refresh the page and try again.', 'sculpture-theme')
+            'message' => __($security_check_err_label, 'sculpture-theme')
         ));
     }
     
@@ -922,24 +1366,31 @@ function sculpture_handle_testimonial_submission() {
     $rating = intval($_POST['rating']);
     $message = sanitize_textarea_field($_POST['message']);
     $show_rating = isset($_POST['show_rating']) ? 1 : 0;
+
+    $name_err_label = get_current_active_language() === 'bg' ? errors_translations['bg']['Name is required'] : errors_translations['en']['Името е задължително']; 
+    $email_err_label = get_current_active_language() === 'bg' ? errors_translations['bg']['Valid email is required'] : errors_translations['en']['Изисква се валиден имейл адрес']; 
+    $rating_err_label = get_current_active_language() === 'bg' ? errors_translations['bg']['Rating must be between 1 and 5'] : errors_translations['en']['Оценката трябва да е между 1 и 5']; 
+    $message_err_label = get_current_active_language() === 'bg' ? errors_translations['bg']['Message is required'] : errors_translations['en']['Съобщението е задължително']; 
+    $fail_send_testimonial_err_label = get_current_active_language() === 'bg' ? errors_translations['bg']['Failed to submit testimonial. Please try again'] : errors_translations['en']['Изпращането на отзив не бе успешно. Моля, опитайте отново']; 
+    $testimonial_send_success_label =  get_current_active_language() === 'bg' ? common_translations['bg']['Thank you! Your testimonial has been submitted and is pending review'] : common_translations['en']['Благодаря! Вашият отзив е изпратен и е в процес на преглед']; 
     
     // Validation
     $errors = array();
     
     if (empty($client_name)) {
-        $errors[] = __('Name is required.', 'sculpture-theme');
+        $errors[] = __($name_err_label, 'sculpture-theme');
     }
     
     if (empty($client_email) || !is_email($client_email)) {
-        $errors[] = __('Valid email is required.', 'sculpture-theme');
+        $errors[] = __($email_err_label, 'sculpture-theme');
     }
     
     if ($rating < 1 || $rating > 5) {
-        $errors[] = __('Rating must be between 1 and 5.', 'sculpture-theme');
+        $errors[] = __($rating_err_label, 'sculpture-theme');
     }
     
     if (empty($message)) {
-        $errors[] = __('Message is required.', 'sculpture-theme');
+        $errors[] = __($message_err_label, 'sculpture-theme');
     }
     
     if (!empty($errors)) {
@@ -961,7 +1412,7 @@ function sculpture_handle_testimonial_submission() {
     
     if (is_wp_error($post_id)) {
         wp_send_json_error(array(
-            'message' => __('Failed to submit testimonial. Please try again.', 'sculpture-theme')
+            'message' => __($fail_send_testimonial_err_label, 'sculpture-theme')
         ));
     }
     
@@ -991,7 +1442,7 @@ function sculpture_handle_testimonial_submission() {
     
     // Success response
     wp_send_json_success(array(
-        'message' => __('Thank you! Your testimonial has been submitted and is pending review.', 'sculpture-theme')
+        'message' => __($testimonial_send_success_label, 'sculpture-theme')
     ));
 }
 
@@ -1050,6 +1501,10 @@ function sculpture_testimonials_slider_shortcode($atts) {
     if (!$testimonials->have_posts()) {
         return '';
     }
+
+     $what_clients_say_label =  get_current_active_language() === 'bg' ? common_translations['bg']['What Our Clients Say'] : common_translations['en']['Отзиви от наши клиенти']; 
+     $view_all_testimonials_btn_label =  get_current_active_language() === 'bg' ? buttons['bg']['View All Testimonials'] : buttons['en']['Виж всички отзиви']; 
+     $write_testimonial_btn_label =  get_current_active_language() === 'bg' ? buttons['bg']['Share Your Experience'] : buttons['en']['Напишете отзив']; 
     
     // Output
     ob_start();
@@ -1057,9 +1512,9 @@ function sculpture_testimonials_slider_shortcode($atts) {
     
     <div class="homepage-testimonials-section">
         <div class="section-header">
-            <h2 class="section-title">What Our Clients Say</h2>
+            <h2 class="section-title"><?php echo $what_clients_say_label; ?></h2>
             <a href="<?php echo get_post_type_archive_link('testimonial'); ?>" class="view-all-link">
-                View All Testimonials →
+                <?php echo $view_all_testimonials_btn_label; ?> →
             </a>
         </div>
         
@@ -1090,10 +1545,10 @@ function sculpture_testimonials_slider_shortcode($atts) {
                 <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
                     <path d="M10 1l2.5 6.5L19 8l-5 4.5L15.5 19 10 15l-5.5 4L6 12.5 1 8l6.5-.5z"/>
                 </svg>
-                Share Your Experience
+                <?php echo $write_testimonial_btn_label; ?>
             </button>
             <a href="<?php echo get_post_type_archive_link('testimonial'); ?>" class="view-all-button">
-                View All Testimonials
+                <?php echo $view_all_testimonials_btn_label; ?>
             </a>
         </div>
     </div>
