@@ -4,16 +4,19 @@
  * 
  * @package Sculpture_Theme
  */
-$share_experience_label =  get_current_active_language() === 'bg' ? buttons['bg']['Share Your Experience'] : buttons['en']['Напишете отзив'];
-$modal_subtitle_label = get_current_active_language() === 'bg' ? common_translations['bg']['Your feedback helps us improve and helps others make informed decisions'] : common_translations['en']['Вашата обратна връзка ни помага да се усъвършенстваме и да помагаме на другите да вземат информирани решения'];
-$your_name_label = get_current_active_language() === 'bg' ? common_translations['bg']['Your Name'] : common_translations['en']['Име'];
-$your_email_label = get_current_active_language() === 'bg' ? common_translations['bg']['Email Address'] : common_translations['en']['Имейл адрес'];
-$display_information_label = get_current_active_language() === 'bg' ? common_translations['bg']['Will not be displayed publicly'] : common_translations['en']['Няма да бъде показано публично'];
-$company_position_label = get_current_active_language() === 'bg' ? common_translations['bg']['Company / Position'] : common_translations['en']['Компания / Длъжност'];
-$company_position_example_label = get_current_active_language() === 'bg' ? common_translations['bg']['CEO at Company Name'] : common_translations['en']['Главен изпълнителен директор на компанията'];
-$rating_label = get_current_active_language() === 'bg' ? common_translations['bg']['Rating'] : common_translations['en']['Оценка'];
-$testimonial_msg_label = get_current_active_language() === 'bg' ? common_translations['bg']['Your Testimonial'] : common_translations['en']['Отзив'];
-$displate_rating_public_label =  get_current_active_language() === 'bg' ? common_translations['bg']['Display my rating publicly'] : common_translations['en']['Покажи оценката ми публично'];
+
+// Get translated labels
+$share_experience_label = sculpture_translate('Share Your Experience', 'buttons');
+$modal_subtitle_label = sculpture_translate('Your feedback helps us improve and helps others make informed decisions', 'common');
+$your_name_label = sculpture_translate('Your Name', 'common');
+$your_email_label = sculpture_translate('Email Address', 'common');
+$display_information_label = sculpture_translate('Will not be displayed publicly', 'common');
+$company_position_label = sculpture_translate('Company / Position', 'common');
+$company_position_example_label = sculpture_translate('CEO at Company Name', 'common');
+$rating_label = sculpture_translate('Rating', 'common');
+$testimonial_msg_label = sculpture_translate('Your Testimonial', 'common');
+$display_rating_public_label = sculpture_translate('Display my rating publicly', 'common');
+$submit_testimonial_label = sculpture_translate('Submit Testimonial', 'buttons');
 ?>
 
 <!-- Modal Overlay -->
@@ -22,88 +25,67 @@ $displate_rating_public_label =  get_current_active_language() === 'bg' ? common
     <div class="modal-container">
         
         <!-- Close Button -->
-        <button class="modal-close" id="close-modal">x</button>
+        <button class="modal-close" id="close-modal">×</button>
         
         <!-- Modal Content -->
         <div class="modal-content">
             
             <header class="modal-header">
-                <h2 class="modal-title"><?php _e(
-                    $share_experience_label,
-                    "sculpture-theme",
-                ); ?></h2>
-                <p class="modal-subtitle"><?php _e(
-                    $modal_subtitle_label,
-                    "sculpture-theme",
-                ); ?></p>
+                <h2 class="modal-title"><?php echo $share_experience_label; ?></h2>
+                <p class="modal-subtitle"><?php echo $modal_subtitle_label; ?></p>
             </header>
             
             <!-- Form -->
             <form id="testimonial-form" class="testimonial-form">
                 
-                <?php wp_nonce_field(
-                    "submit_testimonial",
-                    "testimonial_nonce",
-                ); ?>
+                <?php wp_nonce_field('submit_testimonial', 'testimonial_nonce'); ?>
                 
                 <!-- Name -->
                 <div class="form-group">
                     <label for="testimonial-name">
-                        <?php _e(
-                            $your_name_label,
-                            "sculpture-theme",
-                        ); ?> <span class="required">*</span>
+                        <?php echo $your_name_label; ?> <span class="required">*</span>
                     </label>
                     <input 
                         type="text" 
                         id="testimonial-name" 
                         name="client_name" 
                         required 
-                        placeholder="<?php echo $your_name_label; ?>"
+                        placeholder="<?php echo esc_attr($your_name_label); ?>"
                     >
                 </div>
                 
                 <!-- Email -->
                 <div class="form-group">
                     <label for="testimonial-email">
-                        <?php _e(
-                            $your_email_label,
-                            "sculpture-theme",
-                        ); ?> <span class="required">*</span>
+                        <?php echo $your_email_label; ?> <span class="required">*</span>
                     </label>
                     <input 
                         type="email" 
                         id="testimonial-email" 
                         name="client_email" 
                         required 
-                        placeholder="<?php echo $your_email_label; ?>"
+                        placeholder="<?php echo esc_attr($your_email_label); ?>"
                     >
-                    <small class="form-help"><?php _e(
-                        $display_information_label,
-                        "sculpture-theme",
-                    ); ?></small>
+                    <small class="form-help"><?php echo $display_information_label; ?></small>
                 </div>
                 
                 <!-- Company/Position -->
                 <div class="form-group">
                     <label for="testimonial-company">
-                        <?php _e($company_position_label, "sculpture-theme"); ?>
+                        <?php echo $company_position_label; ?>
                     </label>
                     <input 
                         type="text" 
                         id="testimonial-company" 
                         name="client_company" 
-                        placeholder="<?php echo $company_position_example_label; ?>"
+                        placeholder="<?php echo esc_attr($company_position_example_label); ?>"
                     >
                 </div>
                 
                 <!-- Rating -->
                 <div class="form-group">
                     <label for="testimonial-rating">
-                        <?php _e(
-                            $rating_label,
-                            "sculpture-theme",
-                        ); ?> <span class="required">*</span>
+                        <?php echo $rating_label; ?> <span class="required">*</span>
                     </label>
                     <div class="rating-input">
                         <input type="range" id="testimonial-rating" name="rating" min="1" max="5" value="5" step="1">
@@ -117,17 +99,14 @@ $displate_rating_public_label =  get_current_active_language() === 'bg' ? common
                 <!-- Message -->
                 <div class="form-group">
                     <label for="testimonial-message">
-                        <?php _e(
-                            $testimonial_msg_label,
-                            "sculpture-theme",
-                        ); ?> <span class="required">*</span>
+                        <?php echo $testimonial_msg_label; ?> <span class="required">*</span>
                     </label>
                     <textarea 
                         id="testimonial-message" 
                         name="message" 
                         rows="5" 
                         required
-                        placeholder="<?php echo $share_experience_label; ?>..."
+                        placeholder="<?php echo esc_attr($share_experience_label); ?>..."
                     ></textarea>
                 </div>
                 
@@ -135,10 +114,7 @@ $displate_rating_public_label =  get_current_active_language() === 'bg' ? common
                 <div class="form-group form-checkbox">
                     <label>
                         <input type="checkbox" name="show_rating" value="1" checked>
-                        <span><?php _e(
-                            $displate_rating_public_label,
-                            "sculpture-theme",
-                        ); ?></span>
+                        <span><?php echo $display_rating_public_label; ?></span>
                     </label>
                 </div>
                 
@@ -148,10 +124,7 @@ $displate_rating_public_label =  get_current_active_language() === 'bg' ? common
                 <!-- Submit -->
                 <div class="form-actions">
                     <button type="submit" class="submit-button" id="submit-testimonial">
-                        <span class="button-text"><?php _e(
-                            "Submit Testimonial",
-                            "sculpture-theme",
-                        ); ?></span>
+                        <span class="button-text"><?php echo $submit_testimonial_label; ?></span>
                         <span class="button-loader" style="display: none;">
                             <svg class="spinner" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
                                 <circle cx="12" cy="12" r="10" stroke-width="2" opacity="0.25"/>

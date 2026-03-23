@@ -8,16 +8,18 @@
  * @package Sculpture_Theme
  * @since   1.0.0
  */
-?>
 
+// Get translated labels
+$cta_title = sculpture_translate('Interested in a Commission?', 'common');
+$cta_text = sculpture_translate("Let's create something unique together. Contact us to discuss your vision", 'common');
+$cta_button = sculpture_translate('Get in Touch', 'buttons');
+?>
 <section class="footer-cta-section">
     <div class="footer-cta-container">
-        <h2 class="footer-cta-title"><?php echo (get_current_active_language() === 'bg' ? common_translations['bg']['Interested in a Commission?'] : common_translations['en']['Интересувате ли се от изработка по поръчка?']); ?></h2>
-        <p class="footer-cta-text"><?php echo (get_current_active_language() === 'bg' ? common_translations['bg']["Let's create something unique together. Contact us to discuss your vision"] : common_translations['en']['Нека създадем нещо уникално заедно. Свържете се с нас, за да обсъдим вашата идея.']); ?></p>
-        <a href="<?php echo esc_url(
-            home_url("/contact"),
-        ); ?>" class="btn-footer-cta">
-           <?php echo (get_current_active_language() === 'bg' ? buttons['bg']['Get in Touch'] : buttons['en']['Свържете се с нас']); ?>
+        <h2 class="footer-cta-title"><?php echo $cta_title; ?></h2>
+        <p class="footer-cta-text"><?php echo $cta_text; ?></p>
+        <a href="<?php echo esc_url(home_url('/contact')); ?>" class="btn-footer-cta">
+            <?php echo $cta_button; ?>
         </a>
     </div>
 </section>
