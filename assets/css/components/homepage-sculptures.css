@@ -1,0 +1,63 @@
+/* Featured Sculptures Homepage Section */
+.homepage-sculptures {
+    max-width: 1200px;
+    margin: 80px auto;
+    padding: 0 20px;
+}
+
+.homepage-sculptures-header {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.homepage-sculptures-header .section-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #1f3a2a;
+    margin-bottom: 16px;
+}
+
+.homepage-sculptures-header .section-subtitle {
+    font-size: 1.125rem;
+    color: #666;
+}
+
+.sculptures-grid-homepage {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    margin-bottom: 60px;
+}
+
+@media (max-width: 768px) {
+    .sculptures-grid-homepage {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .sculptures-grid-homepage {
+        grid-template-columns: 1fr;
+    }
+}
+
+.homepage-sculptures-footer {
+    text-align: center;
+}
+
+.homepage-sculptures-footer .btn-view-all {
+    display: inline-block;
+    padding: 16px 40px;
+    background: #1f3a2a;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 4px;
+    font-weight: 600;
+    transition: all 0.3s;
+}
+
+.homepage-sculptures-footer .btn-view-all:hover {
+    background: #e7c871;
+    color: #1f3a2a;
+}
