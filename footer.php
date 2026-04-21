@@ -29,6 +29,10 @@ $terms_of_use_label = sculpture_translate('Terms of Use', 'common');
 $contact_email = 'koumdjiev@mail.ru';
 $contact_phone = '0888 890301';
 $contact_phone_international = '+359 888 890 301';
+$lang_home = function_exists('pll_home_url') ? trailingslashit(pll_home_url()) : trailingslashit(home_url('/'));
+$is_english = sculpture_get_current_language() === 'en';
+$privacy_policy_slug = $is_english ? 'privacy-policy-2' : 'privacy-policy';
+$terms_slug          = $is_english ? 'terms-2' : 'terms';
 
 ?>
 
@@ -122,14 +126,11 @@ $contact_phone_international = '+359 888 890 301';
                 <?php echo esc_html($all_right_reserved_label); ?>.
             </p>
             <p class="credits">
-                <?php
-                $lang_home = function_exists('pll_home_url') ? trailingslashit(pll_home_url()) : trailingslashit(home_url('/'));
-                ?>
-                <a href="<?php echo esc_url($lang_home . 'privacy-policy-2'); ?>">
+                <a href="<?php echo esc_url($lang_home . $privacy_policy_slug); ?>">
                     <?php echo $privacy_policy_label; ?>
                 </a>
                 <span class="separator">•</span>
-                <a href="<?php echo esc_url($lang_home . 'terms-2'); ?>">
+                <a href="<?php echo esc_url($lang_home . $terms_slug); ?>">
                     <?php echo $terms_of_use_label; ?>
                 </a>
             </p>
