@@ -213,7 +213,7 @@ function sculpture_build_query_args($filters)
 
     // On Promotion filter
     if (!empty($filters['on_promotion'])) {
-        $today = date('Ymd');
+        $today = current_time('Ymd');
         $meta_query[] = [
             'relation' => 'AND',
             [
@@ -309,8 +309,8 @@ function sculpture_get_filter_data()
         'materials' => [],
         'min_price' => 0,
         'max_price' => 200,
-        'min_year' => date('Y') - 50,
-        'max_year' => date('Y'),
+        'min_year' => current_time('Y') - 50,
+        'max_year' => current_time('Y'),
     ];
 
     // Single optimized query

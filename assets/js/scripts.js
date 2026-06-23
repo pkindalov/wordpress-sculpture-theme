@@ -32,8 +32,8 @@
             const imgSrc = $(this).attr('src');
             window.open(imgSrc, '_blank');
         });
-        
-        galleryImages.css('cursor', 'pointer');
+
+        galleryImages.addClass('is-clickable');
     }
 
     /**

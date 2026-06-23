@@ -278,3 +278,8 @@ body.single-sculpture .btn-back:hover {
         word-break: break-word;
     }
 }
+
+/* Gallery images become clickable via JS (lightbox) */
+.sculpture-gallery .gallery-item img.is-clickable {
+    cursor: pointer;
+}

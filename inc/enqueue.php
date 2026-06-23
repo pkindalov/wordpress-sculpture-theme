@@ -95,12 +95,14 @@ add_action("wp_enqueue_scripts", "sculpture_theme_enqueue_styles");
  */
 function sculpture_theme_enqueue_scripts()
 {
+    $js_dir = get_stylesheet_directory() . "/assets/js/";
+
     // Custom JavaScript file
     wp_enqueue_script(
         "sculpture-custom-scripts",
         SCULPTURE_THEME_URI . "/assets/js/scripts.js",
         ["jquery"], // Dependencies
-        SCULPTURE_THEME_VERSION,
+        filemtime($js_dir . "scripts.js"),
         true, // Load in footer
     );
 
@@ -115,12 +117,11 @@ function sculpture_theme_enqueue_scripts()
         'sculpture-testimonials',
         SCULPTURE_THEME_URI . '/assets/js/testimonials.js',
         array(),
-        SCULPTURE_THEME_VERSION,
+        filemtime($js_dir . "testimonials.js"),
         true
     );
 
     if (is_page(['privacy-policy', 'terms', 'privacy-policy-2', 'terms-2'])) {
-        $js_dir = get_stylesheet_directory() . '/assets/js/';
         wp_enqueue_script(
             'sculpture-legal-progress',
             SCULPTURE_THEME_URI . '/assets/js/legal-progress.js',

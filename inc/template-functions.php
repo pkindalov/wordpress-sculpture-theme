@@ -1026,7 +1026,7 @@ function sculpture_is_on_promotion($post_id = null)
 
     $promotion_ends = get_field("promotion_ends", $post_id);
     if ($promotion_ends) {
-        $today = date("Ymd");
+        $today = current_time("Ymd");
         if ($today > $promotion_ends) {
             return false;
         }
@@ -1110,7 +1110,7 @@ function sculpture_promo_shortcode($atts)
         $atts,
     );
 
-    $today = date("Ymd");
+    $today = current_time("Ymd");
 
     $sculptures = new WP_Query([
         "post_type" => "sculpture",
@@ -1199,7 +1199,7 @@ function exhibition_get_status($post_id = null)
         return "upcoming";
     }
 
-    $today = date("Ymd");
+    $today = current_time("Ymd");
 
     if ($today >= $start_date && $today <= $end_date) {
         return "current";

@@ -9,6 +9,11 @@
  * @since   1.0.0
  */
 
+// Exit if accessed directly
+if (!defined('ABSPATH')) {
+    exit();
+}
+
 // Get translated labels
 $about_artist_title = sculpture_translate('About the Artist', 'common');
 $artist_short_description = sculpture_translate('Contemporary sculptor working with bronze, stone, and mixed media. Creating unique pieces that explore the intersection of form and emotion', 'common');
@@ -121,7 +126,7 @@ $terms_slug          = $is_english ? 'terms-2' : 'terms';
     <div class="footer-bottom">
         <div class="footer-container">
             <p class="copyright">
-                © <?php echo esc_html(date('Y')); ?>
+                © <?php echo esc_html(current_time('Y')); ?>
                 <?php echo esc_html($site_title); ?>.
                 <?php echo esc_html($all_right_reserved_label); ?>.
             </p>
