@@ -1,0 +1,407 @@
+/* =========================================
+   LEGAL PAGES — Privacy Policy & Terms
+   ========================================= */
+
+/* ── PAGE WRAPPER ───────────────────────── */
+.legal-page {
+    background: var(--color-cream);
+    min-height: 100vh;
+}
+
+/* ── HERO ────────────────────────────────── */
+.legal-hero {
+    background: var(--color-dark);
+    padding: 100px 60px 80px;
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+}
+
+/* Watermark text behind hero */
+.legal-hero::before {
+    content: attr(data-watermark);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 180px;
+    font-weight: 900;
+    color: rgba(255, 255, 255, 0.03);
+    white-space: nowrap;
+    pointer-events: none;
+    letter-spacing: -0.05em;
+    font-family: Arial, Helvetica, sans-serif;
+    text-transform: uppercase;
+}
+
+/* Gold line at the bottom of hero */
+.legal-hero::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, transparent 0%, var(--color-gold) 30%, var(--color-gold) 70%, transparent 100%);
+}
+
+.legal-hero__badge {
+    display: inline-block;
+    padding: 7px 20px;
+    background: rgba(231, 200, 113, 0.12);
+    border: 1px solid rgba(231, 200, 113, 0.35);
+    color: var(--color-gold);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 30px;
+    font-family: var(--font-main);
+}
+
+.legal-hero__title {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 68px;
+    font-weight: 900;
+    color: var(--color-cream);
+    margin: 0 0 24px;
+    line-height: 1;
+    letter-spacing: -0.03em;
+    text-transform: uppercase;
+}
+
+.legal-hero__updated {
+    font-size: 13px;
+    color: rgba(255, 252, 230, 0.45);
+    letter-spacing: 1.5px;
+    font-family: var(--font-main);
+}
+
+/* ── TABLE OF CONTENTS ───────────────────── */
+.legal-toc {
+    max-width: 820px;
+    margin: 60px auto 0;
+    padding: 0 40px;
+}
+
+.legal-toc__inner {
+    background: #fff;
+    border-left: 5px solid var(--color-gold);
+    padding: 36px 44px;
+    box-shadow: 0 4px 40px rgba(31, 58, 42, 0.08);
+    counter-reset: toc;
+}
+
+.legal-toc__label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--color-sage);
+    margin: 0 0 22px;
+    font-family: var(--font-main);
+}
+
+.legal-toc__list {
+    list-style: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    columns: 2;
+    column-gap: 40px;
+}
+
+.legal-toc__list li {
+    counter-increment: toc;
+    margin-bottom: 10px;
+    padding: 0 !important;
+    border: none !important;
+    break-inside: avoid;
+}
+
+.legal-toc__list li::before {
+    display: none !important;
+}
+
+.legal-toc__list a {
+    color: var(--color-forest);
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: color 0.2s, gap 0.2s;
+    font-family: var(--font-main);
+}
+
+.legal-toc__list a::before {
+    content: counter(toc, decimal-leading-zero);
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--color-gold);
+    min-width: 28px;
+    font-family: var(--font-main);
+}
+
+.legal-toc__list a:hover {
+    color: var(--color-dark);
+    gap: 14px;
+}
+
+/* ── MAIN CONTENT ────────────────────────── */
+.legal-content {
+    max-width: 820px;
+    margin: 40px auto 100px;
+    padding: 0 40px;
+    counter-reset: section;
+}
+
+/* Hide empty spacer paragraphs Gutenberg inserts */
+.legal-content p:empty {
+    display: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+/* Strip out redundant nested wrappers */
+.legal-content .wp-block-group:not(.alignwide) {
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+/* Each section card */
+.legal-content .wp-block-group.alignwide {
+    background: #ffffff;
+    margin: 0 0 20px !important;
+    padding: 44px 48px !important;
+    box-shadow: 0 2px 24px rgba(31, 58, 42, 0.06);
+    position: relative;
+    border-left: 4px solid transparent;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.legal-content .wp-block-group.alignwide:hover {
+    border-left-color: var(--color-gold);
+    box-shadow: 0 6px 36px rgba(31, 58, 42, 0.1);
+}
+
+/* Section counter on h2 headings */
+.legal-content .wp-block-heading {
+    counter-increment: section;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 22px;
+    font-weight: 900;
+    color: var(--color-dark);
+    margin: 0 0 6px !important;
+    padding: 0 !important;
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
+    border: none !important;
+}
+
+/* Section number chip above heading */
+.legal-content .wp-block-heading::before {
+    content: counter(section, decimal-leading-zero);
+    display: block;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    color: var(--color-gold);
+    font-family: var(--font-main);
+    margin-bottom: 10px;
+}
+
+/* Divider line after heading */
+.legal-content .wp-block-heading::after {
+    content: '';
+    display: block;
+    width: 40px;
+    height: 3px;
+    background: var(--color-gold);
+    margin: 14px 0 22px;
+}
+
+/* Paragraphs */
+.legal-content p {
+    font-size: 16px;
+    line-height: 1.85;
+    color: #3d4e41;
+    margin-bottom: 16px !important;
+    font-family: var(--font-main);
+}
+
+.legal-content p:last-child {
+    margin-bottom: 0 !important;
+}
+
+/* ── LISTS ───────────────────────────────── */
+.legal-content .wp-block-list {
+    list-style: none !important;
+    padding: 0 !important;
+    margin: 16px 0 20px !important;
+    border: 1px solid rgba(221, 231, 209, 0.8);
+    background: rgba(221, 231, 209, 0.15);
+}
+
+.legal-content .wp-block-list li {
+    position: relative;
+    padding: 12px 18px 12px 48px !important;
+    font-size: 15px;
+    line-height: 1.7;
+    color: #3d4e41;
+    font-family: var(--font-main);
+    border-bottom: 1px solid rgba(221, 231, 209, 0.8);
+    transition: background 0.2s;
+}
+
+.legal-content .wp-block-list li:last-child {
+    border-bottom: none;
+}
+
+.legal-content .wp-block-list li:hover {
+    background: rgba(231, 200, 113, 0.08);
+}
+
+/* Gold bullet */
+.legal-content .wp-block-list li::before {
+    content: '';
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 7px;
+    height: 7px;
+    background: var(--color-gold);
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+/* GDPR rights — 2-column grid */
+.legal-content .wp-block-list li strong:first-child {
+    color: var(--color-dark);
+    font-weight: 700;
+    display: inline;
+}
+
+/* ── BOLD & EMPHASIS ─────────────────────── */
+.legal-content strong {
+    color: var(--color-dark);
+    font-weight: 700;
+}
+
+/* Important callout — paragraph with <strong> that wraps whole sentence */
+.legal-content p > strong:only-child,
+.legal-content p:has(> strong:first-child):has(> strong:last-child) {
+    display: block;
+    background: rgba(231, 200, 113, 0.12);
+    border-left: 3px solid var(--color-gold);
+    padding: 14px 20px;
+    margin: 8px 0;
+    font-size: 15px;
+    color: var(--color-dark);
+}
+
+/* ── CONTACT INFO BLOCK ──────────────────── */
+.legal-content p strong + br + strong,
+.legal-content p:has(strong) {
+    font-size: 16px;
+}
+
+/* ── BACK TO TOP ─────────────────────────── */
+.legal-back-top {
+    text-align: center;
+    padding: 0 40px 80px;
+}
+
+.legal-back-top a {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 18px 48px;
+    background: transparent;
+    border: 2px solid var(--color-dark);
+    color: var(--color-dark);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: all 0.3s;
+    font-family: var(--font-main);
+}
+
+.legal-back-top a:hover {
+    background: var(--color-dark);
+    color: var(--color-cream);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(31, 58, 42, 0.25);
+}
+
+.legal-back-top a svg {
+    transition: transform 0.3s;
+}
+
+.legal-back-top a:hover svg {
+    transform: translateY(-3px);
+}
+
+/* ── READING PROGRESS BAR ────────────────── */
+.legal-progress-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 0%;
+    height: 3px;
+    background: linear-gradient(90deg, var(--color-gold), var(--color-sage));
+    z-index: 9999;
+    transition: width 0.1s linear;
+}
+
+/* ── RESPONSIVE — TABLET ─────────────────── */
+@media (max-width: 1024px) {
+    .legal-hero__title {
+        font-size: 50px;
+    }
+
+    .legal-toc__list {
+        columns: 1;
+    }
+}
+
+/* ── RESPONSIVE — MOBILE ─────────────────── */
+@media (max-width: 768px) {
+    .legal-hero {
+        padding: 60px 24px 50px;
+    }
+
+    .legal-hero__title {
+        font-size: 34px;
+        letter-spacing: -0.02em;
+    }
+
+    .legal-toc,
+    .legal-content {
+        padding: 0 20px;
+    }
+
+    .legal-toc__inner {
+        padding: 28px 24px;
+    }
+
+    .legal-content .wp-block-group.alignwide {
+        padding: 32px 24px !important;
+    }
+
+    .legal-content .wp-block-heading {
+        font-size: 18px;
+    }
+
+    .legal-back-top {
+        padding: 0 20px 60px;
+    }
+
+    .legal-back-top a {
+        width: 100%;
+        justify-content: center;
+    }
+}
