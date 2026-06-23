@@ -49,7 +49,7 @@ $last_modified = get_the_modified_date('F Y');
                 <ul class="legal-toc__list">
                     <?php foreach ($toc as $item) : ?>
                         <li>
-                            <a href="<?php echo esc_attr($item['anchor']); ?>">
+                            <a href="<?php echo esc_url($item['anchor']); ?>">
                                 <?php echo esc_html($item['label']); ?>
                             </a>
                         </li>
@@ -75,22 +75,3 @@ $last_modified = get_the_modified_date('F Y');
     </div>
 
 </article>
-
-<!-- Reading progress bar script -->
-<script>
-    (function() {
-        var bar = document.getElementById('legal-progress-bar');
-        if (!bar) return;
-
-        function updateProgress() {
-            var scrollTop = window.scrollY || document.documentElement.scrollTop;
-            var docHeight = document.documentElement.scrollHeight - window.innerHeight;
-            var progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
-            bar.style.width = Math.min(progress, 100) + '%';
-        }
-        window.addEventListener('scroll', updateProgress, {
-            passive: true
-        });
-        updateProgress();
-    })();
-</script>

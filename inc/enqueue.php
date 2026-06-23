@@ -67,6 +67,15 @@ function sculpture_theme_enqueue_styles()
             filemtime($css_dir . "pages/homepage.css"),
         );
     }
+
+    if (is_page(['privacy-policy', 'terms', 'privacy-policy-2', 'terms-2'])) {
+        wp_enqueue_style(
+            "sculpture-legal",
+            $css_uri . "pages/legal.css",
+            ["sculpture-base"],
+            filemtime($css_dir . "pages/legal.css"),
+        );
+    }
     
     wp_enqueue_style(
         "sculpture-mobile",
@@ -109,6 +118,17 @@ function sculpture_theme_enqueue_scripts()
         SCULPTURE_THEME_VERSION,
         true
     );
+
+    if (is_page(['privacy-policy', 'terms', 'privacy-policy-2', 'terms-2'])) {
+        $js_dir = get_stylesheet_directory() . '/assets/js/';
+        wp_enqueue_script(
+            'sculpture-legal-progress',
+            SCULPTURE_THEME_URI . '/assets/js/legal-progress.js',
+            [],
+            filemtime($js_dir . 'legal-progress.js'),
+            true
+        );
+    }
 }
 add_action("wp_enqueue_scripts", "sculpture_theme_enqueue_scripts");
 
