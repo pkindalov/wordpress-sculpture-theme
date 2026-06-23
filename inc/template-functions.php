@@ -1100,6 +1100,9 @@ function sculpture_get_promotion_percentage($post_id = null)
  * Returns empty string if no active promotions (section hidden)
  *
  * Usage: [promo_sculptures count="3"]
+ *
+ * @param array $atts Shortcode attributes
+ * @return string HTML output
  */
 function sculpture_promo_shortcode($atts)
 {
