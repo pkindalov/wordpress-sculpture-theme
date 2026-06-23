@@ -13,6 +13,12 @@ Desktop.ini
 # Node modules (ако използваш npm в бъдеще)
 node_modules/
 
+# Composer dependencies (dev tooling: PHPUnit, Brain Monkey)
+/vendor/
+
+# PHPUnit generated cache
+.phpunit.result.cache
+
 # Temp files
 *.log
 *.tmp

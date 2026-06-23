@@ -1088,7 +1088,7 @@ function sculpture_get_promotion_percentage($post_id = null)
     $manual_price = get_field("promotion_price", $post_id);
 
     if ($manual_price && $price) {
-        return round((1 - $manual_price / $price) * 100);
+        return (int) round((1 - $manual_price / $price) * 100);
     }
 
     return $percentage ? intval($percentage) : null;
