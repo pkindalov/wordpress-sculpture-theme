@@ -101,6 +101,8 @@
     background: linear-gradient(135deg, #1F3A2A 0%, #2d4a38 100%);
     color: #FFFCE6;
     margin-top: 120px;
+    width: 100%;        /* constrain to containing block; prevents overflow on Astra's boxed layout */
+    overflow-x: hidden; /* clip any internal content that bleeds past the viewport edge */
 }
 
 .footer-main {

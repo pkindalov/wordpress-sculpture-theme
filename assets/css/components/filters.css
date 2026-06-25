@@ -45,6 +45,7 @@
 
 .search-input-modern {
     width: 100%;
+    box-sizing: border-box; /* prevent padding from adding to width and causing right-side overflow */
     padding: 14px 20px 14px 50px;
     background: rgba(255, 252, 230, 0.1);
     border: 2px solid rgba(231, 200, 113, 0.3);
@@ -74,6 +75,7 @@
 
 .sort-select-modern {
     width: 100%;
+    box-sizing: border-box;
     background: rgba(255, 252, 230, 0.1);
     border: 2px solid rgba(231, 200, 113, 0.3);
     border-radius: 8px;
@@ -238,6 +240,7 @@
 }
 
 .filter-dropdown-select {
+    box-sizing: border-box;
     background: rgba(255, 252, 230, 0.1);
     border: 2px solid rgba(231, 200, 113, 0.3);
     border-radius: 8px;

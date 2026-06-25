@@ -2,6 +2,14 @@
    PAGE - Archive / Gallery
    ========================================= */
 
+/* Astra sets display:flex on .ast-container to create primary/sidebar columns.
+   The archive has no sidebar, but footer-cta is also a direct child of .ast-container,
+   so it ends up as a side-by-side flex item (dark green strip on the right).
+   Override to block so children stack vertically as intended. */
+body.post-type-archive-sculpture .site-content .ast-container {
+    display: block;
+}
+
 body.post-type-archive-sculpture .sculpture-archive {
     max-width: 1800px;
     margin: 0 auto;
